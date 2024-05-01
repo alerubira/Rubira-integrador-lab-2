@@ -1,0 +1,19 @@
+{
+  "name": "rubira-integrador-lab-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rubira Gabriel Alejandro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pug": "^3.0.2",
+    "serve-static": "^1.15.0"
+  }
+}
