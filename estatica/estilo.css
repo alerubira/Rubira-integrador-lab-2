@@ -1,3 +1,19 @@
-h1{
-    background-color: brown;
+#divPrincipal {
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    margin: 0;
+}h1{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+}
+#divCabecera{
+    position: fixed;
+    text-align: center;
+    background-color:antiquewhite;
+    width: 95%;
+    margin: 1%;
+    z-index: 1000; 
+    box-shadow: 0 0 0 23px rgb(0, 255, 191); 
 }

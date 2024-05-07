@@ -22,9 +22,11 @@ app.set('views', path.join(__dirname, 'estatica'));
 
 // Definir una ruta para renderizar una vista Pug
 app.get('/', (req, res) => {
-    res.render('vistaPrincipal.pug', { titulo: 'Hola Mundo' });
+    res.render('vistaPrincipal.pug');
   });
-  
+app.grt('/recetas',(req,res)=>{
+
+});
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
