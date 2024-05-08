@@ -1,14 +1,25 @@
 doctype html
-html(lang="es")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="shortcut icon", href="./icono.png", type="image/x-icon")
-    link(rel="stylesheet", href="estilo.css")
-    title Integrador Laboratorio-2
-  body
-    #divPrincipal
-      #divCabecera
-        h1 Bienvenido al Registro Nacional de Recetas
-       
-      #divecundario
+include plantilla
+#divSecundario
+      script.
+        function mostrarFormulario(idF) {
+          let form = document.getElementById(idF);
+
+          form.style.display = "block";
+          }
+
+      button(type="button", onclick="mostrarFormulario('formularioProfecional')") Realizar receta
+      button(type="button", onclick="mostrarFormulario('formularioAdministrativo')") Acceder a medicamentos 
+      button(type="button", onclick="mostrarFormulario('formularioAdministrativo')") Acceder a Profecionales
+
+      form#formularioProfecional(style="display: none;", action="/verificarProfecional", method="POST")
+        label(for="idProfecional") ID del Profecional:
+        input(type="text", id="idProfecional", name="idProfecional")
+        input(type="submit", value="Enviar")
+
+      form#formularioAdministrativo(style="display: none;", action="/verificarAdministrativo", method="POST")
+        label(for="id2") ID del Administrativo:
+        input(type="text", id="idAdminidtrativo", name="idAdministrativo")
+        input(type="submit", value="Enviar")
+
+      
