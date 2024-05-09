@@ -1,2 +1,14 @@
 doctype html
 include plantilla
+#divSecundario
+            form#formularioReceta(action="/guardarReceta", method="POST")
+            
+                #divProfecional 
+                        label= profecional.nombre
+                        label= profecional.apellido 
+                        label= profecional.dni 
+                        label= profecional.profecion
+                        label= profecional.especialidad
+                        label= profecional.domicilio 
+                        label= profecional.matriculaP
+            input(type="submit", value="Enviar")

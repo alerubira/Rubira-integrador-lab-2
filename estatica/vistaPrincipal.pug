@@ -10,7 +10,7 @@ include plantilla
 
       button(type="button", onclick="mostrarFormulario('formularioProfecional')") Realizar receta
       button(type="button", onclick="mostrarFormulario('formularioAdministrativo')") Acceder a medicamentos 
-      button(type="button", onclick="mostrarFormulario('formularioAdministrativo')") Acceder a Profecionales
+      button(type="button", onclick="mostrarFormulario('formularioAdministrativoR')") Acceder a Profecionales
 
       form#formularioProfecional(style="display: none;", action="/verificarProfecional", method="POST")
         label(for="idProfecional") ID del Profecional:
@@ -18,8 +18,15 @@ include plantilla
         input(type="submit", value="Enviar")
 
       form#formularioAdministrativo(style="display: none;", action="/verificarAdministrativo", method="POST")
-        label(for="id2") ID del Administrativo:
+        label(for="idAdministrativo") ID del Administrativo:
         input(type="text", id="idAdminidtrativo", name="idAdministrativo")
         input(type="submit", value="Enviar")
 
-      
+      form#formularioAdministrativoR(style="display: none;", action="/verificarAdministrativoR", method="POST")
+        label(for="idAdministrativoR") ID del Administrativo:
+        input(type="text", id="idAdminidtrativoR", name="idAdministrativoR")
+        input(type="submit", value="Enviar") 
+
+      if alerta 
+        script.
+           alert("Su codigo de acceso es incorrecto");
