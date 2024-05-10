@@ -5,6 +5,8 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
+import { buscarID } from './conexxionBD';
+
 let profecional;
 let encabezado;
 
