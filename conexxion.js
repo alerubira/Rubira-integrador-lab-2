@@ -5,7 +5,7 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import { buscarID } from './conexxionBD';
+import{profecionalI,verificarProfecional}from './manejadorDeRutas.js'
 
 let profecional;
 let encabezado;
@@ -32,26 +32,18 @@ app.get('/', (req, res) => {
     res.render('vistaPrincipal',{encabezado});
   });
   app.post('/verificarProfecional', (req, res) => {
-    // Obtener el ID del Profesional enviado desde el formulario
-    const idProfecional = req.body.idProfecional;
-    if (idProfecional==="123") {
-
-      profecional="Alejandro";
-      // Redirigir al usuario al endpoint '/recetas'
-    return res.redirect('/recetas');
-    }else{
-      let alerta=true;
-     return res.render('vistaPrincipal',{encabezado,alerta})
-    }
-   
+   // Obtener el ID del Profesional enviado desde el formulario
+const idProfecional = req.body.idProfecional; 
+   verificarProfecional(res,idProfecional,encabezado);
+   profecional=profecionalI;
   });
   
   app.get('/recetas', (req, res) => {
      encabezado = "Bienvenido al Recetario web Nacional";
      //Nombre, Apellido, documento, profesión, especialidad, domicilio y matrícula del profesional
-    profecional={nombre:"Alejandro",apellido:"Rubira",dni:"26833093",profecion:"medico",especialidad:"cardiologia",domiclio:"Tilisarao",matriculaP:"123"};
-    
-    res.render('recetas', { encabezado,  profecional }); // Pasar el nombre a la vista
+    //profecional={nombre:"Alejandro",apellido:"Rubira",dni:"26833093",profecion:"medico",especialidad:"cardiologia",domiclio:"Tilisarao",matriculaP:"123"};
+    console.log(profecional);
+    res.render('recetas', { encabezado,profecional }); // Pasar el nombre a la vista
   });
   app.get('/medicos',(req,res)=>{
     res.render('medicos',{encabezado,nombre: profecional});
