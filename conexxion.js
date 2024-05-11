@@ -5,10 +5,13 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{profecionalI,verificarProfecional}from './manejadorDeRutas.js'
+import{verificarProfecional}from './manejadorDeRutas.js'
 
 let profecional;
 let encabezado;
+export function traerProfecionl(profecionalI){
+  profecional=profecionalI;
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,7 +38,7 @@ app.get('/', (req, res) => {
    // Obtener el ID del Profesional enviado desde el formulario
 const idProfecional = req.body.idProfecional; 
    verificarProfecional(res,idProfecional,encabezado);
-   profecional=profecionalI;
+   
   });
   
   app.get('/recetas', (req, res) => {

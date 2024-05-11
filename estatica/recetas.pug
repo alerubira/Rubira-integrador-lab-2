@@ -4,11 +4,13 @@ include plantilla
             form#formularioReceta(action="/guardarReceta", method="POST")
             
                 #divProfecional 
+                        p profecional
                         label= profecional[0].nombre
                         label= profecional[0].apellido 
                         label= profecional[0].documento 
                         label= profecional[0].profecion
                         label= profecional[0].especialidad
                         label= profecional[0].domicilio 
-                        label= profecional[0].matriculaprofecional
+                        label= profecional[0].matriculaprofecioinal
+                                            
             input(type="submit", value="Enviar")
