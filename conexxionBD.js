@@ -61,6 +61,19 @@ function buscarID(id, callback) {
         }
     });
 }
-
+connection.connect(function(err) {
+    if (err) {
+        throw err;
+    } else {
+        connection.query("SELECT * FROM `paciente` ", function(err, result) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(result);
+               // callback(result);
+            }
+        });
+    }
+});
 export { buscarID };
 

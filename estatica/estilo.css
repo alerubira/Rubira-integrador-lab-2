@@ -29,4 +29,28 @@
 #divProfecional{
     border-radius: 10px; /* Establece los bordes redondeados */
     border: 2px solid black; /* Establece el borde de color negro */
+    width: 40%; /* Establece el ancho al 45% del contenedor */
+    display: inline-block; /* Para colocarlos uno al lado del otro */
+    vertical-align: top; /* Alinea los elementos superiormente */
 }
+#divReceta{
+    border-radius: 10px; /* Establece los bordes redondeados */
+    border: 2px solid black; /* Establece el borde de color negro */
+}
+#divPaciente{
+    border-radius: 10px; /* Establece los bordes redondeados */
+    border: 2px solid black; /* Establece el borde de color negro */
+    width: 55%; /* Establece el ancho al 45% del contenedor */
+    display: inline-block; /* Para colocarlos uno al lado del otro */
+    vertical-align: top; /* Alinea los elementos superiormente */
+}
+#diagnostico {
+    width: 95%;
+    height: 100%;
+    resize: none; /* Evita que el usuario pueda cambiar el tamaño manualmente */
+    
+  }
+  #divDiagnostico{
+    border-radius: 10px; /* Establece los bordes redondeados */
+    border: 2px solid black; /* Establece el borde de color negro */
+  }
