@@ -1,4 +1,36 @@
 doctype html
 include plantilla
 #divSecundario 
-     h1= nombre
+          select(id="crudMedico", name="crudMedico")
+               option(value="crearMedico") Inscribir Medico
+               option(value="modificarMedico") Modificar datos de medico 
+               option(value="bajaMedico") Dar de baja a un medico
+               option(value="buscarMedico") Buscar un medico existemte
+
+          #divcrearMedico 
+               form#formularioProfecionalCrear(action="/crearProfecional", method="POST")
+                    label(for="dniProfecional") DNI del Profecional:
+                    input(type="text", id="dniProfecional", name="dniProfecional")
+                    br
+                    label(for="nombreProfecionl") Nombre del profecional 
+                    input(type="text", id="nombreProfecional" ,name="nombreProfecional")
+                    br
+                    label(for="apellidoProfecional") Apellido  del Profecional:
+                    input(type="text", id="apellidoProfecional", name="apellidoProfecional")
+                    br
+                    label(for="profecionProfecional") Profecion del profecional 
+                    input(type="text", id="profecionProfecional" ,name="profecionProfecional")
+                    br
+                    label(for="especialidadProfecional") Especialidad del Profecional:
+                    input(type="text", id="especilalidadProfecional", name="especialidadProfecional")
+                    br
+                    label(for="domicilioProfecionl") Domicilio del profecional 
+                    input(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
+                    br  
+                    label(for="refepsProfecional") Identificacion REFEPS del Profecional:
+                    input(type="text", id="refepsProfecional", name="refepsProfecional")
+                    br
+                    label(for="matriculaProfecionl") Matricula del profecional 
+                    input(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
+                    br                 
+                    input(type="submit", value="Enviar")

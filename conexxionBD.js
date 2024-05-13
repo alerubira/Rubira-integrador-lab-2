@@ -69,11 +69,29 @@ connection.connect(function(err) {
             if (err) {
                 throw err;
             } else {
-                console.log(result);
+                //console.log(result);
                // callback(result);
             }
         });
     }
 });
-export { buscarID };
+function agregarMedico(medico){
+    const sql = "INSERT INTO `profecional` (`idrefeps`, `nombre`, `apellido`, `documento`, `profecion`, `especialidad`, `domicilio`, `matriculaprofecioinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const valores = [medico.refepsProfecional,medico. nombreProfecional,medico.apellidoProfecional, medico.apellidoProfecional,medico.dniProfecional,medico.profecionProfecional,medico.especialidadProfecional, medico.matriculaProfecional];
+    connection.connect(function(err) {
+        if (err) {
+            throw err;
+        } else {
+            connection.query(sql,valores, function(err, result) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log(result);
+                   // callback(result);
+                }
+            });
+        }
+    });
+}
+export { buscarID,agregarMedico };
 

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
 import{verificarProfecional}from './manejadorDeRutas.js'
-
+import { agregarMedico } from './conexxionBD.js';
 let profecional;
 let encabezado;
 export function traerProfecionl(profecionalI){
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   });
   app.post('/verificarProfecional', (req, res) => {
    // Obtener el ID del Profesional enviado desde el formulario
-const idProfecional = req.body.idProfecional; 
+   const idProfecional = req.body.idProfecional; 
    verificarProfecional(res,idProfecional,encabezado);
    
   });
@@ -49,7 +49,8 @@ const idProfecional = req.body.idProfecional;
     res.render('recetas', { encabezado,profecional }); // Pasar el nombre a la vista
   });
   app.get('/medicos',(req,res)=>{
-    res.render('medicos',{encabezado,nombre: profecional});
+    encabezado="Planilla para procesar medicos"
+    res.render('medicos',{encabezado});
   });
   app.get('/medicamentos',(req,res)=>{
     res.render('medicamentos',{encabezado,nombre: profecional});
@@ -82,8 +83,14 @@ return res.redirect('/medicos');
  return res.render('vistaPrincipal',{encabezado,alerta})
 }
 
-});
+});         
+app.post('/crearProfecional',(req,res)=>{
+   const profecionalCreado=req.body;
+   agregarMedico(profecionalCreado);
+   console.log(profecionalCreado);
 
+   res.redirect("/");
+});
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
