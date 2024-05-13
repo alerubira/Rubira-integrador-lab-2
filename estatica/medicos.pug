@@ -1,13 +1,16 @@
 doctype html
 include plantilla
 #divSecundario 
+          if mensajeExito 
+              script.
+                alert("#{mensajeExito}")
           select(id="crudMedico", name="crudMedico")
                option(value="crearMedico") Inscribir Medico
                option(value="modificarMedico") Modificar datos de medico 
                option(value="bajaMedico") Dar de baja a un medico
                option(value="buscarMedico") Buscar un medico existemte
-
-          #divcrearMedico 
+          
+          #divCrearMedico.ocultar 
                form#formularioProfecionalCrear(action="/crearProfecional", method="POST")
                     label(for="dniProfecional") DNI del Profecional:
                     input(type="text", id="dniProfecional", name="dniProfecional")
@@ -34,3 +37,29 @@ include plantilla
                     input(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
                     br                 
                     input(type="submit", value="Enviar")
+          script.
+               document.getElementById('crudMedico').addEventListener('change', function() {
+                    let selectedValue = this.value;
+                    // Realiza una acción en base a la selección
+                    switch(selectedValue) {
+                         case 'crearMedico':
+                              // Acción para inscribir un médico
+                              let divMedico = document.getElementById('divCreaMedico');
+                              divMedico.style.display = 'block';
+                              break;
+                         case 'modificarMedico':
+                              // Acción para modificar datos de un médico
+                              console.log('Modificar datos de Médico');
+                              break;
+                         case 'bajaMedico':
+                              // Acción para dar de baja a un médico
+                              console.log('Dar de baja a un Médico');
+                              break;
+                         case 'buscarMedico':
+                              // Acción para buscar un médico existente
+                              console.log('Buscar un Médico existente');
+                              break;
+                         default:
+                              console.log('Selección no válida');
+                    }
+               });

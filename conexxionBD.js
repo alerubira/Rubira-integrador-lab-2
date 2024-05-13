@@ -75,19 +75,25 @@ connection.connect(function(err) {
         });
     }
 });
-function agregarMedico(medico){
+function agregarMedico(medico,callback){
     const sql = "INSERT INTO `profecional` (`idrefeps`, `nombre`, `apellido`, `documento`, `profecion`, `especialidad`, `domicilio`, `matriculaprofecioinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    const valores = [medico.refepsProfecional,medico. nombreProfecional,medico.apellidoProfecional, medico.apellidoProfecional,medico.dniProfecional,medico.profecionProfecional,medico.especialidadProfecional, medico.matriculaProfecional];
+    const valores = [medico.refepsProfecional,medico.nombreProfecional,medico.apellidoProfecional,medico.dniProfecional,medico.profecionProfecional,medico.especialidadProfecional,  medico.domicilioProfecional,medico.matriculaProfecional];
     connection.connect(function(err) {
         if (err) {
-            throw err;
+            callback (err);
         } else {
             connection.query(sql,valores, function(err, result) {
                 if (err) {
-                    throw err;
+                    callback (err);
                 } else {
-                    console.log(result);
+                   // console.log(result);
                    // callback(result);
+                   if (result.affectedRows > 0) {
+                    callback(null,"Inserción exitosa en la base de datos.");
+                    // callback(result);
+                } else {
+                    callback(null,"No se insertaron filas en la base de datos.");
+                }
                 }
             });
         }

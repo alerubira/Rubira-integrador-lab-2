@@ -9,6 +9,7 @@ import{verificarProfecional}from './manejadorDeRutas.js'
 import { agregarMedico } from './conexxionBD.js';
 let profecional;
 let encabezado;
+let mensajeExito;
 export function traerProfecionl(profecionalI){
   profecional=profecionalI;
 }
@@ -50,7 +51,7 @@ app.get('/', (req, res) => {
   });
   app.get('/medicos',(req,res)=>{
     encabezado="Planilla para procesar medicos"
-    res.render('medicos',{encabezado});
+    res.render('medicos',{encabezado,mensajeExito});
   });
   app.get('/medicamentos',(req,res)=>{
     res.render('medicamentos',{encabezado,nombre: profecional});
@@ -85,11 +86,24 @@ return res.redirect('/medicos');
 
 });         
 app.post('/crearProfecional',(req,res)=>{
-   const profecionalCreado=req.body;
-   agregarMedico(profecionalCreado);
-   console.log(profecionalCreado);
+  mensajeExito="";
+  const profecionalCreado=req.body;
+   //mensajeExito=agregarMedico(profecionalCreado);
+   //console.log(profecionalCreado);
 
-   res.redirect("/");
+   //res.redirect("/medicos");
+   agregarMedico(profecionalCreado, (error, resultado) => {
+    if (error) {
+        // Maneja el error aquí
+        console.error(error);
+    } else {
+        // Maneja el resultado aquí
+        console.log(resultado);
+        mensajeExito=resultado;
+        // Puedes redirigir después de capturar la respuesta
+        res.redirect("/medicos");
+    }
+});
 });
   // Iniciar el servidor
   app.listen(port, () => {

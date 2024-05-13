@@ -54,3 +54,12 @@
     border-radius: 10px; /* Establece los bordes redondeados */
     border: 2px solid black; /* Establece el borde de color negro */
   }
+  form label {
+    display: inline-block;
+    width: 200px; /* Ancho deseado para las etiquetas */
+    text-align: right; /* Alinea el texto de las etiquetas a la derecha */
+    margin-right: 10px; /* Espacio entre las etiquetas y los campos de entrada */
+}
+.ocultar{
+    display: none;
+}
