@@ -5,6 +5,7 @@ include plantilla
               script.
                 alert("#{mensajeExito}")
           select(id="crudMedico", name="crudMedico")
+               option(value="vacio") Elija una opcion
                option(value="crearMedico") Inscribir Medico
                option(value="modificarMedico") Modificar datos de medico 
                option(value="bajaMedico") Dar de baja a un medico
@@ -40,11 +41,14 @@ include plantilla
           script.
                document.getElementById('crudMedico').addEventListener('change', function() {
                     let selectedValue = this.value;
+                    let ocultar=document.getElementByClass('ocultar');
+                    ocultar.style.display = 'none';
                     // Realiza una acción en base a la selección
                     switch(selectedValue) {
                          case 'crearMedico':
+                              console.log(selectedValue);
                               // Acción para inscribir un médico
-                              let divMedico = document.getElementById('divCreaMedico');
+                              let divMedico = document.getElementById('divCrearMedico');
                               divMedico.style.display = 'block';
                               break;
                          case 'modificarMedico':
