@@ -25,7 +25,10 @@ function buscarID(id){
 export{buscarID};*/
 import mysql from 'mysql2';
 
+
 let connection;
+let profecionales;
+let medicamentos;
 
 connection = mysql.createConnection({
     host: 'localhost',
@@ -99,5 +102,34 @@ function agregarMedico(medico,callback){
         }
     });
 }
-export { buscarID,agregarMedico };
+connection.connect(function(err) {
+    if (err) {
+        throw err;
+    } else {
+        connection.query("SELECT * FROM `profecional` where 1", function(err, result, fields) {
+            if (err) {
+                throw err;
+            } else {
+               // console.log(result);
+               profecionales=result; 
+            }
+        });
+    }
+});
+connection.connect(function(err) {
+    if (err) {
+        throw err;
+    } else {
+        connection.query("SELECT * FROM `medicamento` where 1", function(err, result, fields) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(result);
+               medicamentos=result; 
+            }
+        });
+    }
+});
+ 
+export { buscarID,agregarMedico,profecionales,medicamentos };
 

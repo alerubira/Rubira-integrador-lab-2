@@ -5,8 +5,9 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{verificarProfecional}from './manejadorDeRutas.js'
-import { agregarMedico } from './conexxionBD.js';
+import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
+
+let profecionales;
 let profecional;
 let encabezado;
 let mensajeExito;
@@ -14,9 +15,13 @@ export function traerProfecionl(profecionalI){
   profecional=profecionalI;
 }
 
+
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+console.log(profecionales);
 export function conectar(){
 const app = express();
 const port = 3000;
@@ -86,29 +91,14 @@ return res.redirect('/medicos');
 
 });         
 app.post('/crearProfecional',(req,res)=>{
-  mensajeExito="";
-  const profecionalCreado=req.body;
-   //mensajeExito=agregarMedico(profecionalCreado);
-   //console.log(profecionalCreado);
-
-   //res.redirect("/medicos");
-   agregarMedico(profecionalCreado, (error, resultado) => {
-    if (error) {
-        // Maneja el error aquí
-        console.error(error);
-    } else {
-        // Maneja el resultado aquí
-        console.log(resultado);
-        mensajeExito=resultado;
-        // Puedes redirigir después de capturar la respuesta
-        res.redirect("/medicos");
-    }
-});
+  crearProfecional(req,res,mensajeExito)
+  
 });
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
   });
+//console.log(profecionales);
 }
 
 

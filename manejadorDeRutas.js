@@ -1,9 +1,9 @@
 import {buscarID} from './conexxionBD.js'; 
 import { traerProfecionl} from './conexxion.js';
+import { agregarMedico } from './conexxionBD.js';
  
 function verificarProfecional(res,idProfecional,encabezado){
-
-   
+ 
  buscarID(idProfecional, function(result) {
   // Aquí puedes manejar los resultados de la consulta
 // console.log(result);
@@ -20,4 +20,24 @@ function verificarProfecional(res,idProfecional,encabezado){
 });
 
 }
-export{verificarProfecional};
+function crearProfecional(req,res,mensajeExito){
+  mensajeExito="";
+  const profecionalCreado=req.body;
+   //mensajeExito=agregarMedico(profecionalCreado);
+   //console.log(profecionalCreado);
+
+   //res.redirect("/medicos");
+   agregarMedico(profecionalCreado, (error, resultado) => {
+    if (error) {
+        // Maneja el error aquí
+        console.error(error);
+    } else {
+        // Maneja el resultado aquí
+        console.log(resultado);
+        mensajeExito=resultado;
+        // Puedes redirigir después de capturar la respuesta
+        res.redirect("/medicos");
+    }
+});
+}
+export{verificarProfecional,crearProfecional};
