@@ -1,6 +1,6 @@
-import {buscarID} from './conexxionBD.js'; 
+import {buscarID} from '../modelo/conexxionBD.js'; 
 import { traerProfecionl} from './conexxion.js';
-import { agregarMedico } from './conexxionBD.js';
+import { agregarMedico } from '../modelo/conexxionBD.js';
  
 function verificarProfecional(res,idProfecional,encabezado){
  

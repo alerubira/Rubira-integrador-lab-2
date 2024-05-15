@@ -1,0 +1,56 @@
+doctype html
+include plantilla
+#divSecundario
+        form#formularioReceta(action="/guardarReceta", method="POST")
+            - let fechaActual = new Date();
+            p= `${fechaActual.getDate()}/${fechaActual.getMonth() + 1}/${fechaActual.getFullYear()}`
+
+            #divProfecional 
+                h3 PROFECIONAL
+                label=`${profecional[0].nombre}  ${profecional[0].apellido}`
+
+                br
+                label=` DNI : ${profecional[0].documento}`
+                br
+                label=`Profecion : ${profecional[0].profecion}` 
+                label=`Especialida : ${profecional[0].especialidad}` 
+                br
+                label=`Matricula numero : ${profecional[0].matriculaprofecioinal}` 
+                
+            #divPaciente 
+                h3 PACIENTE 
+                label(for="dniP") DNI :
+                input(type="number", id="dniP", name="dniP")
+                br
+                label(for="nombreP") Nombre :
+                input(type="text", id="nombreP", name="nombreP")
+                br
+                label(for="apellidoP") Apellido :
+                input(type="text" ,id="apellidop", name="apellidoP")
+                br
+                label(for="sexoP") Sexo :
+                input(type="text", id="sexoP", name="sexoP")
+                br
+                label(for="obraSP") Obra Social :
+                input(type="text", id="obraSP", name="obraSP")
+                br
+                label(for="plan") Plan :
+                input(type="text", id="plan" ,name="plan")
+                br
+                label(for="fechaNP") Fecha de nacimiento :
+                input(type="date", id="fechaNP", name="fechaNP") 
+            #divReceta 
+                #divDiagnostico 
+                    h3 DIAGNOSTICO 
+                    textarea(type="textarea", id="diagnostico", name="diagnostico")
+                #divTipo
+                    select(id="tipo", name="tipo")
+                            option(value="prestacion") Prestacion
+                            option(value="medicamento") Medicamento
+                #divMedicamento 
+                    select(id="tipoMedicamento",name="tipoMedicamento")
+                        
+                #divPrestacion
+                    button(type="button") Agregar Linea        
+                    
+            input(type="submit", value="Enviar")

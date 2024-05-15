@@ -124,7 +124,7 @@ connection.connect(function(err) {
             if (err) {
                 throw err;
             } else {
-                console.log(result);
+               // console.log(result);
                medicamentos=result; 
             }
         });

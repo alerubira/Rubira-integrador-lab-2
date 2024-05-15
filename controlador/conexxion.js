@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
 import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
-
+let fechaActual = new Date();
 let profecionales;
 let profecional;
 let encabezado;
@@ -21,7 +21,7 @@ export function traerProfecionl(profecionalI){
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log(profecionales);
+//console.log(profecionales);
 export function conectar(){
 const app = express();
 const port = 3000;
@@ -29,11 +29,11 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
-app.use(serveStatic(path.join(__dirname, 'estatica')));
+app.use(serveStatic(path.join(__dirname, '..','estatica')));
 app.use(express.urlencoded({ extended: true }))
 // Configurar Express para usar Pug como motor de plantillas y establecer la carpeta de vistas
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'estatica'));
+app.set('views', path.join(__dirname, '..','vistas'));
 
 // Definir una ruta para renderizar una vista Pug
 app.get('/', (req, res) => {
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
      //Nombre, Apellido, documento, profesión, especialidad, domicilio y matrícula del profesional
     //profecional={nombre:"Alejandro",apellido:"Rubira",dni:"26833093",profecion:"medico",especialidad:"cardiologia",domiclio:"Tilisarao",matriculaP:"123"};
    // console.log(profecional);
-    res.render('recetas', { encabezado,profecional }); // Pasar el nombre a la vista
+    res.render('recetas', { encabezado,profecional ,fechaActual}); // Pasar el nombre a la vista
   });
   app.get('/medicos',(req,res)=>{
     encabezado="Planilla para procesar medicos"
