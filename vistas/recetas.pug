@@ -26,7 +26,7 @@ include plantilla
                 input(type="text", id="nombreP", name="nombreP")
                 br
                 label(for="apellidoP") Apellido :
-                input(type="text" ,id="apellidop", name="apellidoP")
+                input(type="text" ,id="apellidoP", name="apellidoP")
                 br
                 label(for="sexoP") Sexo :
                 input(type="text", id="sexoP", name="sexoP")
@@ -45,12 +45,59 @@ include plantilla
                     textarea(type="textarea", id="diagnostico", name="diagnostico")
                 #divTipo
                     select(id="tipo", name="tipo")
+                            option(value="j") Prestacion o Medicamento
                             option(value="prestacion") Prestacion
                             option(value="medicamento") Medicamento
-                #divMedicamento 
-                    select(id="tipoMedicamento",name="tipoMedicamento")
+                #divMedicamento.ocultar
+                    label(for="id_medicamento") ID Medicamento :
+                    input(type="number", id="id_medicamento", name="id_medicamento")
+                    br
+                    label(for="nombre_generico_medicamento") Nombre Generico del medicamento :
+                    input(type="text", id="nombre_generico_medicamento", name="nombre_generico_medicamento")
+                    br
+                    label(for="concentracion_medicamento") Concentracion del medicamento :
+                    input(type="text" ,id="concentracion_medicamento", name="concentracion_medicamento")
+                    br
+                    label(for="forma_farmaceutica_medicamento") Forma Farmaceutica :
+                    input(type="text", id="forma_farmaceutica_medicamento", name="forma_farmaceutica_medicamento")
+                    br
+                    label(for="precentacion_medicamento") Precentacion :
+                    input(type="text", id="precentacion_medicamento", name="precentacion_medicamento")
+                    br
+                    label(for="categoria_medicamento") Categoria :
+                    input(type="text", id="categoria_medicamento" ,name="categoria_medicamento")
+                    br
+                    label(for="familia_medicamento") Familia :
+                    input(type="text", id="familia_medicamento", name="familia_medicamento") 
+                    br
+                    label(for="marcaMedicamento") Marca del medicamento(opcional)
+                    input(type="text",id="marcaMrdicamento",name="marcaMedicamento")
+                    br
+                    button(type="button") Agregar  
                         
-                #divPrestacion
-                    button(type="button") Agregar Linea        
+                #divPrestacion.ocultar
+                    label(for="id_prestacion") ID Prestacion :
+                    input(type="number", id="id_prestacion", name="id_prestacion")
+                    br
+                    label(for="nombre_prestacion") Nombre de la prestacion :
+                    input(type="text", id="nombre_prestacion", name="nombre_prestacion")
+                    br
+                    label(for="procedimiento_prestacion") Procedimiento :
+                    input(type="text" ,id="procedimiento_prestacion", name="procedimiento_prestacion")
+                    br
+                    label(for="examen_prestacion") Examen  :
+                    input(type="text", id="examen_prestacion", name="examen_prestacion")
+                    br
+                    label(for="lado_prestacion") Lado(opcional) :
+                    input(type="text", id="lado_prestacion", name="lado_prestacion")
+                    br
+                    label(for="indicacionPrestacion") Indicacion :
+                    input(type="text", id="indicacionPrestacion" ,name="indicacionPrestacion")
+                    br
+                    label(for="justificacionPrestacion") Justificacion :
+                    input(type="text", id="justificacionPrestacion", name="justificacionPrestacion") 
                     
+                    br
+                    button(type="button") Agregar        
+                #divRecetado   
             input(type="submit", value="Enviar")

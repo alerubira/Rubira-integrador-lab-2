@@ -41,13 +41,7 @@ include plantilla
           #divBuscarMedico.ocultar
           #divModificarMedico.ocultar
           #divBorrarMedico.ocultar
-          script.
-               function ocultar(){
-                         let ocultar=document.getElementsByClassName('ocultar');
-                       for (let elemento of ocultar) {
-                          elemento.style.display = 'none';
-                             }
-                    }
+          
                document.getElementById('crudMedico').addEventListener('change', function() {
                     let selectedValue = this.value;
                     
