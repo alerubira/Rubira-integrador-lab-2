@@ -25,6 +25,7 @@ function buscarID(id){
 export{buscarID};*/
 import mysql from 'mysql2';
 import { Login } from './clasesEntidad.js';
+import { Medico } from './clasesEntidad.js';
 
 let logins=[];
 let connection;
@@ -49,17 +50,27 @@ connection = mysql.createConnection({
         throw error;
     } 
 }*/
-function buscarID(id, callback) {
+
+function buscarMID(id, callback) {
     connection.connect(function(err) {
         if (err) {
             throw err;
-        } else {
-            connection.query("SELECT * FROM `profecional` WHERE id=?", [id], function(err, result, fields) {
+        } else{
+            
+               
+            
+            connection.query("select nombre,apellido,dni_persona,domicilio,nombre_profecion,nombre_especialidad,matricula_profecional FROM persona p JOIN medico m on p.id_persona=m.id_persona join profecion pr on m.id_profecion=pr.id_profecion join especialida es on es.id_especialidad=m.id_especialidad WHERE m.id_medico=?;", [id], function(err, result, fields) {
                 if (err) {
                     throw err;
                 } else {
-                    //console.log(result);
-                    callback(result);
+                    console.log(result);
+                    let m=new Medico(result[0].nombre,result[0].apellido,result[0].dni_persona,result[0].domicilio,result[0].nombre_profecion,result[0].nombre_especialidad,result[0].matricula_profecional);
+
+                    console.log("----------------------");
+                    console.log(m);
+                    console.log("--------------------------");
+                   
+                    callback(m);
                 }
             });
         }
@@ -130,7 +141,7 @@ connection.connect(function(err) {
                     let logi=new Login(log.id_login,log.id_medico,log.usuario_login,log.clave_login);
                     logins.push(logi);
                 }
-                console.log(logins);
+               // console.log(logins);
             }
         });
     }
@@ -150,5 +161,5 @@ connection.connect(function(err) {
     }
 });*/
  
-export { buscarID,agregarMedico,profecionales,medicamentos ,logins};
+export { buscarMID,agregarMedico,profecionales,medicamentos ,logins};
 

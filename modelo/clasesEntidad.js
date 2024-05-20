@@ -1,21 +1,21 @@
 class Persona {
-    constructor(nombre, apellido, dni, estado) {
+    constructor(nombre, apellido, dni) {
       this.nombre = nombre;
       this.apellido = apellido;
       this.dni = dni;
-      this.estado = estado;
+      
     }
   
     
   }
   class Medico extends Persona {
-    constructor(nombre, apellido, dni, estado, domicilio, profesion, especialidad, matriculaProfesional, idREFEPS) {
-      super(nombre, apellido, dni, estado);
+    constructor(nombre, apellido, dni, domicilio, profesion, especialidad, matriculaProfesional) {
+      super(nombre, apellido, dni);
       this.domicilio = domicilio;
       this.profesion = profesion;
       this.especialidad = especialidad;
       this.matriculaProfesional = matriculaProfesional;
-      this.idREFEPS = idREFEPS;
+      
     }
    }
   class Paciente extends Persona{
@@ -68,4 +68,4 @@ class Persona {
       this.claveUsuario=claveUsuario;
     }
   }
-  export{Login};
+  export{Login,Medico};

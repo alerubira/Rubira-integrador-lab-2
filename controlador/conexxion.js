@@ -44,15 +44,15 @@ app.get('/', (req, res) => {
    console.log(req.body);
    //const loginAux= req.body.idProfecional; 
    verificarProfecional(res,req.body,logins,encabezado);
-   console.log('----------------------');
-   console.log(logins);
+   //console.log('----------------------');
+   //console.log(logins);
   });
   
   app.get('/recetas', (req, res) => {
      encabezado = "Bienvenido al Recetario web Nacional";
      //Nombre, Apellido, documento, profesión, especialidad, domicilio y matrícula del profesional
     //profecional={nombre:"Alejandro",apellido:"Rubira",dni:"26833093",profecion:"medico",especialidad:"cardiologia",domiclio:"Tilisarao",matriculaP:"123"};
-   // console.log(profecional);
+   console.log(`profecional ${profecional}`);
     res.render('recetas', { encabezado,profecional }); // Pasar el nombre a la vista
   });
   app.get('/medicos',(req,res)=>{
