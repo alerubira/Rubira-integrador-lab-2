@@ -24,8 +24,9 @@ function buscarID(id){
 }
 export{buscarID};*/
 import mysql from 'mysql2';
+import { Login } from './clasesEntidad.js';
 
-
+let logins=[];
 let connection;
 let profecionales;
 let medicamentos;
@@ -34,7 +35,7 @@ connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'registrodesalud',
+    database: 'registrodesalud2',
     port: 3306
 });
 
@@ -102,7 +103,7 @@ function agregarMedico(medico,callback){
         }
     });
 }
-connection.connect(function(err) {
+/*connection.connect(function(err) {
     if (err) {
         throw err;
     } else {
@@ -115,8 +116,26 @@ connection.connect(function(err) {
             }
         });
     }
-});
+});*/
 connection.connect(function(err) {
+    if (err) {
+        throw err;
+    } else {
+        connection.query("SELECT * FROM `login` where 1", function(err, result, fields) {
+            if (err) {
+                throw err;
+            } else {
+                //console.log(result);
+                for(let log of result){
+                    let logi=new Login(log.id_login,log.id_medico,log.usuario_login,log.clave_login);
+                    logins.push(logi);
+                }
+                console.log(logins);
+            }
+        });
+    }
+});
+/*connection.connect(function(err) {
     if (err) {
         throw err;
     } else {
@@ -129,7 +148,7 @@ connection.connect(function(err) {
             }
         });
     }
-});
+});*/
  
-export { buscarID,agregarMedico,profecionales,medicamentos };
+export { buscarID,agregarMedico,profecionales,medicamentos ,logins};
 

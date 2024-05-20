@@ -2,9 +2,11 @@ import {buscarID} from '../modelo/conexxionBD.js';
 import { traerProfecionl} from './conexxion.js';
 import { agregarMedico } from '../modelo/conexxionBD.js';
  
-function verificarProfecional(res,idProfecional,encabezado){
- 
- buscarID(idProfecional, function(result) {
+function verificarProfecional(res,req,logins,encabezado){
+  let loginEncontrado = logins.find(login => 
+    login.usuarioLogin === req.idUsuario && login.claveUsuario === req.idClave
+  );
+ buscarID(loginEncontrado.idMedico, function(result) {
   // Aquí puedes manejar los resultados de la consulta
 // console.log(result);
    

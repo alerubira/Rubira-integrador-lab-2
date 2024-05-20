@@ -13,8 +13,10 @@ include plantilla
       button(type="button", onclick="mostrarFormulario('formularioAdministrativoR')") Acceder a Profecionales
 
       form#formularioProfecional(style="display: none;", action="/verificarProfecional", method="POST")
-        label(for="idProfecional") ID del Profecional:
-        input(type="text", id="idProfecional", name="idProfecional")
+        label(for="idUsuari") Usuario:
+        input(type="text", id="idUsuario", name="idUsuario")
+        label(for="idClave") Clave 
+        input(type="text",id="idClave",name="idClave")
         input(type="submit", value="Enviar")
 
       form#formularioAdministrativo(style="display: none;", action="/verificarAdministrativo", method="POST")

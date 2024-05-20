@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
 import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
-let fechaActual = new Date();
+import { logins } from '../modelo/conexxionBD.js';
 let profecionales;
 let profecional;
 let encabezado;
@@ -41,10 +41,11 @@ app.get('/', (req, res) => {
     res.render('vistaPrincipal',{encabezado});
   });
   app.post('/verificarProfecional', (req, res) => {
-   // Obtener el ID del Profesional enviado desde el formulario
-   const idProfecional = req.body.idProfecional; 
-   verificarProfecional(res,idProfecional,encabezado);
-   
+   console.log(req.body);
+   //const loginAux= req.body.idProfecional; 
+   verificarProfecional(res,req.body,logins,encabezado);
+   console.log('----------------------');
+   console.log(logins);
   });
   
   app.get('/recetas', (req, res) => {
@@ -52,7 +53,7 @@ app.get('/', (req, res) => {
      //Nombre, Apellido, documento, profesión, especialidad, domicilio y matrícula del profesional
     //profecional={nombre:"Alejandro",apellido:"Rubira",dni:"26833093",profecion:"medico",especialidad:"cardiologia",domiclio:"Tilisarao",matriculaP:"123"};
    // console.log(profecional);
-    res.render('recetas', { encabezado,profecional ,fechaActual}); // Pasar el nombre a la vista
+    res.render('recetas', { encabezado,profecional }); // Pasar el nombre a la vista
   });
   app.get('/medicos',(req,res)=>{
     encabezado="Planilla para procesar medicos"
