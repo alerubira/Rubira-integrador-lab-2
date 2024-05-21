@@ -31,7 +31,7 @@ let logins=[];
 let connection;
 let profecionales;
 let medicamentos;
-
+let pacientes=[];
 connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -63,12 +63,12 @@ function buscarMID(id, callback) {
                 if (err) {
                     throw err;
                 } else {
-                    console.log(result);
+                    //console.log(result);
                     let m=new Medico(result[0].nombre,result[0].apellido,result[0].dni_persona,result[0].domicilio,result[0].nombre_profecion,result[0].nombre_especialidad,result[0].matricula_profecional);
 
-                    console.log("----------------------");
+                    /*console.log("----------------------");
                     console.log(m);
-                    console.log("--------------------------");
+                    console.log("--------------------------");*/
                    
                     callback(m);
                 }
@@ -80,11 +80,11 @@ connection.connect(function(err) {
     if (err) {
         throw err;
     } else {
-        connection.query("SELECT * FROM `paciente` ", function(err, result) {
+        connection.query("SELECT nombre,apellido,dni_persona,fecha_nacimiento,nombre_sexo FROM `paciente` pa JOIN `persona` pe on pa.id_persona=pe.id_persona join `sexo` s on s.id_sexo=pa.id_sexo WHERE 1; ", function(err, result) {
             if (err) {
                 throw err;
             } else {
-                //console.log(result);
+                console.log(result);
                // callback(result);
             }
         });

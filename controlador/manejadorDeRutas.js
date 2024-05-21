@@ -6,11 +6,27 @@ function verificarProfecional(res,req,logins,encabezado){
   let loginEncontrado = logins.find(login => 
     login.usuarioLogin === req.idUsuario && login.claveUsuario === req.idClave
   );
- buscarMID(loginEncontrado.idMedico, function(result) {
+  if(loginEncontrado){
+    buscarMID(loginEncontrado.idMedico, function(result) {
+      // Aquí puedes manejar los resultados de la consulta
+     //console.log(result);
+       
+        
+          //console.log(profecional);
+          traerProfecionl(result);
+          // Redirigir al usuario al endpoint '/recetas'
+        return res.redirect('/recetas');
+  });
+}else{
+  let alerta=true;
+return res.render('vistaPrincipal',{encabezado,alerta})
+}
+}
+ /*buscarMID(loginEncontrado.idMedico, function(result) {
   // Aquí puedes manejar los resultados de la consulta
-// console.log(result);
+ //console.log(result);
    
-    if (result.length===1) {
+    if (result) {
       //console.log(profecional);
       traerProfecionl(result);
       // Redirigir al usuario al endpoint '/recetas'
@@ -21,7 +37,7 @@ function verificarProfecional(res,req,logins,encabezado){
     }
 });
 
-}
+}*/
 function crearProfecional(req,res,mensajeExito){
   mensajeExito="";
   const profecionalCreado=req.body;

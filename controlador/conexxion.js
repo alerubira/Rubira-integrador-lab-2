@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
     res.render('vistaPrincipal',{encabezado});
   });
   app.post('/verificarProfecional', (req, res) => {
-   console.log(req.body);
+   //console.log(req.body);
    //const loginAux= req.body.idProfecional; 
    verificarProfecional(res,req.body,logins,encabezado);
    //console.log('----------------------');
