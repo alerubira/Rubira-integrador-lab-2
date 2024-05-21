@@ -25,8 +25,8 @@ function buscarID(id){
 export{buscarID};*/
 import mysql from 'mysql2';
 import { Login } from './clasesEntidad.js';
-import { Medico } from './clasesEntidad.js';
-
+import { Medico ,Paciente} from './clasesEntidad.js';
+import { traerPaciente } from '../controlador/conexxion.js';
 let logins=[];
 let connection;
 let profecionales;
@@ -84,8 +84,14 @@ connection.connect(function(err) {
             if (err) {
                 throw err;
             } else {
-                console.log(result);
+                //console.log(result);
+                for(let pac of result){
+                    let aux = new Paciente(pac.nombre,pac.apellido,pac.dni_persona,pac.fecha_nacimiento,pac.nombre_sexo);
+                    pacientes.push(aux);
+                }
                // callback(result);
+               //console.log(pacientes);
+              traerPaciente(pacientes); 
             }
         });
     }
@@ -160,6 +166,7 @@ connection.connect(function(err) {
         });
     }
 });*/
+
  
 export { buscarMID,agregarMedico,profecionales,medicamentos ,logins};
 

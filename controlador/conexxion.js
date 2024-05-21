@@ -11,8 +11,13 @@ let profecionales;
 let profecional;
 let encabezado;
 let mensajeExito;
+let pacientes;
 export function traerProfecionl(profecionalI){
   profecional=profecionalI;
+}
+function traerPaciente(pacs){
+  pacientes=pacs;
+  //console.log(pacientes);
 }
 
 
@@ -23,11 +28,12 @@ const __dirname = dirname(__filename);
 
 //console.log(profecionales);
 export function conectar(){
+  
 const app = express();
 const port = 3000;
 // Configuración del body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.text());
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
 app.use(serveStatic(path.join(__dirname, '..','estatica')));
 app.use(express.urlencoded({ extended: true }))
@@ -95,11 +101,22 @@ app.post('/crearProfecional',(req,res)=>{
   crearProfecional(req,res,mensajeExito)
   
 });
+app.post('/buscarPacientes',(req,res)=>{
+// Capturar los tres caracteres enviados como texto
+//console.log(pacientes);
+const caracteres = req.body;
+
+// Puedes procesar los caracteres aquí
+//console.log('Caracteres recibidos SERVIDOR:', caracteres);
+let pac= pacientes.filter(paciente => paciente.dni.startsWith(caracteres));
+// Enviar una respuesta de vuelta al cliente
+res.send(pac);
+});
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
   });
 //console.log(profecionales);
 }
-
+export{traerPaciente};
 

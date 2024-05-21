@@ -20,7 +20,7 @@ include plantilla
             #divPaciente 
                 h3 PACIENTE 
                 label(for="dniP") DNI :
-                input(type="number", id="dniP", name="dniP")
+                input(type="text", id="dniP", name="dniP")
                 br
                 label(for="nombreP") Nombre :
                 input(type="text", id="nombreP", name="nombreP")
@@ -39,6 +39,7 @@ include plantilla
                 br
                 label(for="fechaNP") Fecha de nacimiento :
                 input(type="date", id="fechaNP", name="fechaNP") 
+                #divPacientes.ocultar
             #divReceta 
                 #divDiagnostico 
                     h3 DIAGNOSTICO 

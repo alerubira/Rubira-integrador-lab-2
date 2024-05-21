@@ -58,4 +58,5 @@ function crearProfecional(req,res,mensajeExito){
     }
 });
 }
+
 export{verificarProfecional,crearProfecional};

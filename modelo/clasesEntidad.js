@@ -19,12 +19,11 @@ class Persona {
     }
    }
   class Paciente extends Persona{
-    constructor(nombre,apellido,dni,estado,fechaNacimiento,sexo,obraSocial,planObraSocial){
-      super(nombre,apellido,dni,estado);
+    constructor(nombre,apellido,dni,fechaNacimiento,sexo){
+      super(nombre,apellido,dni);
       this.fechaNacimiento=fechaNacimiento;
       this.sexo=sexo;
-      this.obraSocial=obraSocial;
-      this.planObraSocial=planObraSocial;
+      
     }
   } 
   class MedicamentoPrescripcion{
@@ -68,4 +67,4 @@ class Persona {
       this.claveUsuario=claveUsuario;
     }
   }
-  export{Login,Medico};
+  export{Login,Medico,Paciente};
