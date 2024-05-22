@@ -103,13 +103,14 @@ app.post('/crearProfecional',(req,res)=>{
 });
 app.post('/buscarPacientes',(req,res)=>{
 // Capturar los tres caracteres enviados como texto
-//console.log(pacientes);
+console.log(pacientes);
 const caracteres = req.body;
 
 // Puedes procesar los caracteres aquí
 //console.log('Caracteres recibidos SERVIDOR:', caracteres);
 let pac= pacientes.filter(paciente => paciente.dni.startsWith(caracteres));
 // Enviar una respuesta de vuelta al cliente
+console.log(pac);
 res.send(pac);
 });
   // Iniciar el servidor
