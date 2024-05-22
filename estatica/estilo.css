@@ -8,6 +8,14 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin: 0;
 }
+.label {
+    display: inline-block;
+     /* Añadir padding opcionalmente para un mejor ajuste visual */
+     padding: 2px 5px;
+     /* Opcional: añadir un borde para ver claramente el tamaño del label */
+     border: 1px solid #000;
+     width: auto; /* Anula la regla width: 200px; */
+}
 #divCabecera {
     /*position: fixed;*/
     text-align: center;
@@ -58,8 +66,13 @@
     display: inline-block;
     width: 200px; /* Ancho deseado para las etiquetas */
     text-align: right; /* Alinea el texto de las etiquetas a la derecha */
-    margin-right: 10px; /* Espacio entre las etiquetas y los campos de entrada */
+    margin-right: 5px; /* Espacio entre las etiquetas y los campos de entrada */
 }
 .ocultar{
     display: none;
 }
+.div{
+border: 1px solid black;
+}
+
+

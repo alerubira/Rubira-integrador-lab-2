@@ -5,6 +5,9 @@ let ocultar=document.getElementsByClassName("ocultar");
 let selectTipo=document.getElementById("tipo");
 let divPacientes=document.getElementById('divPacientes');
 let aux=[];
+let profecional = document.getElementById('app').dataset.profesional;
+      
+console.log(`profecional ${profecional}`);
 function Focultar(){
             
         for (let elemento of ocultar) {
@@ -17,6 +20,7 @@ function Focultar(){
                 try {
                      aux = await fech(inputDniP, '/buscarPacientes');
                     if (aux) {
+                        
                         sugerirPacientes(aux);
                     }
                 } catch (error) {
@@ -38,8 +42,8 @@ function Focultar(){
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-        
-                const data = await response.text();
+                const data = await response.json(); // Cambiado a .json() para manejar respuestas JSON
+                //const data = await response.text();
                 console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
                 return data;
             } catch (error) {
@@ -53,11 +57,39 @@ function Focultar(){
             // Lógica para sugerir pacientes usando la información recibida en aux
             //console.log('Sugerir pacientes con los datos:', aux);
             for(let paciente of aux){
-                let input = document.createElement('input');
-                input.type = 'text';
-                input.value = `${paciente.nombre} ${paciente.apellido}`; // Ajusta esto según las propiedades de los objetos en aux
-                
-                divPacientes.appendChild(input);
+                //console.log(paciente.nombre);
+               // Agregar contenido al label
+               let div = document.createElement('div');
+               div.className = 'div'; // Agrega la clase 'mi-clase' al div
+               // Crear y agregar label para DNI
+               let labelDni = document.createElement('label');
+               labelDni.className=('label');
+               labelDni.textContent = paciente.dni;
+               labelDni.htmlFor = 'dniP';
+               div.appendChild(labelDni);
+               
+               // Crear y agregar label para Nombre
+               let labelNombre = document.createElement('label');
+               labelNombre.className=('label');
+               labelNombre.textContent = paciente.nombre;
+               labelNombre.htmlFor = 'nombreP';
+               div.appendChild(labelNombre);
+               
+               // Crear y agregar label para Apellido
+               let labelApellido = document.createElement('label');
+               labelApellido.className=('label');
+               labelApellido.textContent = paciente.apellido;
+               labelApellido.htmlFor = 'apellidoP';
+               div.appendChild(labelApellido);
+               
+               // Crear y agregar el botón
+               let buton = document.createElement('button');
+               buton.textContent = 'Agregar';
+               div.appendChild(buton);
+               
+               // Agregar el div al contenedor principal
+               divPacientes.appendChild(div);
+               
                 divPacientes.appendChild(document.createElement('br')); // Añadir un salto de línea entre inputs
             
             }

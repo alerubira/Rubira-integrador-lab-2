@@ -4,7 +4,8 @@ include plantilla
         form#formularioReceta(action="/guardarReceta", method="POST")
             - let fechaActual = new Date();
             p= `${fechaActual.getDate()}/${fechaActual.getMonth() + 1}/${fechaActual.getFullYear()}`
-
+            
+            div#app.oculto(data-profesional=profecional)
             #divProfecional 
                 h3 PROFECIONAL
                 label=`${profecional.nombre}  ${profecional.apellido}`
@@ -15,6 +16,7 @@ include plantilla
                 label=`Profecion : ${profecional.profesion}` 
                 label=`Especialida : ${profecional.especialidad}` 
                 br
+                label=`Domicilio : ${profecional.domicilio}`
                 label=`Matricula numero : ${profecional.matriculaProfesional}` 
                 
             #divPaciente 
@@ -39,7 +41,7 @@ include plantilla
                 br
                 label(for="fechaNP") Fecha de nacimiento :
                 input(type="date", id="fechaNP", name="fechaNP") 
-                #divPacientes.ocultar
+                #divPacientes
             #divReceta 
                 #divDiagnostico 
                     h3 DIAGNOSTICO 

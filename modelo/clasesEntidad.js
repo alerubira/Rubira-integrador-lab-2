@@ -9,8 +9,9 @@ class Persona {
     
   }
   class Medico extends Persona {
-    constructor(nombre, apellido, dni, domicilio, profesion, especialidad, matriculaProfesional) {
+    constructor(idMedico,nombre, apellido, dni, domicilio, profesion, especialidad, matriculaProfesional) {
       super(nombre, apellido, dni);
+      this.idMedico=idMedico;
       this.domicilio = domicilio;
       this.profesion = profesion;
       this.especialidad = especialidad;
