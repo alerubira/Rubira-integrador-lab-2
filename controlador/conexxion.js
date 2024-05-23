@@ -7,7 +7,8 @@ import { dirname } from 'path';
 import bodyParser from'body-parser';
 import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
-import { pacientes } from '../modelo/paciente.js';
+//import { pacientes } from '../modelo/paciente.js';
+import { buscarPacienteDni } from '../modelo/paciente.js';
 let profecionales;
 let profecional;
 let encabezado;
@@ -102,18 +103,29 @@ app.post('/crearProfecional',(req,res)=>{
   crearProfecional(req,res,mensajeExito)
   
 });
-app.post('/buscarPacientes',(req,res)=>{
+/*pp.post('/buscarPacientes',(req,res)=>{
 // Capturar los tres caracteres enviados como texto
 //console.log(pacientes);
 const caracteres = req.body;
-
+let pac=buscarPacienteDni(caracteres);
 // Puedes procesar los caracteres aquí
 //console.log('Caracteres recibidos SERVIDOR:', caracteres);
-let pac= pacientes.filter(paciente => paciente.dni.startsWith(caracteres));
+//let pac= pacientes.filter(paciente => paciente.dni.startsWith(caracteres));
 // Enviar una respuesta de vuelta al cliente
-console.log(pac);
+//console.log(pac);
 res.send(pac);
+});*/
+app.get('/buscarPacientes', async (req, res) => {
+  try {
+      let caracteres = req.query.dni; // Suponiendo que los caracteres vienen de una query string
+      let pac = await buscarPacienteDni(caracteres);
+      res.send(pac);
+  } catch (error) {
+      console.error('Error al buscar pacientes:', error);
+      res.status(500).send('Error interno del servidor');
+  }
 });
+
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

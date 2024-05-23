@@ -1,7 +1,7 @@
 import { connection } from "./conexxionBD.js";
 import { Login } from './clasesEntidad.js';
 let logins=[];
-console.log("login");
+//console.log("login");
 connection.connect(function(err) {
     if (err) {
         throw err;

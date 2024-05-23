@@ -23,4 +23,26 @@ connection.connect(function(err) {
         });
     }
 });
-export{pacientes};
+function buscarPacienteDni(dni) {
+    return new Promise((resolve, reject) => {
+        let aux = `${dni}%`;
+        connection.connect(function(err) {
+            if (err) {
+                return reject(err);
+            }
+            connection.query(
+                "SELECT id_paciente, nombre, apellido, dni_persona, fecha_nacimiento, nombre_sexo FROM `paciente` pa JOIN `persona` pe ON pa.id_persona=pe.id_persona JOIN `sexo` s ON s.id_sexo=pa.id_sexo WHERE `dni_persona` LIKE ?", 
+                [aux], 
+                function(err, result) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));
+                    resolve(pacientes);
+                }
+            );
+        });
+    });
+}
+
+export{pacientes,buscarPacienteDni};

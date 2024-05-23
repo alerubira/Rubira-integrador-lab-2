@@ -17,7 +17,7 @@ function Focultar(){
         }
         document.getElementById('dniP').addEventListener('input', async function() {
             let inputDniP = this.value;
-            if (inputDniP.length === 3) {
+            if (inputDniP.length === 7) {
                 try {
                      pacientes = await fech(inputDniP, '/buscarPacientes');
                     if (pacientes) {
