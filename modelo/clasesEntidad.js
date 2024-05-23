@@ -20,8 +20,9 @@ class Persona {
     }
    }
   class Paciente extends Persona{
-    constructor(nombre,apellido,dni,fechaNacimiento,sexo){
+    constructor(nombre,apellido,dni,idPaciente,fechaNacimiento,sexo){
       super(nombre,apellido,dni);
+      this.idPaciente=idPaciente;
       this.fechaNacimiento=fechaNacimiento;
       this.sexo=sexo;
       

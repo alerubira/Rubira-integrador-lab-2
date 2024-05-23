@@ -6,19 +6,20 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
 import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
-import { logins } from '../modelo/conexxionBD.js';
+import { logins } from '../modelo/login.js';
+import { pacientes } from '../modelo/paciente.js';
 let profecionales;
 let profecional;
 let encabezado;
 let mensajeExito;
-let pacientes;
+//let pacientes;
 export function traerProfecionl(profecionalI){
   profecional=profecionalI;
 }
-function traerPaciente(pacs){
+/*function traerPaciente(pacs){
   pacientes=pacs;
   //console.log(pacientes);
-}
+}*/
 
 
 
@@ -103,7 +104,7 @@ app.post('/crearProfecional',(req,res)=>{
 });
 app.post('/buscarPacientes',(req,res)=>{
 // Capturar los tres caracteres enviados como texto
-console.log(pacientes);
+//console.log(pacientes);
 const caracteres = req.body;
 
 // Puedes procesar los caracteres aquí
@@ -119,5 +120,5 @@ res.send(pac);
   });
 //console.log(profecionales);
 }
-export{traerPaciente};
+//export{traerPaciente};
 

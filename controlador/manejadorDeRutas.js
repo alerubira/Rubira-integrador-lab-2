@@ -1,6 +1,6 @@
-import {buscarMID} from '../modelo/conexxionBD.js'; 
+import {buscarMID} from '../modelo/medico.js'; 
 import { traerProfecionl} from './conexxion.js';
-import { agregarMedico } from '../modelo/conexxionBD.js';
+//import { agregarMedico } from '../modelo/medico.js';
  
 function verificarProfecional(res,req,logins,encabezado){
   let loginEncontrado = logins.find(login => 
