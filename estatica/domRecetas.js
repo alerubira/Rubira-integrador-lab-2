@@ -4,10 +4,11 @@ let dirRecetado=document.getElementById("divRecetado");
 let ocultar=document.getElementsByClassName("ocultar");
 let selectTipo=document.getElementById("tipo");
 let divPacientes=document.getElementById('divPacientes');
-let aux=[];
+let pacientes=[];
 let profecional = document.getElementById('app').dataset.profesional;
+let paciente;
       
-console.log(`profecional ${profecional}`);
+//console.log(`profecional ${profecional}`);
 function Focultar(){
             
         for (let elemento of ocultar) {
@@ -18,10 +19,10 @@ function Focultar(){
             let inputDniP = this.value;
             if (inputDniP.length === 3) {
                 try {
-                     aux = await fech(inputDniP, '/buscarPacientes');
-                    if (aux) {
+                     pacientes = await fech(inputDniP, '/buscarPacientes');
+                    if (pacientes) {
                         
-                        sugerirPacientes(aux);
+                        sugerirPacientes(pacientes);
                     }
                 } catch (error) {
                     console.error('Error fetching pacientes:', error);
@@ -85,6 +86,10 @@ function Focultar(){
                // Crear y agregar el botón
                let buton = document.createElement('button');
                buton.textContent = 'Agregar';
+               buton.addEventListener('click', (event) => {
+                event.preventDefault(); // Evitar el envío del formulario
+                asignarPaciente(paciente.dni);
+            });
                div.appendChild(buton);
                
                // Agregar el div al contenedor principal
@@ -95,7 +100,23 @@ function Focultar(){
             }
                
         }
-        
+function convertirFechaISOaFechaLocal(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const year = fecha.getFullYear();
+    const month = ('0' + (fecha.getMonth() + 1)).slice(-2); // Añade ceros a la izquierda
+    const day = ('0' + fecha.getDate()).slice(-2); // Añade ceros a la izquierda
+    return `${year}-${month}-${day}`;
+}
+ function asignarPaciente(dniPaciente){
+    paciente= pacientes.find(persona => persona.dni === dniPaciente);
+        document.getElementById('dniP').value = paciente.dni;
+        document.getElementById('nombreP').value = paciente.nombre;
+        document.getElementById('apellidoP').value = paciente.apellido;
+        document.getElementById('sexoP').value = paciente.sexo;
+        document.getElementById('obraSP').value = paciente.obraSocial;
+        document.getElementById('plan').value = paciente.plan;
+        document.getElementById('fechaNP').value =convertirFechaISOaFechaLocal(paciente.fechaNacimiento) ;
+ }       
 selectTipo.addEventListener("change", function() {
         Focultar();
          if(selectTipo.value==="prestacion"){
