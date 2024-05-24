@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }))
 // Configurar Express para usar Pug como motor de plantillas y establecer la carpeta de vistas
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '..','vistas'));
-
+app.use(express.json());
 // Definir una ruta para renderizar una vista Pug
 app.get('/', (req, res) => {
    encabezado="Bienvenido al Ministerio de Salud";
@@ -115,10 +115,12 @@ let pac=buscarPacienteDni(caracteres);
 //console.log(pac);
 res.send(pac);
 });*/
-app.get('/buscarPacientes', async (req, res) => {
+app.post('/buscarPacientes', async (req, res) => {
   try {
-      let caracteres = req.query.dni; // Suponiendo que los caracteres vienen de una query string
+      let caracteres = req.query.dni; 
+      console.log(caracteres);
       let pac = await buscarPacienteDni(caracteres);
+     // console.log(pac);
       res.send(pac);
   } catch (error) {
       console.error('Error al buscar pacientes:', error);

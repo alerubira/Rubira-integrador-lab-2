@@ -17,6 +17,7 @@ function Focultar(){
         }
         document.getElementById('dniP').addEventListener('input', async function() {
             let inputDniP = this.value;
+            console.log(inputDniP);
             if (inputDniP.length === 7) {
                 try {
                      pacientes = await fech(inputDniP, '/buscarPacientes');
@@ -41,7 +42,7 @@ function Focultar(){
                 });
         
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Error en la respuesta del fetch');
                 }
                 const data = await response.json(); // Cambiado a .json() para manejar respuestas JSON
                 //const data = await response.text();
