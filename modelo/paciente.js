@@ -25,8 +25,9 @@ connection.connect(function(err) {
 });
 function buscarPacienteDni(dni) {
     return new Promise((resolve, reject) => {
+        console.log(`dni entrando a la funsion ${dni}`);
         let aux = `${dni}%`;
-        console.log(aux);
+        console.log(`auxiliar ${aux}`);
         connection.connect(function(err) {
             if (err) {
                 return reject(err);
@@ -39,7 +40,7 @@ function buscarPacienteDni(dni) {
                         return reject(err);
                     }
                     console.log(result);
-                    let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));
+                    let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));//like ?
                     resolve(pacientes);
                 }
             );

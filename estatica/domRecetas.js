@@ -17,9 +17,10 @@ function Focultar(){
         }
         document.getElementById('dniP').addEventListener('input', async function() {
             let inputDniP = this.value;
-            console.log(inputDniP);
+            //console.log(inputDniP);
             if (inputDniP.length === 7) {
                 try {
+                    console.log(`dni antes deir al fetch ${inputDniP}`);
                      pacientes = await fech(inputDniP, '/buscarPacientes');
                     if (pacientes) {
                         
@@ -33,6 +34,7 @@ function Focultar(){
         
         async function fech(input, endpoint) {
             try {
+                console.log(`dni en fech ${input}`);
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
@@ -54,7 +56,7 @@ function Focultar(){
             }
         }
         
-        function sugerirPacientes(aux) {
+ function sugerirPacientes(aux) {
             Focultar();
             // Lógica para sugerir pacientes usando la información recibida en aux
             //console.log('Sugerir pacientes con los datos:', aux);

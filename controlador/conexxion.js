@@ -117,7 +117,7 @@ res.send(pac);
 });*/
 app.post('/buscarPacientes', async (req, res) => {
   try {
-      let caracteres = req.query.dni; 
+      let caracteres = req.body; 
       console.log(caracteres);
       let pac = await buscarPacienteDni(caracteres);
      // console.log(pac);
