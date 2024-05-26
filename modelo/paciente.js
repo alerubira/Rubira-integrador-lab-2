@@ -27,7 +27,7 @@ function buscarPacienteDni(dni) {
     return new Promise((resolve, reject) => {
         console.log(`dni entrando a la funsion ${dni}`);
         let aux = `${dni}%`;
-        console.log(`auxiliar ${aux}`);
+       // console.log(`auxiliar ${aux}`);
         connection.connect(function(err) {
             if (err) {
                 return reject(err);

@@ -7,6 +7,7 @@ let divPacientes=document.getElementById('divPacientes');
 let pacientes=[];
 let profecional = document.getElementById('app').dataset.profesional;
 let paciente;
+let obraSocialSelec=document.getElementById('obraSP');
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -34,7 +35,7 @@ function Focultar(){
         
         async function fech(input, endpoint) {
             try {
-                console.log(`dni en fech ${input}`);
+                //console.log(`dni en fech ${input}`);
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
@@ -110,8 +111,9 @@ function convertirFechaISOaFechaLocal(fechaISO) {
     const day = ('0' + fecha.getDate()).slice(-2); // Añade ceros a la izquierda
     return `${year}-${month}-${day}`;
 }
- function asignarPaciente(dniPaciente){
+ async function asignarPaciente(dniPaciente){
     paciente= pacientes.find(persona => persona.dni === dniPaciente);
+    //console.log(`idPaciente en dom ${paciente.idPaciente}`);
         document.getElementById('dniP').value = paciente.dni;
         document.getElementById('nombreP').value = paciente.nombre;
         document.getElementById('apellidoP').value = paciente.apellido;
@@ -119,6 +121,15 @@ function convertirFechaISOaFechaLocal(fechaISO) {
         document.getElementById('obraSP').value = paciente.obraSocial;
         document.getElementById('plan').value = paciente.plan;
         document.getElementById('fechaNP').value =convertirFechaISOaFechaLocal(paciente.fechaNacimiento) ;
+      let obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
+      console.log(obras);
+      for(let ob of obras){
+        let option = document.createElement('option');
+        option.value = ob.nombre_obra_social;
+        option.textContent = ob.nombre_obra_social;
+        obraSocialSelec.appendChild(option);
+      }
+    
  }       
 selectTipo.addEventListener("change", function() {
         Focultar();
