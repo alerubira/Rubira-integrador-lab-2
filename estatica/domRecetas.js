@@ -8,6 +8,9 @@ let pacientes=[];
 let profecional = document.getElementById('app').dataset.profesional;
 let paciente;
 let obraSocialSelec=document.getElementById('obraSP');
+let planSelec=document.getElementById('plan');
+let obraSocialPlan;
+let obras;
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -121,16 +124,41 @@ function convertirFechaISOaFechaLocal(fechaISO) {
         document.getElementById('obraSP').value = paciente.obraSocial;
         document.getElementById('plan').value = paciente.plan;
         document.getElementById('fechaNP').value =convertirFechaISOaFechaLocal(paciente.fechaNacimiento) ;
-      let obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
-      console.log(obras);
-      for(let ob of obras){
+         obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
+      //console.log(obras);
+        llenarSelecObraS(obras);
+    eliminarHijos(divPacientes);
+ }      
+ function llenarSelecObraS(obras){
+    for(let ob of obras){
         let option = document.createElement('option');
         option.value = ob.nombre_obra_social;
         option.textContent = ob.nombre_obra_social;
         obraSocialSelec.appendChild(option);
       }
+ } 
+ obraSocialSelec.addEventListener("change",function(){
+let planes=obras.fiter(ob=>ob.nombre_obra_social=obraSocialSelec.value);
+
+llenarPlan(planes);
+ });
+ function eliminarHijos(div) {
     
- }       
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
+ function llenarPlan(planes){
+    for(let pl of planes){
+        let option = document.createElement('option');
+        option.value = pl.nombre_plan;
+        option.textContent = pl.nombre_plan;
+        obraSocialSelec.appendChild(option);
+      }
+ }
+ planSelec.addEventListener("change",function(){
+obraSocialPlan=obras.find(ob=>ob.nombre_plan=planSelec.value);
+ });
 selectTipo.addEventListener("change", function() {
         Focultar();
          if(selectTipo.value==="prestacion"){
