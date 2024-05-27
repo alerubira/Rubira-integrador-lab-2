@@ -20,13 +20,14 @@ function Focultar(){
                 }
         }
         document.getElementById('dniP').addEventListener('input', async function() {
+            eliminarHijos(divPacientes);
             let inputDniP = this.value;
             //console.log(inputDniP);
             if (inputDniP.length === 7) {
                 try {
                    // console.log(`dni antes deir al fetch ${inputDniP}`);
                      pacientes = await fech(inputDniP, '/buscarPacientes');
-                    if (pacientes) {
+                    if (pacientes!="") {
                         sugerirPacientes(pacientes);
                     }else{
                         crearPaciente();
@@ -36,11 +37,25 @@ function Focultar(){
                 }
             }
         });
+function traerObras(){
+    fech('*', '/traerObras')
+    .then(function(obras) {
+        llenarSelecObraS(obras);
+        
+    }).catch(function(error) {
+        console.error("Error al traer las obras:", error);
+    });
+}
+
 function crearPaciente(){
+traerObras();
+
 let p=document.createElement('p');
 p.textContent='El paciente no esta registrado,por favor complete los campos y registrelo';
 let buton=document.createElement('button');
 buton.textContent = 'Crear';
+divPacientes.appendChild(p);
+divPacientes.appendChild(buton);
 buton.addEventListener('click', (event) => {
  event.preventDefault(); // Evitar el envío del formulario
  
@@ -137,10 +152,10 @@ function convertirFechaISOaFechaLocal(fechaISO) {
         document.getElementById('fechaNP').value =convertirFechaISOaFechaLocal(paciente.fechaNacimiento) ;
          obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
       //console.log(obras);
-        llenarSelecObraS(obras);
+        llenarSelecObraS(obras,true);
     eliminarHijos(divPacientes);
  }      
- function llenarSelecObraS(obras){
+ function llenarSelecObraS(obras,aux){
     for(let ob of obras){
         let option = document.createElement('option');
         option.value = ob.nombre_obra_social;
@@ -149,7 +164,10 @@ function convertirFechaISOaFechaLocal(fechaISO) {
       }
  } 
  obraSocialSelec.addEventListener("change",function(){
-let planes=obras.filter(ob=>ob.nombre_obra_social=obraSocialSelec.value);
+    if(aux){
+        let planes=obras.filter(ob=>ob.nombre_obra_social=obraSocialSelec.value);
+    }
+
 
 llenarPlan(planes);
  });

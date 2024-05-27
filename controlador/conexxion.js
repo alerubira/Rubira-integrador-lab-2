@@ -9,7 +9,7 @@ import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
 import { buscarPacienteDni } from '../modelo/paciente.js';
-import { buscarOSIdPaciente } from '../modelo/obraSocial.js';
+import { buscarOSIdPaciente ,todasObras} from '../modelo/obraSocial.js';
 let profecionales;
 let profecional;
 let encabezado;
@@ -131,11 +131,24 @@ app.post('/buscarPacientes', async (req, res) => {
 app.post('/obraSocialPaciente', async (req, res) => {
   try {
       let caracteres = req.body; 
-      console.log(`idPaciente en ruta ${caracteres}`);
+     // console.log(`idPaciente en ruta ${caracteres}`);
      // console.log(caracteres);
       let obra = await buscarOSIdPaciente(caracteres);
      // console.log(pac);
       res.send(obra);
+  } catch (error) {
+      console.error('Error al buscar obre sociales:', error);
+      res.status(500).send('Error interno del servidor');
+  }
+});
+app.post('/traerObras', async (req, res) => {
+  try {
+      let caracteres = req.body; 
+      //console.log(`caracter en ruta en ruta ${caracteres}`);
+     // console.log(caracteres);
+      let obras = await todasObras(caracteres);
+     // console.log(pac);
+      res.send(obras);
   } catch (error) {
       console.error('Error al buscar obre sociales:', error);
       res.status(500).send('Error interno del servidor');

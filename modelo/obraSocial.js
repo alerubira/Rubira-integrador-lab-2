@@ -2,7 +2,7 @@ import { connection } from "./conexxionBD.js";
 let obrasSociales;
 let planes;
 let obraSocialPlan;
-console.log("obraSocial:js")
+/*console.log("obraSocial:js")
 function consultar(consulta){
     connection.connect(function(err) {
         if (err) {
@@ -18,10 +18,37 @@ function consultar(consulta){
             });
         }
     });
-}
+}*/
+function todasObras(caracter){
+    
+        return new Promise((resolve, reject) => {
+           // console.log(`caracter entrando a la funsion ${caracter}`);
+           // let aux = `${dni}%`;
+           // console.log(`auxiliar ${aux}`);
+            connection.connect(function(err) {
+                if (err) {
+                    return reject(err);
+                }
+                connection.query('SELECT * FROM `obra_social`',
+                    
+                    function(err, result) {
+                        if (err) {
+                            return reject(err);
+                        }
+                       // let obra=result;
+                       console.log(result);
+                        //console.log(result);
+                        //let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));//like ?
+                        resolve(result);
+                    }
+          );
+            });
+        });
+    }
+
 function buscarOSIdPaciente(id) {
     return new Promise((resolve, reject) => {
-        console.log(`idPaciente entrando a la funsion ${id}`);
+        //console.log(`idPaciente entrando a la funsion ${id}`);
        // let aux = `${dni}%`;
        // console.log(`auxiliar ${aux}`);
         connection.connect(function(err) {
@@ -48,4 +75,4 @@ function buscarOSIdPaciente(id) {
 //obrasSociales=consultar("SELECT * FROM `obra_social`");
 //planes=consultar("SELECT * FROM `plan_obra_social`");
 //obraSocialPlan=consultar("SELECT * FROM `obra_social_plan` ");
-export{obrasSociales,planes,obraSocialPlan,buscarOSIdPaciente};
+export{obrasSociales,planes,obraSocialPlan,buscarOSIdPaciente,todasObras};
