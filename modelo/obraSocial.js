@@ -29,7 +29,7 @@ function todasObras(caracter){
                 if (err) {
                     return reject(err);
                 }
-                connection.query('SELECT * FROM `obra_social`',
+                connection.query('SELECT * FROM `obra_social` os join plan_obra_social pl on pl.id_obra_social=os.id_obra_social WHERE 1;',
                     
                     function(err, result) {
                         if (err) {
