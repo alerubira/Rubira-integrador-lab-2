@@ -6,10 +6,10 @@ let selectTipo=document.getElementById("tipo");
 let divPacientes=document.getElementById('divPacientes');
 let pacientes=[];
 let profecional = document.getElementById('app').dataset.profesional;
-let paciente;
+let paciente;//para la prescripcion
 let obraSocialSelec=document.getElementById('obraSP');
 let planSelec=document.getElementById('plan');
-let obraSocialPlan;
+let obraSocialPlan;//para la prescripcion
 let obras;
       
 //console.log(`profecional ${profecional}`);
@@ -24,18 +24,29 @@ function Focultar(){
             //console.log(inputDniP);
             if (inputDniP.length === 7) {
                 try {
-                    console.log(`dni antes deir al fetch ${inputDniP}`);
+                   // console.log(`dni antes deir al fetch ${inputDniP}`);
                      pacientes = await fech(inputDniP, '/buscarPacientes');
                     if (pacientes) {
-                        
                         sugerirPacientes(pacientes);
+                    }else{
+                        crearPaciente();
                     }
                 } catch (error) {
                     console.error('Error fetching pacientes:', error);
                 }
             }
         });
-        
+function crearPaciente(){
+let p=document.createElement('p');
+p.textContent='El paciente no esta registrado,por favor complete los campos y registrelo';
+let buton=document.createElement('button');
+buton.textContent = 'Crear';
+buton.addEventListener('click', (event) => {
+ event.preventDefault(); // Evitar el envío del formulario
+ 
+});
+
+}  
         async function fech(input, endpoint) {
             try {
                 //console.log(`dni en fech ${input}`);
@@ -138,7 +149,7 @@ function convertirFechaISOaFechaLocal(fechaISO) {
       }
  } 
  obraSocialSelec.addEventListener("change",function(){
-let planes=obras.fiter(ob=>ob.nombre_obra_social=obraSocialSelec.value);
+let planes=obras.filter(ob=>ob.nombre_obra_social=obraSocialSelec.value);
 
 llenarPlan(planes);
  });
@@ -153,7 +164,7 @@ llenarPlan(planes);
         let option = document.createElement('option');
         option.value = pl.nombre_plan;
         option.textContent = pl.nombre_plan;
-        obraSocialSelec.appendChild(option);
+        planSelec.appendChild(option);
       }
  }
  planSelec.addEventListener("change",function(){

@@ -28,7 +28,7 @@ function buscarOSIdPaciente(id) {
             if (err) {
                 return reject(err);
             }
-            connection.query('SELECT id_p_o_s_p,nombre_obra_social,nombre_plan FROM `paciente_obra_social_plan`pop join `obra_social`os on os.id_obra_social=pop.id_obra_social join plan_obra_social pl on pl.id_plan=pop.id_plan WHERE id_paciente=?',[id],
+            connection.query('SELECT id_p_o_s_p,nombre_obra_social,nombre_plan FROM `paciente_obra_social_plan`pop join plan_obra_social pl on pl.id_plan=pop.id_plan join `obra_social`os on os.id_obra_social=pl.id_obra_social WHERE id_paciente=?',[id],
                 
                 function(err, result) {
                     if (err) {
