@@ -5,11 +5,11 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
+import{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
-import { buscarPacienteDni,todosSexo } from '../modelo/paciente.js';
-import { buscarOSIdPaciente ,todasObras} from '../modelo/obraSocial.js';
+import { todosSexo } from '../modelo/paciente.js';
+import { todasObras} from '../modelo/obraSocial.js';
 let profecionales;
 let profecional;
 let encabezado;
@@ -117,7 +117,8 @@ let pac=buscarPacienteDni(caracteres);
 res.send(pac);
 });*/
 app.post('/buscarPacientes', async (req, res) => {
-  try {
+  buscarPacientes(req,res);
+ /* try {
       let caracteres = req.body; 
       console.log(caracteres);
       let pac = await buscarPacienteDni(caracteres);
@@ -126,10 +127,11 @@ app.post('/buscarPacientes', async (req, res) => {
   } catch (error) {
       console.error('Error al buscar pacientes:', error);
       res.status(500).send('Error interno del servidor');
-  }
+  }*/
 });
 app.post('/obraSocialPaciente', async (req, res) => {
-  try {
+  busacrObraSocialPaciente(req,res);
+  /*try {
       let caracteres = req.body; 
      // console.log(`idPaciente en ruta ${caracteres}`);
      // console.log(caracteres);
@@ -139,7 +141,7 @@ app.post('/obraSocialPaciente', async (req, res) => {
   } catch (error) {
       console.error('Error al buscar obre sociales:', error);
       res.status(500).send('Error interno del servidor');
-  }
+  }*/
 });
 app.post('/traerObras', async (req, res) => {
   try {

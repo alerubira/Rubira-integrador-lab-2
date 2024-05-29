@@ -11,8 +11,9 @@ let paciente;//para la prescripcion
 let obraSocialSelec=document.getElementById('obraSP');
 let planSelec=document.getElementById('plan');
 let obraSocialPlan;//para la prescripcion
-let obras;
+let obrass;
 let sexo;
+inputSexoP=document.getElementById('sexoP');
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -42,7 +43,7 @@ function Focultar(){
 function traerObras(){
     fech('*', '/traerObras')
     .then(function(obras) {
-        
+        obrass=obras;
         llenarSelecObraS(obras);
         
     }).catch(function(error) {
@@ -58,12 +59,14 @@ let p=document.createElement('p');
 p.textContent='El paciente no esta registrado,por favor complete los campos y registrelo';
 let buton=document.createElement('button');
 buton.textContent = 'Registrar';
+
 divPacientes.appendChild(p);
 divPacientes.appendChild(buton);
 buton.addEventListener('click', (event) => {
  event.preventDefault(); // Evitar el envío del formulario
- 
+ registrarPaciente();
 });
+
 async function traerSexo(){
     let sexos=await fech('*','sexoTodos');
     //llenar el selec
@@ -79,20 +82,32 @@ async function traerSexo(){
      opti.textContent=sexo.nombre_sexo;
      selectSexo.appendChild(opti);
     }
-    selectSexo.addEventListener('change', function(event) {
+    selectSexo.addEventListener('change', async function(event) {
         // 3. Capturar el valor seleccionado
         const valorSeleccionado = event.target.value;
     // Hacer algo con el valor seleccionado (por ejemplo, imprimirlo en la consola)
        // console.log('Valor seleccionado:', valorSeleccionado);
        
-       console.log( sexos.find(se => se.nombre_sexo===valorSeleccionado));
-        
+    sexo= await sexos.find(se => se.nombre_sexo===valorSeleccionado);
+      if(sexo){
+        inputSexoP.value=sexo.nombre_sexo;
+        inputSexoP.placeholder=sexo.nombre_sexo;
+      }else{
+        alert('La opcion de sexo ingresada no es valida');
+      }  
        
 
     });
 }
 
-}  
+} 
+function registrarPaciente(){
+    console.log(`paciente el funsion registrarPaciente ${paciente}`);
+    //hacerel paciente con los datos necesarios para la base de datos
+    //hacer el endpoin para cargar el pacienta
+    //ejecutar el fech
+    //hacer la queri a la base de datos
+} 
         async function fech(input, endpoint) {
             try {
                 //console.log(`dni en fech ${input}`);
@@ -250,8 +265,10 @@ function convertirFechaISOaFechaLocal(fechaISO) {
       }
  }
 
- planSelec.addEventListener("change",function(){
-obraSocialPlan=obras.find(ob=>ob.nombre_plan=planSelec.value);
+ planSelec.addEventListener("change",async function(){
+    //console.log(obrass);
+obraSocialPlan=await obrass.find(ob=>ob.nombre_plan===planSelec.value);
+//console.log(obraSocialPlan);
  });
 selectTipo.addEventListener("change", function() {
         Focultar();
