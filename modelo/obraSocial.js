@@ -2,23 +2,7 @@ import { connection } from "./conexxionBD.js";
 let obrasSociales;
 let planes;
 let obraSocialPlan;
-/*console.log("obraSocial:js")
-function consultar(consulta){
-    connection.connect(function(err) {
-        if (err) {
-            throw err;
-        } else {
-            connection.query(consulta, function(err, result) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(result);
-                    return result; 
-                }
-            });
-        }
-    });
-}*/
+
 function todasObras(caracter){
     
         return new Promise((resolve, reject) => {

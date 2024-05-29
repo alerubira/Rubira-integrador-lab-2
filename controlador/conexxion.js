@@ -8,7 +8,7 @@ import bodyParser from'body-parser';
 import{verificarProfecional,crearProfecional}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
-import { buscarPacienteDni } from '../modelo/paciente.js';
+import { buscarPacienteDni,todosSexo } from '../modelo/paciente.js';
 import { buscarOSIdPaciente ,todasObras} from '../modelo/obraSocial.js';
 let profecionales;
 let profecional;
@@ -151,6 +151,19 @@ app.post('/traerObras', async (req, res) => {
       res.send(obras);
   } catch (error) {
       console.error('Error al buscar obre sociales:', error);
+      res.status(500).send('Error interno del servidor');
+  }
+});
+app.post('/sexoTodos', async (req, res) => {
+  try {
+      let caracteres = req.body; 
+      //console.log(`caracter en ruta en ruta ${caracteres}`);
+     // console.log(caracteres);
+      let sexos= await todosSexo(caracteres);
+     // console.log(pac);
+      res.send(sexos);
+  } catch (error) {
+      console.error('Error al buscar en la tabla sexo:', error);
       res.status(500).send('Error interno del servidor');
   }
 });

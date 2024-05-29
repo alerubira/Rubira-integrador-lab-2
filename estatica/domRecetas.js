@@ -12,6 +12,7 @@ let obraSocialSelec=document.getElementById('obraSP');
 let planSelec=document.getElementById('plan');
 let obraSocialPlan;//para la prescripcion
 let obras;
+let sexo;
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -52,17 +53,44 @@ function traerObras(){
 function crearPaciente(){
 selectSexo.style.display="block";
 traerObras();
-//traerSexo(){}//traer todos los sexos para el nuevo pacienta
+traerSexo();//traer todos los sexos para el nuevo pacienta
 let p=document.createElement('p');
 p.textContent='El paciente no esta registrado,por favor complete los campos y registrelo';
 let buton=document.createElement('button');
-buton.textContent = 'Crear';
+buton.textContent = 'Registrar';
 divPacientes.appendChild(p);
 divPacientes.appendChild(buton);
 buton.addEventListener('click', (event) => {
  event.preventDefault(); // Evitar el envío del formulario
  
 });
+async function traerSexo(){
+    let sexos=await fech('*','sexoTodos');
+    //llenar el selec
+    //console.log(sexos);
+    eliminarHijos(selectSexo);
+    let opt=document.createElement('option');
+    opt.value=null;
+    opt.textContent='Elija un sexo';
+    selectSexo.appendChild(opt);
+    for(let sexo of sexos){
+     let opti=document.createElement('option');
+     opti.value=sexo.nombre_sexo;
+     opti.textContent=sexo.nombre_sexo;
+     selectSexo.appendChild(opti);
+    }
+    selectSexo.addEventListener('change', function(event) {
+        // 3. Capturar el valor seleccionado
+        const valorSeleccionado = event.target.value;
+    // Hacer algo con el valor seleccionado (por ejemplo, imprimirlo en la consola)
+       // console.log('Valor seleccionado:', valorSeleccionado);
+       
+       console.log( sexos.find(se => se.nombre_sexo===valorSeleccionado));
+        
+       
+
+    });
+}
 
 }  
         async function fech(input, endpoint) {

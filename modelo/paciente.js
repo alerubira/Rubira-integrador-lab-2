@@ -47,5 +47,32 @@ function buscarPacienteDni(dni) {
         });
     });
 }
+function todosSexo(caracter){
+    
+    return new Promise((resolve, reject) => {
+       // console.log(`caracter entrando a la funsion ${caracter}`);
+       // let aux = `${dni}%`;
+       // console.log(`auxiliar ${aux}`);
+        connection.connect(function(err) {
+            if (err) {
+                return reject(err);
+            }
+            connection.query('SELECT * FROM `sexo` WHERE 1',
+                
+                function(err, result) {
+                    if (err) {
+                        return reject(err);
+                    }
+                   // let obra=result;
+                  // console.log(result);
+                    //console.log(result);
+                    //let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));//like ?
+                    resolve(result);
+                }
+      );
+        });
+    });
+}
 
-export{pacientes,buscarPacienteDni};
+
+export{pacientes,buscarPacienteDni,todosSexo};
