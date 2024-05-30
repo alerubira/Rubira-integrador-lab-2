@@ -5,7 +5,7 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente}from './manejadorDeRutas.js'
+import{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
 import { todosSexo } from '../modelo/paciente.js';
@@ -144,7 +144,8 @@ app.post('/obraSocialPaciente', async (req, res) => {
   }*/
 });
 app.post('/traerObras', async (req, res) => {
-  try {
+  traerObras(req,res)
+  /*try {
       let caracteres = req.body; 
       //console.log(`caracter en ruta en ruta ${caracteres}`);
      // console.log(caracteres);
@@ -152,9 +153,9 @@ app.post('/traerObras', async (req, res) => {
      // console.log(pac);
       res.send(obras);
   } catch (error) {
-      console.error('Error al buscar obre sociales:', error);
+      console.error('Error al buscar obras sociales:', error);
       res.status(500).send('Error interno del servidor');
-  }
+  }*/
 });
 app.post('/sexoTodos', async (req, res) => {
   try {

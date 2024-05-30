@@ -1,7 +1,7 @@
 import {buscarMID} from '../modelo/medico.js'; 
 import { traerProfecionl} from './conexxion.js';
 import { buscarPacienteDni} from '../modelo/paciente.js';
-import { buscarOSIdPaciente } from '../modelo/obraSocial.js';
+import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocial.js';
 //import { agregarMedico } from '../modelo/medico.js';
  
 function verificarProfecional(res,req,logins,encabezado){
@@ -86,4 +86,17 @@ async function busacrObraSocialPaciente(req,res){
     res.status(500).send('Error interno del servidor');
 }
 }
-export{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente};
+async function traerObras(req,res){
+  try {
+    let caracteres = req.body; 
+    //console.log(`caracter en ruta en ruta ${caracteres}`);
+   // console.log(caracteres);
+    let obras = await todasObras(caracteres);
+   // console.log(pac);
+    res.send(obras);
+} catch (error) {
+    console.error('Error al buscar obras sociales:', error);
+    res.status(500).send('Error interno del servidor');
+}
+}
+export{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras};
