@@ -196,7 +196,7 @@ function convertirFechaISOaFechaLocal(fechaISO) {
         document.getElementById('obraSP').value = paciente.obraSocial;
         document.getElementById('plan').value = paciente.plan;
         document.getElementById('fechaNP').value =convertirFechaISOaFechaLocal(paciente.fechaNacimiento) ;
-         obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
+        let obras=  await fech(paciente.idPaciente,'/obraSocialPaciente');
       //console.log(obras);
         llenarSelecObraS(obras,true);
     eliminarHijos(divPacientes);
@@ -266,7 +266,7 @@ function convertirFechaISOaFechaLocal(fechaISO) {
  }
 
  planSelec.addEventListener("change",async function(){
-    //console.log(obrass);
+    console.log(obrass);
 obraSocialPlan=await obrass.find(ob=>ob.nombre_plan===planSelec.value);
 //console.log(obraSocialPlan);
  });
