@@ -128,13 +128,18 @@ async function registrarPaciente(){
     paciente.idPlanObraSocial=obraSocialPlan.id_plan;
     controlar(sexo,'el sexo es obligatorio y debe elegirse con el seleccionador');
     paciente.sexo=sexo.id_sexo;
-    console.log(`Paciente antes de ir al fech ${paciente.nombre}`);
-   let pacienteCreado=await fech(paciente,'/generarPaciente');
+    console.log(`Paciente antes de ir al fech ${paciente}`);
+   let pacienteCreado=await fech2(paciente,'/generarPaciente');
+  // console.log(`fecha ${paciente.fecha}`);
    if(pacienteCreado.success){
-    alert('Paciente cargado con exito')
+    alert('Paciente cargado con exito');
+    bloquearDiv(divPacientes);
+    Focultar();
+    eliminarHijos(divPacientes);
    }else{
-    alert('Hubo un erros en la carga del paciente');
+    alert('Hubo un error en la carga del paciente');
    }
+  
     //console.log(`paciente en la funsion registrarPaciente ${paciente.nombre}`);
     //hacer el endpoin para cargar el pacienta
     //ejecutar el fech
@@ -201,8 +206,47 @@ async function registrarPaciente(){
                 console.error('Error en fech:', error.message); // Maneja los errores aquí
                 throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
             }
-        }       
+        }  
+        async function fech2(input, endpoint) {
+            try {
+                console.log(`input en fech: ${input}`);
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    
+                    body: JSON.stringify(input)
+                    
+                    
+                });
         
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del fetch: ${response.status} ${response.statusText}`);
+                }
+        
+                const text = await response.text();
+                console.log('Raw response text:', text);
+        
+                if (!text) {
+                    throw new Error('La respuesta del servidor está vacía');
+                }
+        
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (jsonError) {
+                    throw new Error(`Error parseando JSON: ${jsonError.message}`);
+                }
+        
+                console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
+                return data;
+            } catch (error) {
+                console.error('Error en fech:', error.message); // Maneja los errores aquí
+                throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
+            }
+        }  
+            
  function sugerirPacientes(aux) {
             Focultar();
             // Lógica para sugerir pacientes usando la información recibida en aux
@@ -278,18 +322,32 @@ function convertirFechaISOaFechaLocal(fechaISO) {
     option2.value=null;
     option2.textContent='Obra Social';
     obraSocialSelec.appendChild(option2);
-    for(let ob of obras){
+    /*for(let ob of obras){
         let option = document.createElement('option');
         option.value = ob.nombre_obra_social;
         option.textContent = ob.nombre_obra_social;
         obraSocialSelec.appendChild(option);
-      }
+      }*/
+      let nombresUnicos = new Set();
+
+for (let ob of obras) {
+    // Verifica si el nombre de la obra social ya está en el Set
+    if (!nombresUnicos.has(ob.nombre_obra_social)) {
+        // Si no está, añade el nombre al Set y crea la opción
+        nombresUnicos.add(ob.nombre_obra_social);
+        
+        let option = document.createElement('option');
+        option.value = ob.nombre_obra_social;
+        option.textContent = ob.nombre_obra_social;
+        obraSocialSelec.appendChild(option);
+    }
+}
       llenarO(obras);
  } 
  function llenarO(obras) {
     obraSocialSelec.addEventListener("change", function() {
         console.log(obraSocialSelec.value);
-        console.log(obras);
+       // console.log(obras);
 
         // Crear una promesa para manejar el filtrado
         let filtrarObras = new Promise((resolve, reject) => {
@@ -349,3 +407,15 @@ selectTipo.addEventListener("change", function() {
             divMedicamento.style.display="block";
          }
     });
+// Bloquear todos los elementos dentro del div #divPaciente
+function bloquearDiv(bloquear) {
+
+    let input = bloquear.querySelectorAll('input, select');
+
+    input.forEach(element => {
+        element.disabled = true;
+    });
+}
+
+
+

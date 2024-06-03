@@ -136,7 +136,7 @@ console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
 
                     connection.query(
                         'INSERT INTO `paciente`(`id_persona`, `fecha_nacimiento`, `id_sexo`) VALUES (?,?,?)',
-                        [id_persona, paciente.fecha_nacimiento, paciente.sexo],
+                        [id_persona, paciente.fechaNacimiento, paciente.sexo],
                         (error, results) => {
                             if (error) {
                                 return connection.rollback(() => {
