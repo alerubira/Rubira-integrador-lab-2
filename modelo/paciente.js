@@ -3,7 +3,7 @@ import { connection } from "./conexxionBD.js";
 import { Paciente } from "./clasesEntidad.js";
 
 let pacientes=[];
-connection.connect(function(err) {
+connection.connect( function(err) {
     if (err) {
         throw err;
     } else {
@@ -73,16 +73,38 @@ function todosSexo(caracter){
         });
     });
 }
-async function createPaciente(paciente){
+ async function createPaciente(paciente){
 try {
     connection.beginTransaction(async function(){
-        const personaR=await connection.query('INSERT INTO `persona`( `nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',[paciente.nombre,paciente.apellido,paciente.dni,paciente.estado]
-        ,function(err,result){
-
-        })
+        const [results] = await connection.query(
+            'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
+            [paciente.nombre, paciente.apellido, paciente.dni, paciente.estado]
+        );
+        if(results.affectedRows !==1){
+             connection.rollback();
+        }else{
+            const id_persona=connection.insertId;
+            const[result]=await connection.query('INSERT INTO `paciente`( `id_persona`, `fecha_nacimiento`, `id_sexo`) VALUES (?,?,?)'
+        [id_persona,paciente.fecha_nacimiento,paciente.sexo]);
+        if(result.affectedRows !==1){
+            connection.rollback();
+        }else{
+            const id_paciente=connection.insertId;
+            const[result]=await connection.query('INSERT INTO `paciente_obra_social_plan`(`id_paciente`, `id_plan`) VALUES (?,?)'
+        [id_paciente,paciente.idPlanObraSocial]);
+        if(result.affectedRows !==1){
+            connection.rollback();
+        }else{
+            connection.commit();
+            return { success: true };
+        }
+        }
+        }
     })
 } catch (error) {
-    
+    connection.rollback();
+}finally {
+    if (connection) await connection.end();
 }
 }
 

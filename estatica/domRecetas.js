@@ -107,7 +107,7 @@ function controlar(input,cartel){
         alert(cartel);
     }
 }
-function registrarPaciente(){
+async function registrarPaciente(){
     
     //hacerel paciente con los datos necesarios para la base de datos
     let inputDni=document.getElementById('dniP');
@@ -126,7 +126,12 @@ function registrarPaciente(){
     paciente.idPlanObraSocial=obraSocialPlan.id_plan;
     controlar(sexo,'el sexo es obligatorio y debe elegirse con el seleccionador');
     paciente.sexo=sexo.id_sexo;
-    fech(paciente,'/generarPaciente');
+   let pacienteCreado=await fech(paciente,'/generarPaciente');
+   if(pacienteCreado){
+    alert('Paciente cargado con exito')
+   }else{
+    alert('Hubo un erros en la carga del paciente');
+   }
     //console.log(`paciente en la funsion registrarPaciente ${paciente.nombre}`);
     //hacer el endpoin para cargar el pacienta
     //ejecutar el fech

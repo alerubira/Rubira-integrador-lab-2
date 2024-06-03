@@ -117,9 +117,9 @@ async function crearPaciente(req,res){
     let paciente = req.body; 
     //console.log(`caracter en ruta en ruta ${caracteres}`);
    // console.log(caracteres);
-     await createPaciente(paciente);
+     const pacienteCreado=await createPaciente(paciente);
    // console.log(pac);
-    res.send(sexos);
+    res.send(pacienteCreado);
 } catch (error) {
     console.error('Error al crear paciente:', error);
     res.status(500).send('Error interno del servidor');
