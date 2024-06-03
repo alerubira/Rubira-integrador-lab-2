@@ -1,3 +1,5 @@
+//import { json } from "express";
+
 let divMedicamento=document.getElementById("divMedicamento");
 let divPrestacion=document.getElementById("divPrestacion");
 let dirRecetado=document.getElementById("divRecetado");
@@ -126,8 +128,9 @@ async function registrarPaciente(){
     paciente.idPlanObraSocial=obraSocialPlan.id_plan;
     controlar(sexo,'el sexo es obligatorio y debe elegirse con el seleccionador');
     paciente.sexo=sexo.id_sexo;
+    console.log(`Paciente antes de ir al fech ${paciente.nombre}`);
    let pacienteCreado=await fech(paciente,'/generarPaciente');
-   if(pacienteCreado){
+   if(pacienteCreado.success){
     alert('Paciente cargado con exito')
    }else{
     alert('Hubo un erros en la carga del paciente');
@@ -168,7 +171,10 @@ async function registrarPaciente(){
                     headers: {
                         'Content-Type': 'text/plain'
                     },
-                    body: input
+                    
+                        body: input
+                    
+                    
                 });
         
                 if (!response.ok) {

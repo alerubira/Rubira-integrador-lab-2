@@ -114,7 +114,9 @@ async function sexoTodos(req,res){
 }
 async function crearPaciente(req,res){
   try {
-    let paciente = req.body; 
+    
+    const paciente = req.body; 
+    console.log(`paciente en el body ${paciente.nombre}`);
     //console.log(`caracter en ruta en ruta ${caracteres}`);
    // console.log(caracteres);
      const pacienteCreado=await createPaciente(paciente);

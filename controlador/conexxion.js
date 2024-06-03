@@ -1,5 +1,5 @@
 
-import express from 'express';
+import express, { json } from 'express';
 import path from 'path';
 import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
@@ -35,6 +35,7 @@ export function conectar(){
 const app = express();
 const port = 3000;
 // Configuración del body-parser
+app.use(bodyParser.text({ type: 'text/plain' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.text());
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
@@ -172,6 +173,7 @@ app.post('/sexoTodos', async (req, res) => {
   }*/
 });
 app.post('/generarPaciente',async (req,res)=>{
+
 console.log(req.body);
 await crearPaciente(req,res);
 //res.send(body);
