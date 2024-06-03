@@ -1,6 +1,6 @@
 import {buscarMID} from '../modelo/medico.js'; 
 import { traerProfecionl} from './conexxion.js';
-import { buscarPacienteDni,todosSexo} from '../modelo/paciente.js';
+import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
 import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocial.js';
 //import { agregarMedico } from '../modelo/medico.js';
  
@@ -112,4 +112,17 @@ async function sexoTodos(req,res){
     res.status(500).send('Error interno del servidor');
 }
 }
-export{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos};
+async function crearPaciente(req,res){
+  try {
+    let paciente = req.body; 
+    //console.log(`caracter en ruta en ruta ${caracteres}`);
+   // console.log(caracteres);
+     await createPaciente(paciente);
+   // console.log(pac);
+    res.send(sexos);
+} catch (error) {
+    console.error('Error al crear paciente:', error);
+    res.status(500).send('Error interno del servidor');
+}
+}
+export{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente};

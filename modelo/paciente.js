@@ -73,6 +73,17 @@ function todosSexo(caracter){
         });
     });
 }
+async function createPaciente(paciente){
+try {
+    connection.beginTransaction(async function(){
+        const personaR=await connection.query('INSERT INTO `persona`( `nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',[paciente.nombre,paciente.apellido,paciente.dni,paciente.estado]
+        ,function(err,result){
 
+        })
+    })
+} catch (error) {
+    
+}
+}
 
-export{pacientes,buscarPacienteDni,todosSexo};
+export{pacientes,buscarPacienteDni,todosSexo,createPaciente};

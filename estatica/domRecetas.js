@@ -7,7 +7,7 @@ let divPacientes=document.getElementById('divPacientes');
 let selectSexo=document.getElementById("selectSexo");
 let pacientes=[];
 let profecional = document.getElementById('app').dataset.profesional;
-let paciente;//para la prescripcion
+let paciente={};//para la prescripcion
 let obraSocialSelec=document.getElementById('obraSP');
 let planSelec=document.getElementById('plan');
 let obraSocialPlan;//para la prescripcion
@@ -59,6 +59,7 @@ let p=document.createElement('p');
 p.textContent='El paciente no esta registrado,por favor complete los campos y registrelo';
 let buton=document.createElement('button');
 buton.textContent = 'Registrar';
+//buton.addEventListener('click', registrarPaciente);
 
 divPacientes.appendChild(p);
 divPacientes.appendChild(buton);
@@ -101,14 +102,37 @@ async function traerSexo(){
 }
 
 } 
+function controlar(input,cartel){
+    if(!input||input===undefined){
+        alert(cartel);
+    }
+}
 function registrarPaciente(){
-    console.log(`paciente el funsion registrarPaciente ${paciente}`);
+    
     //hacerel paciente con los datos necesarios para la base de datos
+    let inputDni=document.getElementById('dniP');
+    let inputNombre=document.getElementById('nombreP');
+    controlar(inputNombre.value,'El nombre es obligatorio');
+    let inputApellido=document.getElementById('apellidoP');
+    controlar(inputApellido.value,'El apellido es obligatorio');
+    let inputFechaN=document.getElementById('fechaNP');
+    controlar(inputFechaN.value,'Lafecha de nacimiento es obligatoria');
+    paciente.nombre=inputNombre.value;
+    paciente.apellido=inputApellido.value;
+    paciente.dni=inputDni.value;
+    paciente.estado=true;
+    paciente.fechaNacimiento=inputFechaN.value;
+    controlar(obraSocialPlan,'La obra social y el plan son obligatorios');
+    paciente.idPlanObraSocial=obraSocialPlan.id_plan;
+    controlar(sexo,'el sexo es obligatorio y debe elegirse con el seleccionador');
+    paciente.sexo=sexo.id_sexo;
+    fech(paciente,'/generarPaciente');
+    //console.log(`paciente en la funsion registrarPaciente ${paciente.nombre}`);
     //hacer el endpoin para cargar el pacienta
     //ejecutar el fech
     //hacer la queri a la base de datos
 } 
-        async function fech(input, endpoint) {
+ /*       async function fech(input, endpoint) {
             try {
                 //console.log(`dni en fech ${input}`);
                 const response = await fetch(endpoint, {
@@ -130,7 +154,43 @@ function registrarPaciente(){
                 console.error('Error:', error); // Maneja los errores aquí
                 throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
             }
-        }
+        }*/
+        async function fech(input, endpoint) {
+            try {
+                console.log(`input en fech: ${input}`);
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: input
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del fetch: ${response.status} ${response.statusText}`);
+                }
+        
+                const text = await response.text();
+                console.log('Raw response text:', text);
+        
+                if (!text) {
+                    throw new Error('La respuesta del servidor está vacía');
+                }
+        
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (jsonError) {
+                    throw new Error(`Error parseando JSON: ${jsonError.message}`);
+                }
+        
+                console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
+                return data;
+            } catch (error) {
+                console.error('Error en fech:', error.message); // Maneja los errores aquí
+                throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
+            }
+        }       
         
  function sugerirPacientes(aux) {
             Focultar();
@@ -268,7 +328,7 @@ function convertirFechaISOaFechaLocal(fechaISO) {
  planSelec.addEventListener("change",async function(){
     console.log(obrass);
 obraSocialPlan=await obrass.find(ob=>ob.nombre_plan===planSelec.value);
-//console.log(obraSocialPlan);
+//console.log(`plan obra social seleccionad ${obraSocialPlan.id_plan}`);
  });
 selectTipo.addEventListener("change", function() {
         Focultar();
