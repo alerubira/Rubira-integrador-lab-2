@@ -16,7 +16,8 @@ let divMedicamentoPrestacion=document.getElementById('divMedicamentoPrestacion')
 let obraSocialPlan;//para la prescripcion
 let obrass;
 let sexo;
-
+let prescripcion={};
+let medicamestos=[{}];//para la prescripcion
 inputSexoP=document.getElementById('sexoP');
       
 //console.log(`profecional ${profecional}`);
