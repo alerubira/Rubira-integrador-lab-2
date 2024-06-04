@@ -49,6 +49,7 @@ include plantilla
                 #divDiagnostico 
                     h3 DIAGNOSTICO 
                     textarea(type="textarea", id="diagnostico", name="diagnostico")
+                #divMedicamentoPrestacion    
                 #divTipo
                     select(id="tipo", name="tipo")
                             option(value="j") Prestacion o Medicamento
@@ -59,11 +60,10 @@ include plantilla
                     input(type="number", id="id_medicamento", name="id_medicamento")
                     br
                     label(for="nombre_generico_medicamento") Nombre Generico del medicamento :
-                    input(type="text", id="nombre_generico_medicamento", name="nombre_generico_medicamento")
+                    input(type="text", id="nombre_generico_medicamento", name="nombre_generico_medicamento",list='genericos')
+                    datalist#genericos
                     br
-                    label(for="concentracion_medicamento") Concentracion del medicamento :
-                    input(type="text" ,id="concentracion_medicamento", name="concentracion_medicamento")
-                    br
+                    
                     label(for="forma_farmaceutica_medicamento") Forma Farmaceutica :
                     input(type="text", id="forma_farmaceutica_medicamento", name="forma_farmaceutica_medicamento")
                     br

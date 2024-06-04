@@ -54,7 +54,7 @@ function crearProfecional(req,res,mensajeExito){
         console.error(error);
     } else {
         // Maneja el resultado aquí
-        console.log(resultado);
+       // console.log(resultado);
         mensajeExito=resultado;
         // Puedes redirigir después de capturar la respuesta
         res.redirect("/medicos");
@@ -64,7 +64,7 @@ function crearProfecional(req,res,mensajeExito){
 async function buscarPacientes(req,res){
   try {
     let caracteres = req.body; 
-    console.log(caracteres);
+   // console.log(caracteres);
     let pac = await buscarPacienteDni(caracteres);
    // console.log(pac);
     res.send(pac);
@@ -134,7 +134,7 @@ async function nombresGenericos(req,res){
     //console.log(`caracter en ruta en ruta ${caracteres}`);
    // console.log(caracteres);
     let nombresGenericos= await todoGenericos(caracteres);
-   // console.log(pac);
+    console.log(`remedios en el endpoin ${nombresGenericos}`);
     res.send(nombresGenericos);
 } catch (error) {
     console.error('Error al buscar en la tabla sexo:', error);

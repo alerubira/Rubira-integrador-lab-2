@@ -12,9 +12,11 @@ let profecional = document.getElementById('app').dataset.profesional;
 let paciente={};//para la prescripcion
 let obraSocialSelec=document.getElementById('obraSP');
 let planSelec=document.getElementById('plan');
+let divMedicamentoPrestacion=document.getElementById('divMedicamentoPrestacion')
 let obraSocialPlan;//para la prescripcion
 let obrass;
 let sexo;
+
 inputSexoP=document.getElementById('sexoP');
       
 //console.log(`profecional ${profecional}`);
@@ -346,7 +348,7 @@ for (let ob of obras) {
  } 
  function llenarO(obras) {
     obraSocialSelec.addEventListener("change", function() {
-        console.log(obraSocialSelec.value);
+        //console.log(obraSocialSelec.value);
        // console.log(obras);
 
         // Crear una promesa para manejar el filtrado
@@ -416,6 +418,17 @@ function bloquearDiv(bloquear) {
         element.disabled = true;
     });
 }
+(async function llenarMedicamentos(){
+    let genericos=await fech('*','/nombreGenerico');
+    console.log(genericos);
+    let genericoDL=document.getElementById('genericos');
+    for(let medicamento of genericos){
+        let option = document.createElement('option');
+          let nombreCompleto=`${medicamento.nombre_generico}-${medicamento.valor_concentracion}-${medicamento.medida_concentacion}`;
+          option.value = nombreCompleto;
+          genericoDL.appendChild(option);
+    }
+})();
 
 
 
