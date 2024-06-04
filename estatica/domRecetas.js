@@ -421,13 +421,23 @@ function bloquearDiv(bloquear) {
 }
 (async function llenarMedicamentos(){
     let genericos=await fech('*','/nombreGenerico');
+    let nombreCompleto=new Set();
     console.log(genericos);
     let genericoDL=document.getElementById('genericos');
     for(let medicamento of genericos){
-        let option = document.createElement('option');
-          let nombreCompleto=`${medicamento.nombre_generico}-${medicamento.valor_concentracion}-${medicamento.medida_concentacion}`;
-          option.value = nombreCompleto;
-          genericoDL.appendChild(option);
+        if (!nombreCompleto.has(medicamento.nombre_generico)) {
+            // Si no está, añade el nombre al Set y crea la opción
+            nombreCompleto.add(medicamento.nombre_generico);
+            
+            let option = document.createElement('option');
+            option.value = medicamento.nombre_generico;
+            option.textContent = medicamento.nombre_generico;
+            genericoDL.appendChild(option);
+        }
+       /* let option = document.createElement('option');
+        
+          option.value = medicamento.nombre_generico;
+          genericoDL.appendChild(option);*/
     }
 })();
 

@@ -56,9 +56,7 @@ include plantilla
                             option(value="prestacion") Prestacion
                             option(value="medicamento") Medicamento
                 #divMedicamento.ocultar
-                    label(for="id_medicamento") ID Medicamento :
-                    input(type="number", id="id_medicamento", name="id_medicamento")
-                    br
+                    
                     label(for="nombre_generico_medicamento") Nombre Generico del medicamento :
                     input(type="text", id="nombre_generico_medicamento", name="nombre_generico_medicamento",list='genericos')
                     datalist#genericos
@@ -70,12 +68,7 @@ include plantilla
                     label(for="precentacion_medicamento") Precentacion :
                     input(type="text", id="precentacion_medicamento", name="precentacion_medicamento")
                     br
-                    label(for="categoria_medicamento") Categoria :
-                    input(type="text", id="categoria_medicamento" ,name="categoria_medicamento")
-                    br
-                    label(for="familia_medicamento") Familia :
-                    input(type="text", id="familia_medicamento", name="familia_medicamento") 
-                    br
+                    
                     label(for="marcaMedicamento") Marca del medicamento(opcional)
                     input(type="text",id="marcaMrdicamento",name="marcaMedicamento")
                     br
