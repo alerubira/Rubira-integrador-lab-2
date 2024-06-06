@@ -17,8 +17,10 @@ let obraSocialPlan;//para la prescripcion
 let obrass;
 let sexo;
 let prescripcion={};
+let medicamento={};//para guardar en medicamentos
 let medicamestos=[{}];//para la prescripcion
 inputSexoP=document.getElementById('sexoP');
+let genericos;
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -420,7 +422,7 @@ function bloquearDiv(bloquear) {
     });
 }
 (async function llenarMedicamentos(){
-    let genericos=await fech('*','/nombreGenerico');
+     genericos=await fech('*','/nombreGenerico');
     let nombreCompleto=new Set();
     console.log(genericos);
     let genericoDL=document.getElementById('genericos');
@@ -434,12 +436,43 @@ function bloquearDiv(bloquear) {
             option.textContent = medicamento.nombre_generico;
             genericoDL.appendChild(option);
         }
-       /* let option = document.createElement('option');
-        
-          option.value = medicamento.nombre_generico;
-          genericoDL.appendChild(option);*/
+       
     }
+    
 })();
+let medicamentMomentaneo;
+function obtenerValor() {
+    // Obtener el valor del input
+    let valor = document.getElementById("nombre_generico_medicamento").value;
+     medicamentMomentaneo=genericos.filter(generico=>generico.nombre_generico===valor);
+    let formaDL=document.getElementById('forma');
+    for(let form of medicamentMomentaneo){
+        let option=document.createElement('option');
+        option.value=form.nombre_forma;
+        option.textContent=form.nombre_forma;
+        formaDL.appendChild(option);
+    }
+  }
+  function obtenerForma(){
+      let forma=document.getElementById('forma_farmaceutica_medicamento').value;
+      console.log(medicamentMomentaneo);
+      let presentaciones=medicamentMomentaneo.filter(pres=>pres.nombre_presntacion===forma);
+      console.log(presentaciones);
+      let presDL=document.getElementById('presentacion ');
+      for(let pres of presentaciones){
+        let option=document.createElement('option');
+        option.value=pres.nombre_presentacion;
+        option.textContent=pres.nombre_presentacion;
+        presDL.appendChild(option);
+      }
+  }
+  function obtenrPresentacion(){
+       let presentacion=document.getElementById('presentacion_medicamento');
+       console.log(presentacion);
+       medicamento=medicamentMomentaneo.find(med=>med.nombre_presentacion===presentacion);
+       console.log(medicamento);
+  }
+
 
 
 

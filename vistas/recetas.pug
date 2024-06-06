@@ -60,13 +60,18 @@ include plantilla
                     label(for="nombre_generico_medicamento") Nombre Generico del medicamento :
                     input(type="text", id="nombre_generico_medicamento", name="nombre_generico_medicamento",list='genericos')
                     datalist#genericos
+                    button(onclick="obtenerValor()") seleccionar
                     br
                     
                     label(for="forma_farmaceutica_medicamento") Forma Farmaceutica :
-                    input(type="text", id="forma_farmaceutica_medicamento", name="forma_farmaceutica_medicamento")
+                    input(type="text", id="forma_farmaceutica_medicamento", name="forma_farmaceutica_medicamento",list="forma")
+                    datalist#forma 
+                    button(onclick="obtenerForma()") selccionar
                     br
-                    label(for="precentacion_medicamento") Precentacion :
-                    input(type="text", id="precentacion_medicamento", name="precentacion_medicamento")
+                    label(for="presentacion_medicamento") Precentacion :
+                    input(type="text", id="presentacion_medicamento", name="presentacion_medicamento",list="presentacion")
+                    datalist#presentacion 
+                    button(onclik="obtenerPresentacion") seleccionar
                     br
                     
                     label(for="marcaMedicamento") Marca del medicamento(opcional)
