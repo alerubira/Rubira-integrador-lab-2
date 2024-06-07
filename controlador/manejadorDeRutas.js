@@ -2,7 +2,7 @@ import {buscarMID} from '../modelo/medico.js';
 import { traerProfecionl} from './conexxion.js';
 import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
 import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocial.js';
-import { todoGenericos } from '../modelo/medicamentos.js';
+import { todoGenericos ,todasAdministracion} from '../modelo/medicamentos.js';
 //import { agregarMedico } from '../modelo/medico.js';
  
 function verificarProfecional(res,req,logins,encabezado){
@@ -134,11 +134,25 @@ async function nombresGenericos(req,res){
     //console.log(`caracter en ruta en ruta ${caracteres}`);
    // console.log(caracteres);
     let nombresGenericos= await todoGenericos(caracteres);
-    console.log(`remedios en el endpoin ${nombresGenericos}`);
+   // console.log(`remedios en el endpoin ${nombresGenericos}`);
     res.send(nombresGenericos);
 } catch (error) {
     console.error('Error al buscar en la tabla sexo:', error);
     res.status(500).send('Error interno del servidor');
 }
 }
-export{verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente};
+async function administraciones(req,res){
+  try {
+    let caracteres = req.body; 
+    //console.log(`caracter en ruta en ruta ${caracteres}`);
+   // console.log(caracteres);
+    let administraciones= await todasAdministracion(caracteres);
+   // console.log(`remedios en el endpoin ${nombresGenericos}`);
+    res.send(administraciones);
+} catch (error) {
+    console.error('Error al buscar en la tabla administracion:', error);
+    res.status(500).send('Error interno del servidor');
+}
+}
+
+export{verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones};

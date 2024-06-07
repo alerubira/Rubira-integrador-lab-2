@@ -5,4 +5,9 @@ let query='SELECT n_g.id_nombre_generico,nombre_generico,f_f.id_forma,nombre_for
 let remedios=await consulta1(query,caracter);
 return remedios;
 }
-export{todoGenericos}
+async function todasAdministracion(caracter){
+let query='SELECT * FROM `administracion_medicamento`where 1';
+let administraciones=await consulta1(query,caracter);
+return administraciones;
+}
+export{todoGenericos,todasAdministracion}

@@ -68,10 +68,15 @@ include plantilla
                     datalist#forma 
                     button(onclick="obtenerForma()") selccionar
                     br
-                    label(for="presentacion_medicamento") Precentacion :
+                    label(for="presentacion_medicamento") Presentacion :
                     input(type="text", id="presentacion_medicamento", name="presentacion_medicamento",list="presentacion")
                     datalist#presentacion 
-                    button(onclik="obtenerPresentacion") seleccionar
+                    button(onclick="obtenerPresentacion()") seleccionar
+                    br
+                    label(for="administracion_medicamento") Administracion :
+                    input(type="text", id="administracion_medicamento", name="administracion_medicamento",list="administracion")
+                    datalist#administracion 
+                    button(onclick="obtenerAdministracion()") seleccionar
                     br
                     
                     label(for="marcaMedicamento") Marca del medicamento(opcional)

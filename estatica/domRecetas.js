@@ -445,6 +445,9 @@ function obtenerValor() {
     // Obtener el valor del input
     let valor = document.getElementById("nombre_generico_medicamento").value;
      medicamentMomentaneo=genericos.filter(generico=>generico.nombre_generico===valor);
+     if(medicamentMomentaneo.length<1){
+        alert('El medicameno seleccionado no es valido');
+     }
     let formaDL=document.getElementById('forma');
     for(let form of medicamentMomentaneo){
         let option=document.createElement('option');
@@ -455,10 +458,14 @@ function obtenerValor() {
   }
   function obtenerForma(){
       let forma=document.getElementById('forma_farmaceutica_medicamento').value;
-      console.log(medicamentMomentaneo);
-      let presentaciones=medicamentMomentaneo.filter(pres=>pres.nombre_presntacion===forma);
+     // console.log(forma);
+     // console.log(medicamentMomentaneo);
+      let presentaciones=medicamentMomentaneo.filter(pres=>pres.nombre_forma===forma);
+      if(presentaciones.length<1){
+        alert('La presentacion seleccionada no cooresponde al medicamento seleccionado');
+      }
       console.log(presentaciones);
-      let presDL=document.getElementById('presentacion ');
+      let presDL=document.getElementById('presentacion');
       for(let pres of presentaciones){
         let option=document.createElement('option');
         option.value=pres.nombre_presentacion;
@@ -466,10 +473,14 @@ function obtenerValor() {
         presDL.appendChild(option);
       }
   }
-  function obtenrPresentacion(){
-       let presentacion=document.getElementById('presentacion_medicamento');
-       console.log(presentacion);
+  function obtenerPresentacion(){
+    console.log(`en lafunsion`);
+       let presentacion=document.getElementById('presentacion_medicamento').value;
+       //console.log(presentacion);
        medicamento=medicamentMomentaneo.find(med=>med.nombre_presentacion===presentacion);
+       if(!medicamento){
+        alert('La presentacion selecionada no corresponde al medicamento');
+       }
        console.log(medicamento);
   }
 
