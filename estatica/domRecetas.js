@@ -424,11 +424,13 @@ function bloquearDiv(bloquear) {
         element.disabled = true;
     });
 }
+let genericoDL=document.getElementById('genericos');
 (async function (){
      genericos=await fech('*','/nombreGenerico');
     let nombreCompleto=new Set();
     console.log(genericos);
-    let genericoDL=document.getElementById('genericos');
+    
+    
     for(let medicamento of genericos){
         if (!nombreCompleto.has(medicamento.nombre_generico)) {
             // Si no está, añade el nombre al Set y crea la opción
@@ -448,7 +450,9 @@ function bloquearDiv(bloquear) {
 })();
 let medicamentMomentaneo;
 let nombre;
+let formaDL=document.getElementById('forma');
 function obtenerNombre() {
+    
     // Obtener el valor del input
     nombre = document.getElementById("nombre_generico_medicamento");
    
@@ -457,7 +461,8 @@ function obtenerNombre() {
      if(medicamentMomentaneo.length<1){
         alert('El medicameno seleccionado no es valido');
      }
-    let formaDL=document.getElementById('forma');
+    
+    
     for(let form of medicamentMomentaneo){
         let option=document.createElement('option');
         option.value=form.nombre_forma;
@@ -465,7 +470,8 @@ function obtenerNombre() {
         formaDL.appendChild(option);
     }
   }
-  let forma=document.getElementById('forma_farmaceutica_medicamento')
+  let forma=document.getElementById('forma_farmaceutica_medicamento');
+  let presDL=document.getElementById('presentacion');
   function obtenerForma(){
     
      // console.log(forma);
@@ -475,15 +481,16 @@ function obtenerNombre() {
         alert('La presentacion seleccionada no cooresponde al medicamento seleccionado');
       }
       console.log(presentaciones);
-      let presDL=document.getElementById('presentacion');
+      
       for(let pres of presentaciones){
-        let option=document.createElement('option');
+       let  option=document.createElement('option');
         option.value=pres.nombre_presentacion;
         option.textContent=pres.nombre_presentacion;
         presDL.appendChild(option);
       }
   }
-  let presentacion=document.getElementById('presentacion_medicamento')
+  let presentacion=document.getElementById('presentacion_medicamento');
+  let administracionDL=document.getElementById('administracion');
   function obtenerPresentacion(){
     //console.log(`en lafunsion`);
        //console.log(presentacion);
@@ -493,7 +500,7 @@ function obtenerNombre() {
        }
        console.log(medicamento);
       // console.log(administraciones);
-      let administracionDL=document.getElementById('administracion');
+      
       for(let adm of administraciones){
         let option=document.createElement('option');
         option.value=adm.nombre_administracion_medicamento;
@@ -521,13 +528,28 @@ function obtenerNombre() {
     medicamentoCompleto.id_forma=medicamento.id_forma;
     medicamentoCompleto.id_presentacion=medicamento.id_presentacion;
     medicamentoCompleto.id_administracion_medicamento=administracion.id_administracion_medicamento;
-    medicamentoCompleto.marca=marca;
+    medicamentoCompleto.marca=marca.value;
 
     medicamentos.push(medicamentoCompleto);
+    medicamentoCompleto={};
+    medicamentMomentaneo=[];
     let p=document.createElement('p');
     p.textContent=`${medicamento.nombre_generico}-${medicamento.nombre_forma}-${medicamento.nombre_presentacion}-${administracion.nombre_administracion_medicamento}-${marca.value}`;
     divMedicamentoPrestacion.appendChild(p); 
     limpiarCampos(nombre,forma,presentacion,admin,marca);
+   /* eliminarHijos(formaDL);
+    eliminarHijos( genericoDL);
+    eliminarHijos(administracionDL);
+    eliminarHijos( presDL);*/
+   /* formaDL.innerHTML="";
+    genericoDL.innerHTML="";*/
+    administracionDL.innerHTML="";
+    presDL.innerHTML="";
+    formaDL.innerHTML="";
+    const selectElement = document.getElementById('tipo');
+    
+    // Restablecemos el valor a la opción inicial
+    selectElement.value = 'j'; // O el valor que corresponda a la opción inicial
     Focultar();
     console.log(medicamentos);
    }
