@@ -24,7 +24,7 @@ function consulta1(query,caracter){
                          return reject(err);
                      }
                     // let obra=result;
-                    console.log(result);
+                    console.log(`en la coneexionBD ${result}`);
                      //console.log(result);
                      //let pacientes = result.map(pac => new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo));//like ?
                      resolve(result);

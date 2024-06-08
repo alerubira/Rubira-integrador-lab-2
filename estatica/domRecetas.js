@@ -17,8 +17,11 @@ let obraSocialPlan;//para la prescripcion
 let obrass;
 let sexo;
 let prescripcion={};
-let medicamento={};//para guardar en medicamentos
-let medicamestos=[{}];//para la prescripcion
+let medicamento={};
+let medicamentos=[{}];//para la prescripcion
+let administracion={};
+let administraciones;
+let medicamentoCompleto={};//para guardar en medicamentos
 inputSexoP=document.getElementById('sexoP');
 let genericos;
       
@@ -400,7 +403,7 @@ for (let ob of obras) {
  }
 
  planSelec.addEventListener("change",async function(){
-    console.log(obrass);
+    //console.log(obrass);
 obraSocialPlan=await obrass.find(ob=>ob.nombre_plan===planSelec.value);
 //console.log(`plan obra social seleccionad ${obraSocialPlan.id_plan}`);
  });
@@ -421,7 +424,7 @@ function bloquearDiv(bloquear) {
         element.disabled = true;
     });
 }
-(async function llenarMedicamentos(){
+(async function llenarMedicamentosYAdministraciones(){
      genericos=await fech('*','/nombreGenerico');
     let nombreCompleto=new Set();
     console.log(genericos);
@@ -436,9 +439,12 @@ function bloquearDiv(bloquear) {
             option.textContent = medicamento.nombre_generico;
             genericoDL.appendChild(option);
         }
+       }
        
-    }
     
+})();
+(async()=>{
+    administraciones=await fech('*','/administraciones');
 })();
 let medicamentMomentaneo;
 function obtenerValor() {
@@ -474,7 +480,7 @@ function obtenerValor() {
       }
   }
   function obtenerPresentacion(){
-    console.log(`en lafunsion`);
+    //console.log(`en lafunsion`);
        let presentacion=document.getElementById('presentacion_medicamento').value;
        //console.log(presentacion);
        medicamento=medicamentMomentaneo.find(med=>med.nombre_presentacion===presentacion);
@@ -482,6 +488,34 @@ function obtenerValor() {
         alert('La presentacion selecionada no corresponde al medicamento');
        }
        console.log(medicamento);
+      // console.log(administraciones);
+      let administracionDL=document.getElementById('administracion');
+      for(let adm of administraciones){
+        let option=document.createElement('option');
+        option.value=adm.nombre_administracion_medicamento;
+        option.textContent=adm.nombre_administracion_medicamento;
+        administracionDL.appendChild(option);
+      }
+  }
+  function obtenerAdministracion(){
+       let admin=document.getElementById('administracion').value;
+       administracion=administraciones.find(ad=>ad.nombre_administracion_medicamento=admin===admin);
+       if(!administracion){
+        alert('La administracion del medicamento elegida no es aceptada');
+       }
+  }
+  function agregarMedicamentoCompleto(){
+    let marca=document.getElementById('marcaMedicamento').value;
+    console.log(medicamento);
+    console.loh(administracion);
+    medicamentoCompleto.id_nombre_generico=medicamento.id_nombre_medicamento;
+    medicamentoCompleto.id_forma=medicamento.id_forma;
+    medicamentoCompleto.id_presentacion=medicamento.id_presentacion;
+    medicamentoCompleto.id_administracion_medicamento=administracion.id_administracion_medicamento;
+    medicamentoCompleto.marca=marca;
+
+    medicamentos.push(medicamentoCompleto);
+    console.log(medicamentos);
   }
 
 

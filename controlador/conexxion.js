@@ -5,7 +5,7 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos}from './manejadorDeRutas.js'
+import{verificarProfecional,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
 import { todosSexo } from '../modelo/paciente.js';
@@ -191,6 +191,10 @@ app.post('/nombreGenerico', async (req, res) => {
       console.error('Error al buscar en la tabla sexo:', error);
       res.status(500).send('Error interno del servidor');
   }*/
+});
+app.post('/administraciones',async(req,res)=>{
+  console.log(`body en conexxion ${req.body}`);
+administraciones(req,res);
 });
   // Iniciar el servidor
   app.listen(port, () => {

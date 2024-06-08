@@ -6,8 +6,10 @@ let remedios=await consulta1(query,caracter);
 return remedios;
 }
 async function todasAdministracion(caracter){
-let query='SELECT * FROM `administracion_medicamento`where 1';
+let query='SELECT * FROM `administracion_medicamento` WHERE 1';
+//console.log(`caracter en medicamentos.js ${caracter}`);
 let administraciones=await consulta1(query,caracter);
+//console.log(`administracion en medicamento.js ${administraciones}`);
 return administraciones;
 }
 export{todoGenericos,todasAdministracion}
