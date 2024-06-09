@@ -18,4 +18,9 @@ let prestacionesTodas=await consulta1(query,caracter);
 //console.log(`en medicamento ${caracter} ${prestacionesTodas}`);
 return prestacionesTodas;
 }
-export{todoGenericos,todasAdministracion,todasPrestaciones}
+async function ladoTodos(caracter){
+    let query='SELECT * FROM `lado` WHERE 1;';
+    let lados=await consulta1(query,caracter);
+    return lados;
+}
+export{todoGenericos,todasAdministracion,todasPrestaciones,ladoTodos}

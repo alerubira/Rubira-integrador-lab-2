@@ -2,7 +2,7 @@ import {buscarMID} from '../modelo/medico.js';
 import { traerProfecionl} from './conexxion.js';
 import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
 import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocial.js';
-import { todoGenericos ,todasAdministracion,todasPrestaciones} from '../modelo/medicamentos.js';
+import { todoGenericos ,todasAdministracion,todasPrestaciones,ladoTodos} from '../modelo/medicamentos.js';
 //import { agregarMedico } from '../modelo/medico.js';
  
 function verificarProfecional(res,req,logins,encabezado){
@@ -167,6 +167,19 @@ async function traerPrestaciones(req,res){
     res.status(500).send('Error interno del servidor');
 }
 }
+async function todosLados(req,res){
+  try {
+    let caracteres = req.body; 
+    //console.log(`caracter en ruta en ruta ${caracteres}`);
+   // console.log(caracteres);
+    let lados= await ladoTodos(caracteres);
+   // console.log(`remedios en el endpoin ${nombresGenericos}`);
+    res.send(lados);
+} catch (error) {
+    console.error('Error al buscar en la tabla lado:', error);
+    res.status(500).send('Error interno del servidor');
+}
+}
 
 
-export{verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};
+export{todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};

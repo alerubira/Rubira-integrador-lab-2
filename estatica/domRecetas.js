@@ -27,6 +27,8 @@ let genericos;
 let prestacionesPrescripcion=[];//para la prscripcion
 let prestacion={};
 let prestacionesTodas;
+let lados;
+let lado={};
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -408,8 +410,8 @@ function bloquearDiv(bloquear) {
 let genericoDL=document.getElementById('genericos');
 (async function (){
      genericos=await fech('*','/nombreGenerico');
-    let nombreCompleto=new Set();
-    console.log(genericos);
+  let nombreCompleto=new Set();
+    //console.log(genericos);
     
     
     for(let medicamento of genericos){
@@ -429,10 +431,32 @@ let genericoDL=document.getElementById('genericos');
 (async()=>{
     administraciones=await fech('*','/administraciones');
 })();
+let nombrePracticaDL=document.getElementById("nombrePractica");
 (async function(){ 
+    let auxPractica=new Set();
    prestacionesTodas=await fech('*','/prestaciones');
+   for(let prestacion of prestacionesTodas){
+    if (!auxPractica.has(prestacion.nombre_practica)) {
+        // Si no está, añade el nombre al Set y crea la opción
+        auxPractica.add(prestacion.nombre_practica);
+        
+        let option = document.createElement('option');
+        option.value = prestacion.nombre_practica;
+        option.textContent = prestacion.nombre_practica;
+        nombrePracticaDL.appendChild(option);
+    }
+}
 })();
-
+(async ()=>{
+lados=await fech('*','/lados');
+})();
+let practica=document.getElementById('nombre_prestacion');
+let practicaMomentanea;
+function capturarNombrePrestacion(){
+    console.log(practica.value);
+practicaMomentanea=prestacionesTodas.filter(pres=>pres.nombre_prestacion===practica.value);
+console.log(practicaMomentanea);
+}
 
 let medicamentMomentaneo;
 let nombre;

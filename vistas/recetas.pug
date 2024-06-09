@@ -85,11 +85,10 @@ include plantilla
                     button(onclick="agregarMedicamentoCompleto()") Agregar  
                         
                 #divPrestacion.ocultar
-                    label(for="id_prestacion") ID Prestacion :
-                    input(type="number", id="id_prestacion", name="id_prestacion")
-                    br
                     label(for="nombre_prestacion") Nombre de la prestacion :
-                    input(type="text", id="nombre_prestacion", name="nombre_prestacion")
+                    input(type="text", id="nombre_prestacion", name="nombre_prestacion",list="nombrePractica")
+                    datalist#nombrePractica
+                    button(onclick="capturarNombrePrestacion()") Agregar
                     br
                     label(for="procedimiento_prestacion") Procedimiento :
                     input(type="text" ,id="procedimiento_prestacion", name="procedimiento_prestacion")
