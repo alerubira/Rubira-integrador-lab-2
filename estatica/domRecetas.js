@@ -24,6 +24,9 @@ let administraciones;
 let medicamentoCompleto={};//para guardar en medicamentos
 inputSexoP=document.getElementById('sexoP');
 let genericos;
+let prestacionesPrescripcion=[];//para la prscripcion
+let prestacion={};
+let prestacionesTodas;
       
 //console.log(`profecional ${profecional}`);
 function Focultar(){
@@ -153,29 +156,7 @@ async function registrarPaciente(){
     //ejecutar el fech
     //hacer la queri a la base de datos
 } 
- /*       async function fech(input, endpoint) {
-            try {
-                //console.log(`dni en fech ${input}`);
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: input
-                });
-        
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta del fetch');
-                }
-                const data = await response.json(); // Cambiado a .json() para manejar respuestas JSON
-                //const data = await response.text();
-                console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
-                return data;
-            } catch (error) {
-                console.error('Error:', error); // Maneja los errores aquí
-                throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
-            }
-        }*/
+ 
         async function fech(input, endpoint) {
             try {
                 console.log(`input en fech: ${input}`);
@@ -448,6 +429,11 @@ let genericoDL=document.getElementById('genericos');
 (async()=>{
     administraciones=await fech('*','/administraciones');
 })();
+(async function(){ 
+   prestacionesTodas=await fech('*','/prestaciones');
+})();
+
+
 let medicamentMomentaneo;
 let nombre;
 let formaDL=document.getElementById('forma');

@@ -12,4 +12,10 @@ let administraciones=await consulta1(query,caracter);
 //console.log(`administracion en medicamento.js ${administraciones}`);
 return administraciones;
 }
-export{todoGenericos,todasAdministracion}
+async function todasPrestaciones(caracter){
+let query='SELECT p.id_practica,p.nombre_practica,pr.id_procedimiento,pr.nombre_procedimiento,e.id_examen,e.nombre_examen FROM `practica` p join practica_procedimiento pp on p.id_practica=pp.id_practica join procedimiento pr on pr.id_procedimiento=pp.id_procedimiento join practica_examen pe ON pe.id_practica=p.id_practica join examen e on e.id_examen=pe.id_examen WHERE 1;';
+let prestacionesTodas=await consulta1(query,caracter);
+//console.log(`en medicamento ${caracter} ${prestacionesTodas}`);
+return prestacionesTodas;
+}
+export{todoGenericos,todasAdministracion,todasPrestaciones}
