@@ -508,13 +508,20 @@ let indicacion=document.getElementById('indicacionPrestacion');
 let justificacion=document.getElementById('justificacionPrestacion');
 let observacion=document.getElementById('observacionPrestacion');
 function agregarPrestacionCompleta(){
-if(!indicacion.value){
+    if(!practicaMomentanea.examen){
+        alert('El examen debe ser valido e ingresado');
+    }else{
+    const existe = objetoEnArreglo(practicaMomentanea, prestacionesPrescripcion);
+    if(existe){
+     alert('El medicamento ya se encuentra en la prescripcion');
+    }else if(!indicacion.value){
     alert('La indicacion es obligatoria');
-}ifelse(!justificacion.value){
+    }else if(!justificacion.value){
     alert('La justificacion es obligatoria');
-}ifelse(!practicaMomentanea){
+    }else if(!practicaMomentanea){
     alert('la prestacin no esta completa');
-}else{
+    }else{
+    console.log(practicaMomentanea);
 prestacion.id_practica=practicaMomentanea.id_practica;
 prestacion.id_procedimiento=practicaMomentanea.id_procedimiento;
 prestacion.id_examen=practicaMomentanea.id_examen;
@@ -523,7 +530,33 @@ prestacion.indicacion=indicacion.value;
 prestacion.justificacion=justificacion.value;
 prestacion.observacion=observacion.value;
 console.log(prestacion);
+prestacionesPrescripcion.push(prestacion);
+let p=document.createElement('p');
+p.textContent=`${practicaMomentanea.nombre_practica}--${practicaMomentanea.nombre_procedimiento}--${practicaMomentanea.nombre_examen}--${practicaMomentanea.nombre_lado}`;
+divMedicamentoPrestacion.appendChild(p);
+let p1=document.createElement('p'); 
+p1.textContent=`${indicacion.value}`
+divMedicamentoPrestacion.appendChild(p1);
+let p2=document.createElement('p');
+p2.textContent=`${justificacion.value}`;
+divMedicamentoPrestacion.appendChild(p2);
+let p3=document.createElement('p');
+p3.textContent=`${observacion.value}`;
+divMedicamentoPrestacion.appendChild(p3);
+limpiarCampos(indicacion,justificacion,observacion,examen,procedimiento,practica,ladoPrestacion);
+
+
+ ladoDL.innerHTML="";
+ examenDL.innerHTML="";
+ //nombrePracticaDL.innerHTML="";
+ procedimientDL.innerHTML="";
+ const selectElement = document.getElementById('tipo');
+ 
+ // Restablecemos el valor a la opción inicial
+ selectElement.value = 'j'; // O el valor que corresponda a la opción inicial
+ Focultar();
 }
+    }
 }
 let medicamentMomentaneo;
 let nombre;
