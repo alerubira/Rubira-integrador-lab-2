@@ -452,12 +452,79 @@ lados=await fech('*','/lados');
 })();
 let practica=document.getElementById('nombre_prestacion');
 let practicaMomentanea;
+let procedimientDL=document.getElementById('procedimiento');
 function capturarNombrePrestacion(){
-    console.log(practica.value);
-practicaMomentanea=prestacionesTodas.filter(pres=>pres.nombre_prestacion===practica.value);
-console.log(practicaMomentanea);
+    //console.log(practica.value);
+practicaMomentanea=prestacionesTodas.filter(pres=>pres.nombre_practica===practica.value);
+//console.log(practicaMomentanea);
+if(practicaMomentanea.length<1){
+    alert('El nombre de la practica no es valido');
+}
+for(let pro of practicaMomentanea){
+    let option = document.createElement('option');
+    option.value = pro.nombre_procedimiento;
+    option.textContent = pro.nombre_procedimiento;
+    procedimientDL.appendChild(option);
 }
 
+}
+let procedimiento=document.getElementById('procedimiento_prestacion');
+let examenDL=document.getElementById('examen');
+
+function capturarProcedimiento(){
+   practicaMomentanea=practicaMomentanea.filter(pro=>pro.nombre_procedimiento===procedimiento.value);
+   if(practicaMomentanea.length<1){
+    alert('El procedimiento seleccionado no cooresponde a la practica')
+   }
+   for(let exa of practicaMomentanea){
+    let option = document.createElement('option');
+    option.value = exa.nombre_examen;
+    option.textContent = exa.nombre_examen;
+    examenDL.appendChild(option);
+}
+
+}
+let examen=document.getElementById('examen_prestacion');
+let ladoDL=document.getElementById('lado');
+function capturarExamen(){
+practicaMomentanea=practicaMomentanea.find(ex=>ex.nombre_examen===examen.value);
+if(!practicaMomentanea){
+    alert('El examen no corresponde')
+}
+for(let lad of lados){
+    let option = document.createElement('option');
+    option.value = lad.nombre_lado;
+    option.textContent = lad.nombre_lado;
+    ladoDL.appendChild(option);
+}
+}
+let ladoPrestacion=document.getElementById('lado_prestacion');
+function capturarLado(){
+    if(ladoPrestacion.value){
+        lado=lados.find(lad=>lad.nombre_lado===ladoPrestacion.value);
+    }
+}
+let indicacion=document.getElementById('indicacionPrestacion');
+let justificacion=document.getElementById('justificacionPrestacion');
+let observacion=document.getElementById('observacionPrestacion');
+function agregarPrestacionCompleta(){
+if(!indicacion.value){
+    alert('La indicacion es obligatoria');
+}ifelse(!justificacion.value){
+    alert('La justificacion es obligatoria');
+}ifelse(!practicaMomentanea){
+    alert('la prestacin no esta completa');
+}else{
+prestacion.id_practica=practicaMomentanea.id_practica;
+prestacion.id_procedimiento=practicaMomentanea.id_procedimiento;
+prestacion.id_examen=practicaMomentanea.id_examen;
+prestacion.id_lado=lado.id_lado;
+prestacion.indicacion=indicacion.value;
+prestacion.justificacion=justificacion.value;
+prestacion.observacion=observacion.value;
+console.log(prestacion);
+}
+}
 let medicamentMomentaneo;
 let nombre;
 let formaDL=document.getElementById('forma');

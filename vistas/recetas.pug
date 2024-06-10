@@ -85,27 +85,34 @@ include plantilla
                     button(onclick="agregarMedicamentoCompleto()") Agregar  
                         
                 #divPrestacion.ocultar
-                    label(for="nombre_prestacion") Nombre de la prestacion :
+                    label(for="nombre_prestacion") Practica :
                     input(type="text", id="nombre_prestacion", name="nombre_prestacion",list="nombrePractica")
                     datalist#nombrePractica
                     button(onclick="capturarNombrePrestacion()") Agregar
                     br
                     label(for="procedimiento_prestacion") Procedimiento :
-                    input(type="text" ,id="procedimiento_prestacion", name="procedimiento_prestacion")
+                    input(type="text" ,id="procedimiento_prestacion", name="procedimiento_prestacion",list="procedimiento")
+                    datalist#procedimiento 
+                    button(onclick="capturarProcedimiento()") Agregar
                     br
                     label(for="examen_prestacion") Examen  :
-                    input(type="text", id="examen_prestacion", name="examen_prestacion")
+                    input(type="text", id="examen_prestacion", name="examen_prestacion",list="examen")
+                    datalist#examen 
+                    button(onclick="capturarExamen()") Agregar
                     br
                     label(for="lado_prestacion") Lado(opcional) :
-                    input(type="text", id="lado_prestacion", name="lado_prestacion")
+                    input(type="text", id="lado_prestacion", name="lado_prestacion",list="lado")
+                    datalist#lado 
+                    button(onclick="capturarLado()") Agregar
                     br
-                    label(for="indicacionPrestacion") Indicacion :
-                    input(type="text", id="indicacionPrestacion" ,name="indicacionPrestacion")
+                    textarea(id="indicacionPrestacion", name="indicacionPrestacion", rows="4", cols="50", placeholder="La indicacion es obligatoria")
+                     
                     br
-                    label(for="justificacionPrestacion") Justificacion :
-                    input(type="text", id="justificacionPrestacion", name="justificacionPrestacion") 
-                    
                     br
-                    button(type="button") Agregar        
+                    textarea(id="justificacionPrestacion", name="justificacionPrestacion", rows="4", cols="50", placeholder="La justificacion es obligatora")
+                    br
+                    textarea(id="observacionPrestacion", name="observacionPrestacion", rows="4", cols="50", placeholder="La observacion es opcional")
+                    br
+                    button(onclick="agregarPrestacionCompleta()") Agregar        
                 #divRecetado   
             input(type="submit", value="Enviar")
