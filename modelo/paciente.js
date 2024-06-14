@@ -115,7 +115,7 @@ function createPaciente(paciente) {
                     reject(err);
                 });
             }
-console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
+//console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
             connection.query(
                 'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
                 [paciente.nombre, paciente.apellido, paciente.dni, paciente.estado],

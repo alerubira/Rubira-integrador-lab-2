@@ -19,20 +19,25 @@
 #divCabecera {
     /*position: fixed;*/
     text-align: center;
-    background-color:antiquewhite;
+   /* background-color:antiquewhite;*/
     width: 95%;
     margin: 1%;
     /*z-index: 1000;*/ 
-    box-shadow: 0 0 0 10px rgb(0, 255, 191); 
+   /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
 }
+#divOpcional {
+    height: 35px;
+    background-color: #808080; /* Gris */
+}
+
 #divSecundario{
       /*position: fixed;*/
       text-align: center;
-      background-color:antiquewhite;
+     /* background-color:antiquewhite;*/
       width: 95%;
       margin: 1%;
       /*z-index: 1000;*/ 
-      box-shadow: 0 0 0 10px rgb(0, 255, 191); 
+      /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
 }
 #divProfecional{
     border-radius: 10px; /* Establece los bordes redondeados */
