@@ -19,17 +19,24 @@
 #divCabecera {
     /*position: fixed;*/
     text-align: center;
-   /* background-color:antiquewhite;*/
+    background-color:antiquewhite;
     width: 95%;
     margin: 1%;
     /*z-index: 1000;*/ 
    /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
 }
-#divOpcional {
-    height: 35px;
-    background-color: #808080; /* Gris */
+.boton{
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
 }
-
+.boton:hover{
+    background-color: darkblue;
+}
 #divSecundario{
       /*position: fixed;*/
       text-align: center;
