@@ -1,8 +1,9 @@
 let ocultar=document.getElementsByClassName('ocultar');
-export function Focultar(){
+ function Focultar(){
             
         for (let elemento of ocultar) {
             elemento.style.display = 'none';
                 }
         }
+export{Focultar};
 

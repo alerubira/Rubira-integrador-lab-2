@@ -22,17 +22,28 @@ export function traerProfecionl(profecionalI){
   pacientes=pacs;
   //console.log(pacientes);
 }*/
-
-
-
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-//console.log(profecionales);
 export function conectar(){
   
 const app = express();
+
+// Convierte import.meta.url a __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const staticOptions = {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        }
+    }
+};
+
+app.use(express.static(path.join(__dirname, 'estatica'), staticOptions));
+
+
+//console.log(profecionales);
+
+
 const port = 3000;
 // Configuración del body-parser
 app.use(bodyParser.text({ type: 'text/plain' }));
@@ -40,6 +51,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.text());
 // Configurar Express para servir archivos estáticos desde la carpeta 'public'
 app.use(serveStatic(path.join(__dirname, '..','estatica')));
+
 app.use(express.urlencoded({ extended: true }))
 // Configurar Express para usar Pug como motor de plantillas y establecer la carpeta de vistas
 app.set('view engine', 'pug');
