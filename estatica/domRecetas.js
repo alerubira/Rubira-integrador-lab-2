@@ -31,12 +31,7 @@ let lados;
 let lado={};
       
 //console.log(`profecional ${profecional}`);
-function Focultar(){
-            
-        for (let elemento of ocultar) {
-            elemento.style.display = 'none';
-                }
-        }
+
         document.getElementById('dniP').addEventListener('input', async function() {
             eliminarHijos(divPacientes);
             let inputDniP = this.value;

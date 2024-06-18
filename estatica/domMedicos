@@ -1,0 +1,42 @@
+
+//const Focultar = require('./domFunsiones.js');
+let ocultar=document.getElementsByClassName('ocultar');
+function Focultar(){
+            
+    for (let elemento of ocultar) {
+        elemento.style.display = 'none';
+            }
+    }
+
+ document.getElementById('crudMedico').addEventListener('change', function() {
+                              let selectedValue = this.value;
+                              
+                              // Realiza una acción en base a la selección
+                              switch(selectedValue) {
+                                   case 'crearMedico':
+                                        console.log(selectedValue);
+                                        Focultar();
+                                        // Acción para inscribir un médico
+                                        let divCMedico = document.getElementById('divCrearMedico');
+                                        divCMedico.style.display = 'block';
+                                        break;
+                                   case 'modificarMedico':
+                                         Focultar();
+                                        // Acción para modificar datos de un médico
+                                        console.log('Modificar datos de Médico');
+                                        break;
+                                   case 'bajaMedico':
+                                        Focultar();
+                                        // Acción para dar de baja a un médico
+                                        console.log('Dar de baja a un Médico');
+                                        break;
+                                   case 'buscarMedico':
+                                        Focultar();
+                                        // Acción para buscar un médico existente
+                                        console.log('Buscar un Médico existente');
+                                        break;
+                                   default:
+                                        console.log('Selección no válida');
+                              }
+                              
+                         });

@@ -20,10 +20,13 @@
     /*position: fixed;*/
     text-align: center;
     background-color:antiquewhite;
-    width: 95%;
+    width: 75%;
     margin: 1%;
     /*z-index: 1000;*/ 
    /* box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
+}
+#divLogo{
+    width: 20%;
 }
 .boton{
     background-color: blue;
@@ -41,10 +44,15 @@
       /*position: fixed;*/
       text-align: center;
      /* background-color:antiquewhite;*/
-      width: 95%;
+      width: 75%;
       margin: 1%;
       /*z-index: 1000;*/ 
       /*box-shadow: 0 0 0 10px rgb(0, 255, 191);*/ 
+}
+#divLateral{
+    width: 20%;
+    background-color: darkslategrey;
+    text-align: center;
 }
 #divProfecional{
     border-radius: 10px; /* Establece los bordes redondeados */

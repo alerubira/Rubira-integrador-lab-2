@@ -1,76 +1,69 @@
-doctype html
-include plantilla
-#divSecundario 
-          if mensajeExito 
-              script.
-                alert("#{mensajeExito}")
-          select(id="crudMedico", name="crudMedico")
-               option(value="vacio") Elija una opcion
-               option(value="crearMedico") Inscribir Medico
-               option(value="modificarMedico") Modificar datos de medico 
-               option(value="bajaMedico") Dar de baja a un medico
-               option(value="buscarMedico") Buscar un medico existemte
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="shortcut icon", href="./icono.png", type="image/x-icon")
+        link(rel="stylesheet", href="estilo.css")
+        script(src="domMedicos", defer)
+        script(src="domFunsiones",defre)
+     
+        title Integrador Laboratorio-2
+    body
+      #divPrincipal
           
-          #divCrearMedico.ocultar 
-               form#formularioProfecionalCrear(action="/crearProfecional", method="POST")
-                    label(for="dniProfecional") DNI del Profecional:
-                    input(type="text", id="dniProfecional", name="dniProfecional")
-                    br
-                    label(for="nombreProfecionl") Nombre del profecional 
-                    input(type="text", id="nombreProfecional" ,name="nombreProfecional")
-                    br
-                    label(for="apellidoProfecional") Apellido  del Profecional:
-                    input(type="text", id="apellidoProfecional", name="apellidoProfecional")
-                    br
-                    label(for="profecionProfecional") Profecion del profecional 
-                    input(type="text", id="profecionProfecional" ,name="profecionProfecional")
-                    br
-                    label(for="especialidadProfecional") Especialidad del Profecional:
-                    input(type="text", id="especilalidadProfecional", name="especialidadProfecional")
-                    br
-                    label(for="domicilioProfecionl") Domicilio del profecional 
-                    input(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
-                    br  
-                    label(for="refepsProfecional") Identificacion REFEPS del Profecional:
-                    input(type="text", id="refepsProfecional", name="refepsProfecional")
-                    br
-                    label(for="matriculaProfecionl") Matricula del profecional 
-                    input(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
-                    br                 
-                    input(type="submit", value="Enviar")
-          #divBuscarMedico.ocultar
-          #divModificarMedico.ocultar
-          #divBorrarMedico.ocultar
-          
-               document.getElementById('crudMedico').addEventListener('change', function() {
-                    let selectedValue = this.value;
+          #divCabecera
+              h1= encabezado
+          #divLogo
+            img(src="./icons8-medicina-100.png", alt="Logo")
+          #divLateral
+              button(type="button") Adorno 
+              br
+              button(type="button") Adorno 
+              br
+              button(type="button") Adorno 
+              br
+              button(type="button") Adorno      
+          #divSecundario
+ 
+                    if mensajeExito 
+                         script.
+                              alert("#{mensajeExito}")
+                    select(id="crudMedico", name="crudMedico")
+                         option(value="vacio") Elija una opcion
+                         option(value="crearMedico") Inscribir Medico
+                         option(value="modificarMedico") Modificar datos de medico 
+                         option(value="bajaMedico") Dar de baja a un medico
+                         option(value="buscarMedico") Buscar un medico existemte
                     
-                    // Realiza una acción en base a la selección
-                    switch(selectedValue) {
-                         case 'crearMedico':
-                              console.log(selectedValue);
-                              ocultar();
-                              // Acción para inscribir un médico
-                              let divCMedico = document.getElementById('divCrearMedico');
-                              divCMedico.style.display = 'block';
-                              break;
-                         case 'modificarMedico':
-                              ocultar();
-                              // Acción para modificar datos de un médico
-                              console.log('Modificar datos de Médico');
-                              break;
-                         case 'bajaMedico':
-                              ocultar();
-                              // Acción para dar de baja a un médico
-                              console.log('Dar de baja a un Médico');
-                              break;
-                         case 'buscarMedico':
-                              ocultar();
-                              // Acción para buscar un médico existente
-                              console.log('Buscar un Médico existente');
-                              break;
-                         default:
-                              console.log('Selección no válida');
-                    }
+                    #divCrearMedico.ocultar 
+                         form#formularioProfecionalCrear(action="/crearProfecional", method="POST")
+                              label(for="dniProfecional") DNI del Profecional:
+                              input(type="text", id="dniProfecional", name="dniProfecional")
+                              br
+                              label(for="nombreProfecionl") Nombre del profecional 
+                              input(type="text", id="nombreProfecional" ,name="nombreProfecional")
+                              br
+                              label(for="apellidoProfecional") Apellido  del Profecional:
+                              input(type="text", id="apellidoProfecional", name="apellidoProfecional")
+                              br
+                              label(for="profecionProfecional") Profecion del profecional 
+                              input(type="text", id="profecionProfecional" ,name="profecionProfecional")
+                              br
+                              label(for="especialidadProfecional") Especialidad del Profecional:
+                              input(type="text", id="especilalidadProfecional", name="especialidadProfecional")
+                              br
+                              label(for="domicilioProfecionl") Domicilio del profecional 
+                              input(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
+                              br  
+                              label(for="refepsProfecional") Identificacion REFEPS del Profecional:
+                              input(type="text", id="refepsProfecional", name="refepsProfecional")
+                              br
+                              label(for="matriculaProfecionl") Matricula del profecional 
+                              input(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
+                              br                 
+                              input(type="submit", value="Enviar")
+                    #divBuscarMedico.ocultar
+                    #divModificarMedico.ocultar
+                    #divBorrarMedico.ocultar
                     
-               });
+                        
