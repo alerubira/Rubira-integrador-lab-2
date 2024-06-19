@@ -1,5 +1,6 @@
 let ocultar=document.getElementsByClassName('ocultar');
 let limpiar=document.getElementsByClassName('limpiar');
+let divAlerta=document.getElementById('divAlerta');
  function Focultar(){
             
         for (let elemento of ocultar) {
@@ -12,6 +13,25 @@ function limpiarCampos(list){
         li.textContent="";
         li.value=null;
     }
+}
+function eliminarHijos(div) {
+    
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
+function alerta(pagina,mensage){
+    // Limpiar cualquier contenido anterior antes de añadir nuevos elementos
+    divAlerta.innerHTML = '';
+    //console.log(pagina);
+    p1=document.createElement('p');
+    p1.textContent=`ALERTA La pagina ${pagina} dice`;
+    divAlerta.appendChild(p1);
+    p=document.createElement('p');
+    p.textContent=`${mensage}`;
+    divAlerta.appendChild(p);
+    // Ejecutar la función eliminarHijos después de 5 segundos (5000 milisegundos)
+    setTimeout(() => eliminarHijos(divAlerta), 6000);
 }
 //export{Focultar};
 

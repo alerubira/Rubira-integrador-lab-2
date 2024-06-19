@@ -4,6 +4,7 @@
 
  document.getElementById('crudMedico').addEventListener('change', function() {
      limpiarCampos(limpiar);
+     
      //console.log(limpiar);
      let selectedValue = this.value;
      Focultar();

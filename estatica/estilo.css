@@ -100,5 +100,27 @@ border: 1px solid black;
     background-color:antiquewhite;
     border-radius: 5px;
 }
+/* Estilos para la alerta */
+#divAlerta {
+    position: fixed; /* Para que se sobreponga a otros elementos */
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    width: 60vw; /* 60% del ancho de la ventana */
+    background-color: #FF69B4; /* Fondo rosa */
+    /*border: 5px solid red; /* Bordes rojos */
+    /*padding: 20px;*/
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de sobreposición */
+    z-index: 9999; /* Para asegurar que esté al frente */
+  }
+  
+  /* Estilo para el mensaje dentro de la alerta */
+  #divAlerta p {
+    color: white;
+    font-size: 1.5em;
+    margin: 0;
+  }
+  
 
 
