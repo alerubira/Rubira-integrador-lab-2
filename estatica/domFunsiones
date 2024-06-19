@@ -1,9 +1,17 @@
 let ocultar=document.getElementsByClassName('ocultar');
+let limpiar=document.getElementsByClassName('limpiar');
  function Focultar(){
             
         for (let elemento of ocultar) {
             elemento.style.display = 'none';
                 }
         }
-export{Focultar};
+function limpiarCampos(list){
+    //console.log(list);
+    for (let li of list){
+        li.textContent="";
+        li.value=null;
+    }
+}
+//export{Focultar};
 

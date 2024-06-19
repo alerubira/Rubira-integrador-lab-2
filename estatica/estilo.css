@@ -29,13 +29,14 @@
     width: 20%;
 }
 .boton{
-    background-color: blue;
+    background-color: cornflowerblue;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    margin: 2px;
 }
 .boton:hover{
     background-color: darkblue;
@@ -53,6 +54,7 @@
     width: 20%;
     background-color: darkslategrey;
     text-align: center;
+    height: 400px; /* Añadir esta línea para un alto fijo */
 }
 #divProfecional{
     border-radius: 10px; /* Establece los bordes redondeados */
@@ -93,6 +95,10 @@
 }
 .div{
 border: 1px solid black;
+}
+.form{
+    background-color:antiquewhite;
+    border-radius: 5px;
 }
 
 

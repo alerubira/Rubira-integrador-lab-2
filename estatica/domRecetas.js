@@ -666,12 +666,7 @@ function obtenerNombre() {
 function objetoEnArreglo(objeto, arreglo) {
     return arreglo.some(elemento => objetosSonIguales(objeto, elemento));
 }
-function limpiarCampos(...list){
-    for (let li of list){
-        li.textContent="";
-        li.value=null;
-    }
-}
+
 
 
 

@@ -4,8 +4,8 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="shortcut icon", href="./icono.png", type="image/x-icon")
         link(rel="stylesheet", href="estilo.css")
-        script(type="module",src="domMedicos", defer)
-        script(type="module",src="domFunsiones",defer)
+        script(src="domMedicos", defer)
+        script(src="domFunsiones",defer)
      
         title Integrador Laboratorio-2
     body
@@ -36,32 +36,38 @@ html(lang="es")
                          option(value="buscarMedico") Buscar un medico existemte
                     
                     #divCrearMedico.ocultar 
-                         form#formularioProfecionalCrear(action="/crearProfecional", method="POST")
+                         form#formularioProfecionalCrear.form(action="/crearProfecional", method="POST")
                               label(for="dniProfecional") DNI del Profecional:
-                              input(type="text", id="dniProfecional", name="dniProfecional")
+                              input.limpiar(type="text", id="dniProfecional", name="dniProfecional")
                               br
                               label(for="nombreProfecionl") Nombre del profecional 
-                              input(type="text", id="nombreProfecional" ,name="nombreProfecional")
+                              input.limpiar(type="text", id="nombreProfecional" ,name="nombreProfecional")
                               br
                               label(for="apellidoProfecional") Apellido  del Profecional:
-                              input(type="text", id="apellidoProfecional", name="apellidoProfecional")
+                              input.limpiar(type="text", id="apellidoProfecional", name="apellidoProfecional")
                               br
                               label(for="profecionProfecional") Profecion del profecional 
-                              input(type="text", id="profecionProfecional" ,name="profecionProfecional")
+                              input.limpiar(type="text", id="profecionProfecional" ,name="profecionProfecional")
                               br
                               label(for="especialidadProfecional") Especialidad del Profecional:
-                              input(type="text", id="especilalidadProfecional", name="especialidadProfecional")
+                              input.limpiar(type="text", id="especilalidadProfecional", name="especialidadProfecional")
                               br
                               label(for="domicilioProfecionl") Domicilio del profecional 
-                              input(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
+                              input.limpiar(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
                               br  
-                              label(for="refepsProfecional") Identificacion REFEPS del Profecional:
-                              input(type="text", id="refepsProfecional", name="refepsProfecional")
+                              label(for="refepsProfecional") Identificacion REFEPS:
+                              input.limpiar(type="text", id="refepsProfecional", name="refepsProfecional")
                               br
                               label(for="matriculaProfecionl") Matricula del profecional 
-                              input(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
-                              br                 
-                              input(type="submit", value="Enviar")
+                              input.limpiar(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
+                              br 
+                              label(for="claveProvidoria") Clave provisoria 
+                              input.limpiar(type="text",id="claveProvisoria",name="claveProvisoria")
+                              br
+                              label(for="usuarioProvisorio") Usuario Provisorio 
+                              input.limpiar(type="text",id="usuarioProvisorio",name="usuarioProvisorio") 
+                              br              
+                              input.boton(type="submit", value="Enviar")
                     #divBuscarMedico.ocultar
                     #divModificarMedico.ocultar
                     #divBorrarMedico.ocultar
