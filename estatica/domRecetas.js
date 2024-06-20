@@ -360,12 +360,7 @@ for (let ob of obras) {
 // Asegúrate de que las funciones y variables como `llenarPlan` y `obraSocialSelec` estén definidas
 
 
- function eliminarHijos(div) {
-    
-    while (div.firstChild) {
-        div.removeChild(div.firstChild);
-    }
-}
+ 
  function llenarPlan(planes){
     eliminarHijos(planSelec);
     let option2 = document.createElement('option');

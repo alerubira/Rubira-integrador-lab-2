@@ -1,7 +1,7 @@
 
 //const Focultar = require('./domFunsiones.js');
-
-
+let formularioProfecionalCrear=document.getElementById('formularioProfecionalCrear')
+let dniProfecional=document.getElementById('dniProfecional');
  document.getElementById('crudMedico').addEventListener('change', function() {
      limpiarCampos(limpiar);
      
@@ -37,3 +37,15 @@
      }
      
 });
+formularioProfecionalCrear.addEventListener('submit', function(event) {
+     let dniValue = dniProfecional.value;
+console.log(dniValue);
+     // Validar que el campo tenga entre 7 y 8 dígitos
+     if (dniValue.length < 7 || dniValue.length > 8 || !/^\d+$/.test(dniValue)) {
+       event.preventDefault(); // Previene el envío del formulario
+       alerta("Medicos","El dni solo acepta 7 u 8 numeros");
+        
+     } else {
+          event.preventDefault(); // Previene el envío del formulario
+     }
+   });

@@ -39,7 +39,7 @@ html(lang="es")
                     #divCrearMedico.ocultar 
                          form#formularioProfecionalCrear.form(action="/crearProfecional", method="POST")
                               label(for="dniProfecional") DNI del Profecional:
-                              input.limpiar(type="text", id="dniProfecional", name="dniProfecional")
+                              input#dniProfecional.limpiar(name="dniProfecional",type="number")    
                               br
                               label(for="nombreProfecionl") Nombre del profecional 
                               input.limpiar(type="text", id="nombreProfecional" ,name="nombreProfecional")
@@ -57,12 +57,12 @@ html(lang="es")
                               input.limpiar(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
                               br  
                               label(for="refepsProfecional") Identificacion REFEPS:
-                              input.limpiar(type="text", id="refepsProfecional", name="refepsProfecional")
+                              input.limpiar(type="number", id="refepsProfecional", name="refepsProfecional")
                               br
                               label(for="matriculaProfecionl") Matricula del profecional 
-                              input.limpiar(type="text", id="matriculaProfecional" ,name="matriculaProfecional")
+                              input.limpiar(type="number", id="matriculaProfecional" ,name="matriculaProfecional")
                               br 
-                              label(for="claveProvidoria") Clave provisoria 
+                              label(for="claveProvisoria") Clave provisoria 
                               input.limpiar(type="text",id="claveProvisoria",name="claveProvisoria")
                               br
                               label(for="usuarioProvisorio") Usuario Provisorio 
