@@ -1,5 +1,6 @@
 import { connection } from "./conexxionBD.js";
 import { Medico } from './clasesEntidad.js';
+import { consulta1 } from "./conexxionBD.js";
 let profecionales;
 function buscarMID(id, callback) {
     connection.connect(function(err) {
@@ -50,4 +51,12 @@ function agregarMedico(medico,callback){
         }
     });
 }
-export{buscarMID,agregarMedico,profecionales};
+async function profecionesTodas(caracter){
+    let query='SELECT * FROM `profecion` WHERE 1;';
+    return await consulta1(query,caracter);
+}
+async function especialidadesTodas(caracter){
+    let query='SELECT * FROM `especialida` WHERE 1;';
+    return await consulta1(query,caracter);
+}
+export{buscarMID,agregarMedico,profecionales,profecionesTodas,especialidadesTodas};

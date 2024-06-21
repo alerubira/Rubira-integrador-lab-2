@@ -38,7 +38,7 @@ function validar(codicion,pagina,mensage,event){
          alerta(pagina,mensage);
          event.preventDefault(); // Previene el envío del formulario
         }}
-        async function fech(input, endpoint) {
+ async function fech(input, endpoint) {
             try {
                 console.log(`input en fech: ${input}`);
                 const response = await fetch(endpoint, {
@@ -57,7 +57,7 @@ function validar(codicion,pagina,mensage,event){
                 }
         
                 const text = await response.text();
-                console.log('Raw response text:', text);
+                //console.log('Raw response text:', text);
         
                 if (!text) {
                     throw new Error('La respuesta del servidor está vacía');
@@ -70,7 +70,7 @@ function validar(codicion,pagina,mensage,event){
                     throw new Error(`Error parseando JSON: ${jsonError.message}`);
                 }
         
-                console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
+               // console.log('Success cliente:', data); // Maneja la respuesta del servidor aquí
                 return data;
             } catch (error) {
                 console.error('Error en fech:', error.message); // Maneja los errores aquí

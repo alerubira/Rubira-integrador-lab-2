@@ -4,7 +4,17 @@ let formularioProfecionalCrear=document.getElementById('formularioProfecionalCre
 let dniProfecional=document.getElementById('dniProfecional');
 let nombreProfecional=document.getElementById('nombreProfecional');
 let apellidoProfecional=document.getElementById('apellidoProfecional');
+let profecionDL=document.getElementById('profecion');
+let especialidadDL=document.getElementById('especialidad');
 let pagina="Medicos";
+let profeciones;
+let especialidades;
+(async function(){
+profeciones=await fech("*","/profeciones");
+console.log(profeciones);
+especialidades=await fech("*","/especialidades");
+console.log(especialidades);
+})();
 
  document.getElementById('crudMedico').addEventListener('change', function() {
      limpiarCampos(limpiar);

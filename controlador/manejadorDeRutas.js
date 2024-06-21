@@ -1,8 +1,9 @@
-import {buscarMID} from '../modelo/medico.js'; 
+import {buscarMID} from '../modelo/medicoData.js'; 
 import { traerProfecionl} from './conexxion.js';
 import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
-import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocial.js';
+import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocialData.js';
 import { todoGenericos ,todasAdministracion,todasPrestaciones,ladoTodos} from '../modelo/medicamentos.js';
+import { profecionesTodas,especialidadesTodas } from '../modelo/medicoData.js';
 //import { agregarMedico } from '../modelo/medico.js';
  
 function verificarProfecional(res,req,logins,encabezado){
@@ -117,7 +118,7 @@ async function crearPaciente(req,res){
   try {
     
     const paciente = req.body; 
-    console.log(`paciente en el body ${paciente}`);
+    //console.log(`paciente en el body ${paciente}`);
     //console.log(`caracter en ruta en ruta ${caracteres}`);
    // console.log(caracteres);
      const pacienteCreado=await createPaciente(paciente);
@@ -180,6 +181,28 @@ async function todosLados(req,res){
     res.status(500).send('Error interno del servidor');
 }
 }
+async function traerTodo(req,res,tabla){
+  try {
+    let aux;
+    let caracteres = req.body; 
+    switch (tabla) {
+      case 'profecion':
+         aux= await profecionesTodas(caracteres);
+        break;
+      case 'especialidad':
+         aux=await especialidadesTodas(caracteres);
+        break;
+      default:
+        break;
+    }
+    
+   
+    res.send(aux);
+} catch (error) {
+    console.error(`Error al buscar en la tabla ${tabla}`, error);
+    res.status(500).send('Error interno del servidor');
+}
+}
 
 
-export{todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};
+export{traerTodo,todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};

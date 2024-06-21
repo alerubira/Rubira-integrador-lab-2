@@ -4,9 +4,8 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="shortcut icon", href="./icono.png", type="image/x-icon")
         link(rel="stylesheet", href="estilo.css")
-        script(src="domMedicos", defer)
         script(src="domFunsiones",defer)
-     
+        script(src="domMedicos", defer)
         title Integrador Laboratorio-2
     body
       #divPrincipal
@@ -48,10 +47,12 @@ html(lang="es")
                               input.limpiar(type="text", id="apellidoProfecional", name="apellidoProfecional")
                               br
                               label(for="profecionProfecional") Profecion del profecional 
-                              input.limpiar(type="text", id="profecionProfecional" ,name="profecionProfecional")
+                              input.limpiar(type="text", id="profecionProfecional" ,name="profecionProfecional",list="profecion")
+                              datalist#profecion
                               br
                               label(for="especialidadProfecional") Especialidad del Profecional:
-                              input.limpiar(type="text", id="especilalidadProfecional", name="especialidadProfecional")
+                              input.limpiar(type="text", id="especilalidadProfecional", name="especialidadProfecional",list="especialidad")
+                              datalist#especialidad
                               br
                               label(for="domicilioProfecionl") Domicilio del profecional 
                               input.limpiar(type="text", id="domicilioProfecional" ,name="domicilioProfecional")
