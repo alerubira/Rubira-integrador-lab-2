@@ -2,6 +2,10 @@
 //const Focultar = require('./domFunsiones.js');
 let formularioProfecionalCrear=document.getElementById('formularioProfecionalCrear')
 let dniProfecional=document.getElementById('dniProfecional');
+let nombreProfecional=document.getElementById('nombreProfecional');
+let apellidoProfecional=document.getElementById('apellidoProfecional');
+let pagina="Medicos";
+
  document.getElementById('crudMedico').addEventListener('change', function() {
      limpiarCampos(limpiar);
      
@@ -38,14 +42,14 @@ let dniProfecional=document.getElementById('dniProfecional');
      
 });
 formularioProfecionalCrear.addEventListener('submit', function(event) {
+     event.preventDefault(); // Previene el envío del formulario
      let dniValue = dniProfecional.value;
+     let nombreValue=nombreProfecional.value;
+     let apellidoValue=apellidoProfecional.value;
 console.log(dniValue);
      // Validar que el campo tenga entre 7 y 8 dígitos
-     if (dniValue.length < 7 || dniValue.length > 8 || !/^\d+$/.test(dniValue)) {
-       event.preventDefault(); // Previene el envío del formulario
-       alerta("Medicos","El dni solo acepta 7 u 8 numeros");
-        
-     } else {
-          event.preventDefault(); // Previene el envío del formulario
-     }
+     validar(dniValue.length < 7 || dniValue.length > 8 || !/^\d+$/.test(dniValue),pagina,"El dni solo acepta 7 u 8 numeros",event)
+     validar(nombreValue.length<1||nombreValue.length>28||!/^[a-zA-Z]+$/.test(nombreValue),pagina,"El nombre es obligatorio,debe contener menos de 30 letras unicamente",event)
+     validar(apellidoValue.length<1||apellidoValue.length>28||!/^[a-zA-Z]+$/.test(apellidoValue),pagina,"El apellido es obligatorio,debe contener menos de 30 letras unicamente",event)
    });
+   
