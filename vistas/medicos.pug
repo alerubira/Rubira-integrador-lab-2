@@ -47,11 +47,13 @@ html(lang="es")
                               input.limpiar(type="text", id="apellidoProfecional", name="apellidoProfecional")
                               br
                               label(for="profecionProfecional") Profecion del profecional 
-                              input.limpiar(type="text", id="profecionProfecional" ,name="profecionProfecional",list="profecion")
-                              datalist#profecion
+                              input#idProfecion.limpiar.ocultar
+                              input.limpiar(type="text", id="profecionProfecional" ,name="profecionProfecional",list="profecion2", autocomplete="off")
+                              datalist#profecion2
                               br
                               label(for="especialidadProfecional") Especialidad del Profecional:
-                              input.limpiar(type="text", id="especilalidadProfecional", name="especialidadProfecional",list="especialidad")
+                              input#idEspecialidad.limpiar.ocultar
+                              input.limpiar(type="text", id="especilalidadProfecional", name="especialidadProfecional",list="especialidad", autocomplete="off")
                               datalist#especialidad
                               br
                               label(for="domicilioProfecionl") Domicilio del profecional 

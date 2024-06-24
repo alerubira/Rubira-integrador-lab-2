@@ -4,15 +4,46 @@ let formularioProfecionalCrear=document.getElementById('formularioProfecionalCre
 let dniProfecional=document.getElementById('dniProfecional');
 let nombreProfecional=document.getElementById('nombreProfecional');
 let apellidoProfecional=document.getElementById('apellidoProfecional');
-let profecionDL=document.getElementById('profecion');
+let profecionDL=document.getElementById('profecion2');
 let especialidadDL=document.getElementById('especialidad');
+let idProfecion=document.getElementById('idProfecion');
+let idEspecialidad=document.getElementById('idEspecialidad');
 let pagina="Medicos";
 let profeciones;
 let especialidades;
+/*// Limpia el almacenamiento local
+localStorage.clear();
+
+// Limpia el almacenamiento de la sesión
+sessionStorage.clear();*/
+
 (async function(){
+ /*    // Limpia el almacenamiento local
+localStorage.clear();
+
+// Limpia el almacenamiento de la sesión
+sessionStorage.clear();*/
+
+     
 profeciones=await fech("*","/profeciones");
 console.log(profeciones);
+profecionDL.innerHTML = ''; // Limpiar opciones existentes
+
+for(let p of profeciones){
+     console.log("--");
+     let op=document.createElement('option');
+     op.textContent=p.nombre_profecion;
+     op.value=p.nombre_profecion;
+     profecionDL.appendChild(op);
+}
 especialidades=await fech("*","/especialidades");
+especialidadDL.innerHTML = ''; // Limpiar opciones existentes
+for(let e of especialidades){
+     let op2=document.createElement('option');
+     op2.textContent=e.nombre_especialidad;
+     op2.value=e.nombre_especialidad;
+     especialidadDL.appendChild(op2);
+}
 console.log(especialidades);
 })();
 
