@@ -77,5 +77,12 @@ function validar(codicion,pagina,mensage,event){
                 throw error; // Re-lanzar el error para que pueda ser capturado en el bloque catch
             }
         }  
+// Función para verificar si la palabra está en el arreglo de objetos
+function contienePalabra(array,propiedad,palabra) {
+    console.log(array);
+    console.log(propiedad);
+    console.log(palabra);
+    return array.some(objeto => objeto.propiedad === palabra);
+  }
 //export{Focultar};
 
