@@ -1,6 +1,6 @@
-
+pagina="Medico";
 //const Focultar = require('./domFunsiones.js');
-let formularioProfecionalCrear=document.getElementById('formularioProfecionalCrear')
+let formularioProfecionalCrear=document.getElementById('formularioProfecionalCrear');
 let dniProfecional=document.getElementById('dniProfecional');
 let nombreProfecional=document.getElementById('nombreProfecional');
 let apellidoProfecional=document.getElementById('apellidoProfecional');
@@ -10,7 +10,10 @@ let idProfecion=document.getElementById('idProfecion');
 let idEspecialidad=document.getElementById('idEspecialidad');
 let inputProfecion=document.getElementById('profecionProfecional');
 let inputEspecialidad=document.getElementById('especialidadProfecional');
-let pagina="Medicos";
+let inputDomicilio=document.getElementById('domicilioProfecional');
+let inputRefeps=document.getElementById('refepsProfecional');
+let inputClave=document.getElementById('claveProvisoria');
+let inputUsuario=document.getElementById('usuarioProvisorio');
 let profeciones;
 let especialidades;
 /*// Limpia el almacenamiento local
@@ -91,6 +94,9 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
      let apellidoValue=apellidoProfecional.value;
      let profecionValue=inputProfecion.value;
      let especialidadValue=inputEspecialidad.value;
+     let domicilioValue=inputDomicilio.value;
+     let refepsValue=inputRefeps.value;
+
       //console.log(profecionValue);
       //console.log(especialidadValue);
      // Validar que el campo tenga entre 7 y 8 dígitos
@@ -100,12 +106,19 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
     // let condicion= profeciones.some(objeto => objeto.nombre_profecion === profecionValue);
      let objetoEncontrado = profeciones.find(objeto => objeto.nombre_profecion === profecionValue);
      validar(!objetoEncontrado,pagina,'La profecion no corresponde',event);
-     idProfecion.value=objetoEncontrado.id_profecion;
+     if(objetoEncontrado){
+          idProfecion.value=objetoEncontrado.id_profecion;
+     }
+    
      //condicion=especialidades.some(objeto=>objeto.nombre_especialidad===especialidadValue);
       objetoEncontrado = especialidades.find(objeto => objeto.nombre_especialidad === especialidadValue);
 
      validar(!objetoEncontrado,pagina,'La especialidad no corresponde',event);
-     idEspecialidad.value=objetoEncontrado.id_especialidad;
+     if(objetoEncontrado){
+          idEspecialidad.value=objetoEncontrado.id_especialidad;
+     }
+     
+
 
    });
    
