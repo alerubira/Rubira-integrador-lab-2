@@ -59,4 +59,8 @@ async function especialidadesTodas(caracter){
     let query='SELECT * FROM `especialida` WHERE 1;';
     return await consulta1(query,caracter);
 }
-export{buscarMID,agregarMedico,profecionales,profecionesTodas,especialidadesTodas};
+async function crearMedico(medico){
+    console.log('en crear medico');
+    console.log(medico);
+}
+export{crearMedico,buscarMID,agregarMedico,profecionales,profecionesTodas,especialidadesTodas};

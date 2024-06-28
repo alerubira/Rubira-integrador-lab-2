@@ -12,6 +12,7 @@ let inputProfecion=document.getElementById('profecionProfecional');
 let inputEspecialidad=document.getElementById('especialidadProfecional');
 let inputDomicilio=document.getElementById('domicilioProfecional');
 let inputRefeps=document.getElementById('refepsProfecional');
+let inputMatricula=document.getElementById('matriculaProfecional');
 let inputClave=document.getElementById('claveProvisoria');
 let inputUsuario=document.getElementById('usuarioProvisorio');
 let profeciones;
@@ -88,14 +89,17 @@ console.log(especialidades);
      
 });
 formularioProfecionalCrear.addEventListener('submit', function(event) {
-     event.preventDefault(); // Previene el envío del formulario
+    // event.preventDefault(); // Previene el envío del formulario
      let dniValue = dniProfecional.value;
      let nombreValue=nombreProfecional.value;
      let apellidoValue=apellidoProfecional.value;
      let profecionValue=inputProfecion.value;
      let especialidadValue=inputEspecialidad.value;
      let domicilioValue=inputDomicilio.value;
+     let matriculaValue=inputMatricula.value ;
      let refepsValue=inputRefeps.value;
+     let claveValue=inputClave.value ;
+     let usuarioValue=inputUsuario.value ;
 
       //console.log(profecionValue);
       //console.log(especialidadValue);
@@ -111,14 +115,20 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
      }
     
      //condicion=especialidades.some(objeto=>objeto.nombre_especialidad===especialidadValue);
-      objetoEncontrado = especialidades.find(objeto => objeto.nombre_especialidad === especialidadValue);
+      objetoEncontrado = especialidades.find(objet => objet.nombre_especialidad === especialidadValue);
 
      validar(!objetoEncontrado,pagina,'La especialidad no corresponde',event);
      if(objetoEncontrado){
           idEspecialidad.value=objetoEncontrado.id_especialidad;
      }
      
-
+     validar( domicilioValue.length<1||domicilioValue.length>30,pagina,'El domicilio es obligatorio y no debe exeder los 25 caracteres',event);
+     validar(refepsValue.length < 1 || refepsValue.length > 30 || !/^\d+$/.test(refepsValue),pagina,'El REFEPS solo hacepya numeros y no debe superar los 30 caracteres',event);
+     validar(matriculaValue.length < 1 || matriculaValue.length > 30 || !/^\d+$/.test(matriculaValue),pagina,'La matrcula solo hacepta numeros y no debe superar los 30 caracteres',event);
+     validar(usuarioValue.length<1||usuarioValue.length>6,pagina,'El usuario es obligatorio y no debe superar los 6 caracteres',event);
+     let cla=/^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-zA-Z]){3,})(?=(?:.*\d){3,}).*$/;
+     validar(claveValue.length<1||!cla.test(claveValue),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
+     
 
    });
    

@@ -36,7 +36,7 @@ html(lang="es")
                          option(value="buscarMedico") Buscar un medico existemte
                     
                     #divCrearMedico.ocultar 
-                         form#formularioProfecionalCrear.form(action="/crearProfecional", method="POST")
+                         form#formularioProfecionalCrear.form(action="/crearMedico", method="POST")
                               label(for="dniProfecional") DNI del Profecional:
                               input#dniProfecional.limpiar(name="dniProfecional",type="number")    
                               br
@@ -65,12 +65,12 @@ html(lang="es")
                               label(for="matriculaProfecionl") Matricula del profecional 
                               input.limpiar(type="number", id="matriculaProfecional" ,name="matriculaProfecional")
                               br 
-                              label(for="claveProvisoria") Clave provisoria 
-                              input.limpiar(type="text",id="claveProvisoria",name="claveProvisoria")
-                              br
                               label(for="usuarioProvisorio") Usuario Provisorio 
-                              input.limpiar(type="text",id="usuarioProvisorio",name="usuarioProvisorio") 
-                              br              
+                              input.limpiar(type="text",id="usuarioProvisorio",name="usuarioProvisorio",placeHolder="maximo 6 caracteres") 
+                              br  
+                              label(for="claveProvisoria") Clave provisoria 
+                              input.limpiar(type="text",id="claveProvisoria",name="claveProvisoria",placeHolder="3letras(minimo 1 may)3numeros")
+                              br            
                               input.boton(type="submit", value="Enviar")
                     #divBuscarMedico.ocultar
                     #divModificarMedico.ocultar

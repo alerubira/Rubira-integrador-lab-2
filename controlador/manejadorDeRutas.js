@@ -1,10 +1,11 @@
-import {buscarMID} from '../modelo/medicoData.js'; 
+import {buscarMID,crearMedico} from '../modelo/medicoData.js'; 
 import { traerProfecionl} from './conexxion.js';
 import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
 import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocialData.js';
 import { todoGenericos ,todasAdministracion,todasPrestaciones,ladoTodos} from '../modelo/medicamentos.js';
 import { profecionesTodas,especialidadesTodas } from '../modelo/medicoData.js';
-//import { agregarMedico } from '../modelo/medico.js';
+import { verificarMedico } from './procesarDatos.js';
+import { agregarMedico } from '../modelo/medicoData.js';
  
 function verificarProfecional(res,req,logins,encabezado){
   let loginEncontrado = logins.find(login => 
@@ -203,6 +204,27 @@ async function traerTodo(req,res,tabla){
     res.status(500).send('Error interno del servidor');
 }
 }
+async function crear(req,res,objeto){
+  try {
+    
+    let aux;
+    let objet = req.body; 
+    switch (objeto) {
+      case 'Medico':
+         aux= await verificarMedico(objet);
+         aux=await crearMedico(objeto);
+        break;
+      case 'especialidad':
+         aux=await especialidadesTodas(caracteres);
+        break;
+      default:
+        break;
+}
+res.send(aux);
+}catch (error) {
+    console.error(`Error al crear el ${objeto}`, error);
+    res.status(500).send('Error interno del servidor');
+}
+}
 
-
-export{traerTodo,todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};
+export{crear,traerTodo,todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};

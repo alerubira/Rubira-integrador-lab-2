@@ -5,7 +5,7 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{verificarProfecional,traerTodo,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones,traerPrestaciones,todosLados}from './manejadorDeRutas.js'
+import{crear,verificarProfecional,traerTodo,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones,traerPrestaciones,todosLados}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
 import { todosSexo } from '../modelo/paciente.js';
@@ -220,6 +220,9 @@ traerTodo(req,res,"profecion");
 app.post('/especialidades',async(req,res)=>{
 traerTodo(req,res,"especialidad");
 });
+app.post('/crearMedico',async(req,res) =>{
+crear(req,res,"Medico");
+})
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
