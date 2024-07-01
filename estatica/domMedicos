@@ -15,6 +15,7 @@ let inputRefeps=document.getElementById('refepsProfecional');
 let inputMatricula=document.getElementById('matriculaProfecional');
 let inputClave=document.getElementById('claveProvisoria');
 let inputUsuario=document.getElementById('usuarioProvisorio');
+let inputNivel=document.getElementById('nivelAutorizacion');
 let profeciones;
 let especialidades;
 /*// Limpia el almacenamiento local
@@ -100,7 +101,7 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
      let refepsValue=inputRefeps.value;
      let claveValue=inputClave.value ;
      let usuarioValue=inputUsuario.value ;
-
+     let nivelValue=inputNivel.value ;
       //console.log(profecionValue);
       //console.log(especialidadValue);
      // Validar que el campo tenga entre 7 y 8 dígitos
@@ -128,7 +129,7 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
      validar(usuarioValue.length<1||usuarioValue.length>6,pagina,'El usuario es obligatorio y no debe superar los 6 caracteres',event);
      let cla=/^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-zA-Z]){3,})(?=(?:.*\d){3,}).*$/;
      validar(claveValue.length<1||!cla.test(claveValue),pagina,'La clave debe contener 3 letras(minimo una mayuscula) y debe contener 3 numeros',event);
-     
+     validar(nivelValue!=1&&nivelValue!=2&&nivelValue!=3 ,pagina,'El nivel seleccionado no es valido',event)
 
    });
    

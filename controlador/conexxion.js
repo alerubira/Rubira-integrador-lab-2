@@ -5,7 +5,7 @@ import serveStatic from 'serve-static';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from'body-parser';
-import{crear,verificarProfecional,traerTodo,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones,traerPrestaciones,todosLados}from './manejadorDeRutas.js'
+import{crear,verificarProfecional,traerTodo,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones,traerPrestaciones,todosLados}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
 import { todosSexo } from '../modelo/paciente.js';
@@ -113,10 +113,10 @@ return res.redirect('/medicos');
 }
 
 });         
-app.post('/crearProfecional',(req,res)=>{
+/*app.post('/crearProfecional',(req,res)=>{
   crearProfecional(req,res,mensajeExito)
   
-});
+});*/
 /*pp.post('/buscarPacientes',(req,res)=>{
 // Capturar los tres caracteres enviados como texto
 //console.log(pacientes);

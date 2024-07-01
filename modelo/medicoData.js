@@ -27,7 +27,7 @@ function buscarMID(id, callback) {
         }
     });
 }
-function agregarMedico(medico,callback){
+/*function agregarMedico(medico,callback){
     const sql = "INSERT INTO `profecional` (`idrefeps`, `nombre`, `apellido`, `documento`, `profecion`, `especialidad`, `domicilio`, `matriculaprofecioinal`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     const valores = [medico.refepsProfecional,medico.nombreProfecional,medico.apellidoProfecional,medico.dniProfecional,medico.profecionProfecional,medico.especialidadProfecional,  medico.domicilioProfecional,medico.matriculaProfecional];
     connection.connect(function(err) {
@@ -50,7 +50,7 @@ function agregarMedico(medico,callback){
             });
         }
     });
-}
+}*/
 async function profecionesTodas(caracter){
     let query='SELECT * FROM `profecion` WHERE 1;';
     return await consulta1(query,caracter);
@@ -63,4 +63,4 @@ async function crearMedico(medico){
     console.log('en crear medico');
     console.log(medico);
 }
-export{crearMedico,buscarMID,agregarMedico,profecionales,profecionesTodas,especialidadesTodas};
+export{crearMedico,buscarMID,profecionales,profecionesTodas,especialidadesTodas};

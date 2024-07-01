@@ -70,6 +70,14 @@ html(lang="es")
                               br  
                               label(for="claveProvisoria") Clave provisoria 
                               input.limpiar(type="text",id="claveProvisoria",name="claveProvisoria",placeHolder="3letras(minimo 1 may)3numeros")
+                              br
+                              label(for="nivelAutorizacion") Nivel de Autorizacion:
+                              input.limpiar(type="number", id="nivelAutorizacion", name="nivelAutorizacion",list="dlNivel", autocomplete="off")
+                              datalist#dlNivel 
+                               option(value="1")
+                               option(value="2")
+                               option(value="3")   
+                              br
                               br            
                               input.boton(type="submit", value="Enviar")
                     #divBuscarMedico.ocultar

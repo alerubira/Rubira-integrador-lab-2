@@ -5,7 +5,7 @@ import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocialData.js';
 import { todoGenericos ,todasAdministracion,todasPrestaciones,ladoTodos} from '../modelo/medicamentos.js';
 import { profecionesTodas,especialidadesTodas } from '../modelo/medicoData.js';
 import { verificarMedico } from './procesarDatos.js';
-import { agregarMedico } from '../modelo/medicoData.js';
+//import { agregarMedico } from '../modelo/medicoData.js';
  
 function verificarProfecional(res,req,logins,encabezado){
   let loginEncontrado = logins.find(login => 
@@ -43,7 +43,7 @@ return res.render('vistaPrincipal',{encabezado,alerta})
 });
 
 }*/
-function crearProfecional(req,res,mensajeExito){
+/*function crearProfecional(req,res,mensajeExito){
   mensajeExito="";
   const profecionalCreado=req.body;
    //mensajeExito=agregarMedico(profecionalCreado);
@@ -62,7 +62,7 @@ function crearProfecional(req,res,mensajeExito){
         res.redirect("/medicos");
     }
 });
-}
+}*/
 async function buscarPacientes(req,res){
   try {
     let caracteres = req.body; 
@@ -212,7 +212,7 @@ async function crear(req,res,objeto){
     switch (objeto) {
       case 'Medico':
          aux= await verificarMedico(objet);
-         aux=await crearMedico(objeto);
+         aux=await crearMedico(objet);
         break;
       case 'especialidad':
          aux=await especialidadesTodas(caracteres);
@@ -227,4 +227,4 @@ res.send(aux);
 }
 }
 
-export{crear,traerTodo,todosLados,verificarProfecional,nombresGenericos,crearProfecional,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};
+export{crear,traerTodo,todosLados,verificarProfecional,nombresGenericos,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,administraciones,traerPrestaciones};
