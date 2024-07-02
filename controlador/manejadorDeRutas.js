@@ -1,6 +1,6 @@
 import {buscarMID,crearMedico} from '../modelo/medicoData.js'; 
 import { traerProfecionl} from './conexxion.js';
-import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/paciente.js';
+import { buscarPacienteDni,todosSexo,createPaciente} from '../modelo/pacienteData.js';
 import { buscarOSIdPaciente, todasObras} from '../modelo/obraSocialData.js';
 import { todoGenericos ,todasAdministracion,todasPrestaciones,ladoTodos} from '../modelo/medicamentos.js';
 import { profecionesTodas,especialidadesTodas } from '../modelo/medicoData.js';
@@ -205,6 +205,7 @@ async function traerTodo(req,res,tabla){
 }
 }
 async function crear(req,res,objeto){
+  console.log(objeto);
   try {
     
     let aux;
@@ -212,7 +213,11 @@ async function crear(req,res,objeto){
     switch (objeto) {
       case 'Medico':
          aux= await verificarMedico(objet);
-         aux=await crearMedico(objet);
+         console.log("aux");
+         console.log(aux);
+        /* if(aux){
+          aux=await crearMedico(objet);
+         }*/
         break;
       case 'especialidad':
          aux=await especialidadesTodas(caracteres);

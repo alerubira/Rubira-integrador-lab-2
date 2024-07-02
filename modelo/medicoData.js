@@ -59,8 +59,97 @@ async function especialidadesTodas(caracter){
     let query='SELECT * FROM `especialida` WHERE 1;';
     return await consulta1(query,caracter);
 }
-async function crearMedico(medico){
-    console.log('en crear medico');
-    console.log(medico);
+async function crearMedico(Medico) {
+    return new Promise((resolve, reject) => {
+        connection.beginTransaction((err) => {
+            if (err) {
+                return connection.rollback(() => {
+                    reject(err);
+                });
+            }
+//console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
+            connection.query(
+                'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
+                [Medico.nombreProfecional,Medico.apellidoProfecional,Medico.dniProfecional, true],
+                (error, results) => {
+                    if (error) {
+                        return connection.rollback(() => {
+                            reject(error);
+                        });
+                    }
+
+                    if (results.affectedRows !== 1) {
+                        return connection.rollback(() => {
+                            reject(new Error('Error al insertar en la tabla persona persona'));
+                        });
+                    }
+
+                    const id_persona = results.insertId;
+
+                    connection.query(
+                        'INSERT INTO `medico`(`id_persona`, `domicilio`, `id_profecion`,`id_especialidad`,`matricula_profecional`,`ìd_refeps`) VALUES (?,?,?,?,?,?)',
+                        [id_persona, Medico.domicilioProfecional, Medico.idProfecion,Medico.idEspecialidad,Medico.matriculaProfecional,Medico.refepsProfecional],
+                        (error, results) => {
+                            if (error) {
+                                return connection.rollback(() => {
+                                    reject(error);
+                                });
+                            }
+
+                            if (results.affectedRows !== 1) {
+                                return connection.rollback(() => {
+                                    reject(new Error('Error al insertar en la tabla medico'));
+                                });
+                            }
+
+                            const id_medico = results.insertId;
+
+                            connection.query(
+                                'INSERT INTO `login`(`id_medico`, `usuario_login`,`clave_login`,`tipo_autorizacion`,`instancia`) VALUES (?,?,?,?,?)',
+                                [id_medico, Medico.usuarioProvisorio,Medico.claveProvisoria,Medico.nivelAutorizacion,1],
+                                (error, results) => {
+                                    if (error) {
+                                        return connection.rollback(() => {
+                                            reject(error);
+                                        });
+                                    }
+
+                                    if (results.affectedRows !== 1) {
+                                        return connection.rollback(() => {
+                                            reject(new Error('Error al insertr en la tabla login'));
+                                        });
+                                    }
+
+                                    connection.commit((err) => {
+                                        if (err) {
+                                            return connection.rollback(() => {
+                                                reject(err);
+                                            });
+                                        }
+                                        resolve({ success: true });
+                                    });
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+        });
+    })
+    .catch((error) => {
+        console.error('Transaction error:', error);
+        return { success: false, message: 'Transaction error', error };
+    })
+    .finally(() => {
+        connection.end((err) => {
+            if (err) {
+                console.error('Error closing the connection:', err);
+            }
+        });
+    });
 }
+
+
+
+
 export{crearMedico,buscarMID,profecionales,profecionesTodas,especialidadesTodas};

@@ -8,7 +8,7 @@ import bodyParser from'body-parser';
 import{crear,verificarProfecional,traerTodo,buscarPacientes,busacrObraSocialPaciente,traerObras,sexoTodos,crearPaciente,nombresGenericos,administraciones,traerPrestaciones,todosLados}from './manejadorDeRutas.js'
 import { logins } from '../modelo/login.js';
 //import { pacientes } from '../modelo/paciente.js';
-import { todosSexo } from '../modelo/paciente.js';
+import { todosSexo } from '../modelo/pacienteData.js';
 
 let profecionales;
 let profecional;

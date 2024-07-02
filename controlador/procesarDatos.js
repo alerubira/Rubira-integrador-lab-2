@@ -14,10 +14,18 @@ apellidoProfecional: yup.string()
     .matches(/^[a-zA-Z]+$/, 'El apellido solo debe contener letras')
     .max(30, 'El apellido debe tener como máximo 30 caracteres')
     .required('El apellido es obligatorio'),
+idProfecion:yup.string()
+     .matches(/^\d+$/, 'El idProfecion debe ser un número')
+     .max(30, 'El idProfecion debe tener como máximo 30 caracteres')
+     .required('El idProfecion es obligatorio'),
 profecionProfecional: yup.string()
     .matches(/^[a-zA-Z]+$/, 'La profesión solo debe contener letras')
     .max(30, 'La profesión debe tener como máximo 30 caracteres')
-    .required('La profesión es obligatoria'),
+    .required('La profesión es obligatoria'), 
+ idEspecialidad:yup.string()
+    .matches(/^\d+$/, 'El idEspecialidad debe ser un número')
+    .max(30, 'El idEspecialidad debe tener como máximo 30 caracteres')
+    .required('El idEspecialidad es obligatorio'),   
 especialidadProfecional: yup.string()
     .matches(/^[a-zA-Z]+$/, 'La especialidad solo debe contener letras')
     .max(30, 'La especialidad debe tener como máximo 30 caracteres')
@@ -47,14 +55,16 @@ nivelAutorizacion: yup.string()
 
 //console.log(medicamentos);
 //console.log(profecionales);
-async function verificarMedico(objeto){
+ function verificarMedico(objeto){
+    //console.log(objeto);
     MedicoY.validate(objeto)
     .then(validData => {
         console.log("Validación exitosa:", validData);
-        return objeto;
+        return validData;
     })
     .catch(err => {
         console.error("Errores de validación:", err.errors);
+        return err;
     });
 }
 export{verificarMedico};

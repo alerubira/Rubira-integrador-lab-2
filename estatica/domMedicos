@@ -89,7 +89,7 @@ console.log(especialidades);
      }
      
 });
-formularioProfecionalCrear.addEventListener('submit', function(event) {
+formularioProfecionalCrear.addEventListener('submit',async function(event) {
     // event.preventDefault(); // Previene el envío del formulario
      let dniValue = dniProfecional.value;
      let nombreValue=nombreProfecional.value;
@@ -112,7 +112,8 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
      let objetoEncontrado = profeciones.find(objeto => objeto.nombre_profecion === profecionValue);
      validar(!objetoEncontrado,pagina,'La profecion no corresponde',event);
      if(objetoEncontrado){
-          idProfecion.value=objetoEncontrado.id_profecion;
+          idProfecion.textContent=await objetoEncontrado.id_profecion;
+          idProfecion.value=await objetoEncontrado.id_profecion;
      }
     
      //condicion=especialidades.some(objeto=>objeto.nombre_especialidad===especialidadValue);
@@ -120,7 +121,7 @@ formularioProfecionalCrear.addEventListener('submit', function(event) {
 
      validar(!objetoEncontrado,pagina,'La especialidad no corresponde',event);
      if(objetoEncontrado){
-          idEspecialidad.value=objetoEncontrado.id_especialidad;
+          idEspecialidad.value=await objetoEncontrado.id_especialidad;
      }
      
      validar( domicilioValue.length<1||domicilioValue.length>30,pagina,'El domicilio es obligatorio y no debe exeder los 25 caracteres',event);

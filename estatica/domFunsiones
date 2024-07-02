@@ -1,6 +1,7 @@
 let ocultar=document.getElementsByClassName('ocultar');
 let limpiar=document.getElementsByClassName('limpiar');
 let divAlerta=document.getElementById('divAlerta');
+let pagina;
  function Focultar(){
             
         for (let elemento of ocultar) {
