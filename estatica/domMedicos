@@ -112,7 +112,6 @@ formularioProfecionalCrear.addEventListener('submit',async function(event) {
      let objetoEncontrado = profeciones.find(objeto => objeto.nombre_profecion === profecionValue);
      validar(!objetoEncontrado,pagina,'La profecion no corresponde',event);
      if(objetoEncontrado){
-          idProfecion.textContent=await objetoEncontrado.id_profecion;
           idProfecion.value=await objetoEncontrado.id_profecion;
      }
     

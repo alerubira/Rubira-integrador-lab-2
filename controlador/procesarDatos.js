@@ -49,7 +49,7 @@ claveProvisoria: yup.string()
     .required('La clave es obligatoria'),
 nivelAutorizacion: yup.string()
      .oneOf(['1', '2', '3'], 'El nivel debe ser 1, 2 o 3')
-     .required('El nivel es un campo obligatorio'),
+     .required('El nivel de autorizacion es obligatorio obligatorio'),
 
 });
 
@@ -57,9 +57,9 @@ nivelAutorizacion: yup.string()
 //console.log(profecionales);
  function verificarMedico(objeto){
     //console.log(objeto);
-    MedicoY.validate(objeto)
+   return MedicoY.validate(objeto)
     .then(validData => {
-        console.log("Validación exitosa:", validData);
+        
         return validData;
     })
     .catch(err => {

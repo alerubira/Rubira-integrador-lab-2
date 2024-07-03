@@ -1,6 +1,7 @@
 import { connection } from "./conexxionBD.js";
 import { Medico } from './clasesEntidad.js';
 import { consulta1 } from "./conexxionBD.js";
+import { crearHash } from "./loginn.js";
 let profecionales;
 function buscarMID(id, callback) {
     connection.connect(function(err) {
@@ -87,7 +88,7 @@ async function crearMedico(Medico) {
                     const id_persona = results.insertId;
 
                     connection.query(
-                        'INSERT INTO `medico`(`id_persona`, `domicilio`, `id_profecion`,`id_especialidad`,`matricula_profecional`,`ìd_refeps`) VALUES (?,?,?,?,?,?)',
+                        'INSERT INTO `medico`(`id_persona`, `domicilio`, `id_profecion`,`id_especialidad`,`matricula_profecional`,`id_refeps`) VALUES (?,?,?,?,?,?)',
                         [id_persona, Medico.domicilioProfecional, Medico.idProfecion,Medico.idEspecialidad,Medico.matriculaProfecional,Medico.refepsProfecional],
                         (error, results) => {
                             if (error) {
@@ -103,10 +104,12 @@ async function crearMedico(Medico) {
                             }
 
                             const id_medico = results.insertId;
-
+                            let claveH= crearHash(Medico.claveProvisoria);
+                            let usuarioH=crearHash(Medico.usuarioProvisorio);
                             connection.query(
+                               
                                 'INSERT INTO `login`(`id_medico`, `usuario_login`,`clave_login`,`tipo_autorizacion`,`instancia`) VALUES (?,?,?,?,?)',
-                                [id_medico, Medico.usuarioProvisorio,Medico.claveProvisoria,Medico.nivelAutorizacion,1],
+                                [id_medico, usuarioH,claveH,Medico.nivelAutorizacion,1],
                                 (error, results) => {
                                     if (error) {
                                         return connection.rollback(() => {
@@ -138,7 +141,7 @@ async function crearMedico(Medico) {
     })
     .catch((error) => {
         console.error('Transaction error:', error);
-        return { success: false, message: 'Transaction error', error };
+        return { success: false, message: 'Error en la transaccion', error };
     })
     .finally(() => {
         connection.end((err) => {

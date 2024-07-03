@@ -213,11 +213,9 @@ async function crear(req,res,objeto){
     switch (objeto) {
       case 'Medico':
          aux= await verificarMedico(objet);
-         console.log("aux");
-         console.log(aux);
-        /* if(aux){
+          if(!aux.err){
           aux=await crearMedico(objet);
-         }*/
+         }
         break;
       case 'especialidad':
          aux=await especialidadesTodas(caracteres);
