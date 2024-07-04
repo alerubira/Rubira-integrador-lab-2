@@ -1,6 +1,7 @@
 let ocultar=document.getElementsByClassName('ocultar');
 let limpiar=document.getElementsByClassName('limpiar');
 let divAlerta=document.getElementById('divAlerta');
+let divExito=document.getElementById('divExito');
 let pagina;
  function Focultar(){
             
@@ -33,6 +34,19 @@ function alerta(pagina,mensage){
     divAlerta.appendChild(p);
     // Ejecutar la función eliminarHijos después de 5 segundos (5000 milisegundos)
     setTimeout(() => eliminarHijos(divAlerta), 6000);
+}
+function exito(pagina,mensage){
+    // Limpiar cualquier contenido anterior antes de añadir nuevos elementos
+    divExito.innerHTML = '';
+    //console.log(pagina);
+    p1=document.createElement('p');
+    p1.textContent=`Exito La pagina ${pagina} dice`;
+    divExito.appendChild(p1);
+    p=document.createElement('p');
+    p.textContent=`${mensage}`;
+    divExito.appendChild(p);
+    // Ejecutar la función eliminarHijos después de 5 segundos (5000 milisegundos)
+    setTimeout(() => eliminarHijos(divExito), 6000);
 }
 function validar(codicion,pagina,mensage,event){
     if (codicion) {

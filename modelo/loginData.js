@@ -20,4 +20,7 @@ connection.connect(function(err) {
         });
     }
 });
+async function crearLogin(usuario,clave,nivel){
+    
+}
 export{logins};

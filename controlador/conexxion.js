@@ -186,7 +186,7 @@ app.post('/sexoTodos', async (req, res) => {
 });
 app.post('/generarPaciente',async (req,res)=>{
 
-console.log(req.body);
+//console.log(req.body);
 await crearPaciente(req,res);
 //res.send(body);
 });
@@ -221,8 +221,12 @@ app.post('/especialidades',async(req,res)=>{
 traerTodo(req,res,"especialidad");
 });
 app.post('/crearMedico',async(req,res) =>{
-crear(req,res,"Medico");
-})
+let sucess=await crear(req,res,"Medico");
+
+/*let suces=await JSON.parse(sucess);
+let estadoSuces=suces.success;
+  res.render('medicos',{encabezado,estadoSuces})*/
+});
   // Iniciar el servidor
   app.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);

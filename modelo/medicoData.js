@@ -61,6 +61,8 @@ async function especialidadesTodas(caracter){
     return await consulta1(query,caracter);
 }
 async function crearMedico(Medico) {
+    let claveH= await crearHash(Medico.claveProvisoria);
+    let usuarioH=await crearHash(Medico.usuarioProvisorio);
     return new Promise((resolve, reject) => {
         connection.beginTransaction((err) => {
             if (err) {
@@ -70,7 +72,7 @@ async function crearMedico(Medico) {
             }
 //console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
             connection.query(
-                'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
+               // 'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
                 [Medico.nombreProfecional,Medico.apellidoProfecional,Medico.dniProfecional, true],
                 (error, results) => {
                     if (error) {
@@ -104,8 +106,7 @@ async function crearMedico(Medico) {
                             }
 
                             const id_medico = results.insertId;
-                            let claveH= crearHash(Medico.claveProvisoria);
-                            let usuarioH=crearHash(Medico.usuarioProvisorio);
+                            
                             connection.query(
                                
                                 'INSERT INTO `login`(`id_medico`, `usuario_login`,`clave_login`,`tipo_autorizacion`,`instancia`) VALUES (?,?,?,?,?)',

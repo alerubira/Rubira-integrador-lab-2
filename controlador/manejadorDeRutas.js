@@ -205,7 +205,7 @@ async function traerTodo(req,res,tabla){
 }
 }
 async function crear(req,res,objeto){
-  console.log(objeto);
+ // console.log(objeto);
   try {
     
     let aux;
@@ -224,6 +224,7 @@ async function crear(req,res,objeto){
         break;
 }
 res.send(aux);
+
 }catch (error) {
     console.error(`Error al crear el ${objeto}`, error);
     res.status(500).send('Error interno del servidor');
