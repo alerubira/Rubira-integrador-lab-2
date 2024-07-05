@@ -14,6 +14,7 @@ let profecionales;
 let profecional;
 let encabezado;
 let mensajeExito;
+let estadoSuces;
 //let pacientes;
 export function traerProfecionl(profecionalI){
   profecional=profecionalI;
@@ -79,7 +80,7 @@ app.get('/', (req, res) => {
   });
   app.get('/medicos',(req,res)=>{
     encabezado="Planilla para procesar medicos"
-    res.render('medicos',{encabezado,mensajeExito});
+    res.render('medicos',{encabezado,mensajeExito,estadoSuces});
   });
   app.get('/medicamentos',(req,res)=>{
     res.render('medicamentos',{encabezado,nombre: profecional});
@@ -222,10 +223,11 @@ traerTodo(req,res,"especialidad");
 });
 app.post('/crearMedico',async(req,res) =>{
 let sucess=await crear(req,res,"Medico");
-
-/*let suces=await JSON.parse(sucess);
-let estadoSuces=suces.success;
-  res.render('medicos',{encabezado,estadoSuces})*/
+console.log('en ruta');
+console.log(sucess.success);
+//let suces=await JSON.parse(sucess);
+ estadoSuces=sucess.success;
+  res.redirect('/medicos');
 });
   // Iniciar el servidor
   app.listen(port, () => {

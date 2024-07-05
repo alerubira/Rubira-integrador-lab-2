@@ -141,13 +141,13 @@ async function crearMedico(Medico) {
         });
     })
     .catch((error) => {
-        console.error('Transaction error:', error);
+        console.error('Error en la transaccion:', error);
         return { success: false, message: 'Error en la transaccion', error };
     })
     .finally(() => {
         connection.end((err) => {
             if (err) {
-                console.error('Error closing the connection:', err);
+                console.error('Error al cerrar la conexión:', err);
             }
         });
     });

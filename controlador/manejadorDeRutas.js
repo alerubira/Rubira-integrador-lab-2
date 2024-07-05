@@ -215,6 +215,7 @@ async function crear(req,res,objeto){
          aux= await verificarMedico(objet);
           if(!aux.err){
           aux=await crearMedico(objet);
+          return aux;
          }
         break;
       case 'especialidad':
@@ -223,7 +224,7 @@ async function crear(req,res,objeto){
       default:
         break;
 }
-res.send(aux);
+//res.send(aux);
 
 }catch (error) {
     console.error(`Error al crear el ${objeto}`, error);
