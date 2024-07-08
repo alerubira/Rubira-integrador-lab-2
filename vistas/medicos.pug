@@ -29,12 +29,13 @@ html(lang="es")
                     if mensajeExito 
                          script.
                               alert("#{mensajeExito}")
-                    if estdoSuces===true 
-                         script.
-                               exito('Medico','La operacion fue realizada con exito')
-                    if estdoSuces===false
-                         script. 
-                               alerta('Medico','La operacion fue rechazada')
+                    if estdoSuces === true
+                        script.
+                            exito('Medico', 'La operacion fue realizada con exito')
+                    else if estdoSuces === false
+                            script.
+                               alerta('Medico', 'La operacion fue rechazada')
+
                     select(id="crudMedico", name="crudMedico")
                          option(value="vacio") Elija una opcion
                          option(value="crearMedico") Inscribir Medico

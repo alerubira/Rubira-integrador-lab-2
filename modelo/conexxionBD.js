@@ -1,5 +1,5 @@
 
-import mysql from 'mysql2';
+/*import mysql from 'mysql2';
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -33,7 +33,37 @@ function consulta1(query,caracter){
          });
      });
 }
-export{connection,consulta1};
+export{connection,consulta1};*/
+import mysql from 'mysql2/promise';
+
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'registrodesalud2',
+    port: 3306,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+async function consulta1(query, params) {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const [results] = await connection.query(query, params);
+        return results;
+    } catch (error) {
+        console.error('Error en la consulta:', error);
+        throw error;
+    } finally {
+        if (connection) {
+            connection.release();
+        }
+    }
+}
+
+export {pool,consulta1} ;
+
 
 
 

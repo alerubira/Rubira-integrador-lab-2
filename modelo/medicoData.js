@@ -1,6 +1,6 @@
-import { connection } from "./conexxionBD.js";
+//import { connection } from "./conexxionBD.js";
 import { Medico } from './clasesEntidad.js';
-import { consulta1 } from "./conexxionBD.js";
+import { consulta1 ,pool} from "./conexxionBD.js";
 import { crearHash } from "./loginn.js";
 let profecionales;
 function buscarMID(id, callback) {
@@ -60,7 +60,7 @@ async function especialidadesTodas(caracter){
     let query='SELECT * FROM `especialida` WHERE 1;';
     return await consulta1(query,caracter);
 }
-async function crearMedico(Medico) {
+/*async function crearMedico(Medico) {
     let claveH= await crearHash(Medico.claveProvisoria);
     let usuarioH=await crearHash(Medico.usuarioProvisorio);
     return new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ async function crearMedico(Medico) {
             }
 //console.log(`paciente antes de entrar a la query ${paciente.nombre}`);
             connection.query(
-               // 'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
+                'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
                 [Medico.nombreProfecional,Medico.apellidoProfecional,Medico.dniProfecional, true],
                 (error, results) => {
                     if (error) {
@@ -151,7 +151,52 @@ async function crearMedico(Medico) {
             }
         });
     });
+}*/
+
+
+async function crearMedico(Medico) {
+    let claveH = await crearHash(Medico.claveProvisoria);
+    let usuarioH = await crearHash(Medico.usuarioProvisorio);
+
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        await connection.beginTransaction();
+
+        const [personaResult] = await connection.execute(
+            'INSERT INTO `persona`(`nombre`, `apellido`, `dni_persona`, `estado_persona`) VALUES (?,?,?,?)',
+            [Medico.nombreProfecional, Medico.apellidoProfecional, Medico.dniProfecional, true]
+        );
+
+        const id_persona = personaResult.insertId;
+
+        const [medicoResult] = await connection.execute(
+            'INSERT INTO `medico`(`id_persona`, `domicilio`, `id_profecion`, `id_especialidad`, `matricula_profecional`, `id_refeps`) VALUES (?,?,?,?,?,?)',
+            [id_persona, Medico.domicilioProfecional, Medico.idProfecion, Medico.idEspecialidad, Medico.matriculaProfecional, Medico.refepsProfecional]
+        );
+
+        const id_medico = medicoResult.insertId;
+
+        const [loginResult] = await connection.execute(
+            'INSERT INTO `login`(`id_medico`, `usuario_login`, `clave_login`, `tipo_autorizacion`, `instancia`) VALUES (?,?,?,?,?)',
+            [id_medico, usuarioH, claveH, Medico.nivelAutorizacion, 1]
+        );
+
+        await connection.commit();
+        return { success: true };
+    } catch (error) {
+        if (connection) {
+            await connection.rollback();
+        }
+        console.error('Error en la transacción:', error);
+        return { success: false, message: 'Error en la transacción', error };
+    } finally {
+        if (connection) {
+            connection.release(); // Devolvemos la conexión al pool
+        }
+    }
 }
+
 
 
 

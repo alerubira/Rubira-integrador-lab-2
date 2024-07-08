@@ -1,9 +1,11 @@
-import { connection } from "./conexxionBD.js";
+//import { connection } from "./conexxionBD.js";
 //import { traerPaciente } from '../controlador/conexxion.js';
 import { Paciente } from "./clasesEntidad.js";
+import { pool } from "./conexxionBD.js";
+
 
 let pacientes=[];
-connection.connect( function(err) {
+/*connection.connect( function(err) {
     if (err) {
         throw err;
     } else {
@@ -22,6 +24,41 @@ connection.connect( function(err) {
             }
         });
     }
+});*/
+(async function obtenerPacientes() {
+    let connection;
+    try {
+        // Obtén una conexión del pool
+        connection = await pool.getConnection();
+
+        // Ejecuta la consulta
+        const [result] = await connection.query(`
+            SELECT id_paciente, nombre, apellido, dni_persona, fecha_nacimiento, nombre_sexo
+            FROM paciente pa
+            JOIN persona pe ON pa.id_persona = pe.id_persona
+            JOIN sexo s ON s.id_sexo = pa.id_sexo
+            WHERE 1;
+        `);
+
+        // Procesa los resultados
+        let pacientes = [];
+        for (let pac of result) {
+            let aux = new Paciente(pac.nombre, pac.apellido, pac.dni_persona, pac.id_paciente, pac.fecha_nacimiento, pac.nombre_sexo);
+            pacientes.push(aux);
+        }
+
+        // Imprime la lista de pacientes o realiza otra operación
+        console.log('Pacientes:', pacientes);
+    } catch (error) {
+        console.error('Error al obtener pacientes:', error);
+        throw error;  // Propaga el error para manejo en niveles superiores
+    } finally {
+        if (connection) {
+            connection.release();  // Asegúrate de liberar la conexión al pool
+        }
+    }
+})().catch(error => {
+    console.error('Error al ejecutar la función:', error);
 });
 function buscarPacienteDni(dni) {
     return new Promise((resolve, reject) => {
