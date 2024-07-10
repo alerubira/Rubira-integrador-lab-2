@@ -1,4 +1,4 @@
-import { consulta1} from "./conexxionBD.js";
+import { conection,consulta1} from "./conexxionBD.js";
 let obrasSociales;
 let planes;
 let obraSocialPlan;
